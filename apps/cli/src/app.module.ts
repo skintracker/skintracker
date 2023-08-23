@@ -9,7 +9,13 @@ import { RemoveTrackedSkinModule } from './modules/remove-tracked-skin.module';
 
 @Module({
   imports: [
-    OgmaModule.forRoot(),
+    OgmaModule.forRoot(
+      process.env.NEST_DEBUG
+        ? {
+            logLevel: 'ALL',
+          }
+        : {},
+    ),
     MainMenuModule,
     AddTrackedSkinModule,
     ListTrackedSkinsModule,

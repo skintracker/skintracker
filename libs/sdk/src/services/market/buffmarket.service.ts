@@ -65,13 +65,14 @@ export class BuffMarketService {
     return response.data;
   }
 
-  async getGoodsId(skin: Skin) {
+  async getGoodsId(skin: Skin, cookie?: string) {
     this.logger.verbose(`Getting ${this.market} Goods ID for ${skinToString(skin)}...`);
-    const searchResponse = await this.search(skin);
+    const searchResponse = await this.search(skin, cookie);
     if (typeof searchResponse === 'string') {
       return searchResponse;
     }
     this.logger.verbose(`Got ${this.market} search response: [${searchResponse.code}] ${searchResponse.data}`);
+    if (!searchResponse.data) throw new Error('No data found for search query');
     const goodsId = searchResponse.data.items[0].id;
     this.logger.verbose(`Got ${this.market} Goods ID for ${skinToString(skin)}: ${goodsId}`);
     return goodsId;
@@ -82,13 +83,14 @@ export class BuffMarketService {
       return 'Cookie is required';
     }
     this.logger.verbose(`Getting ${this.market} min price for ${skinToString(skin)}...`);
-    const goodsId = await this.getGoodsId(skin);
+    const goodsId = await this.getGoodsId(skin, cookie);
 
     const headers = {
       Cookie: cookie,
     };
 
     this.logger.verbose('Executing Buff Market request...');
+    this.logger.log(`Goods ID: ${goodsId}`)
     const sellOrderResponse = await firstValueFrom(
       this.httpService
         .get<BuffMarketResponse<BuffMarketSellOrderResponseData>>(
@@ -104,10 +106,8 @@ export class BuffMarketService {
           }),
         ),
     );
-    this.logger.verbose('Executed Buff Market request:', {
-      response: sellOrderResponse.data,
-      status: sellOrderResponse.status,
-    });
+    this.logger.verbose(`Executed Buff Market request: ${JSON.stringify(sellOrderResponse.data)}`);
+    if (!sellOrderResponse.data.data) throw new Error('No data found for search query');
     const minPrice = sellOrderResponse.data.data.items[0].price;
     this.logger.verbose(`Got ${this.market} min price for ${skinToString(skin)}: ${minPrice}`);
     return this.convertPriceToStandardizedFormat(minPrice);

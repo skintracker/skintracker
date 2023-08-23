@@ -1,11 +1,10 @@
-import { Module } from '@nestjs/common';
-import { SkinportService } from '../../services/market/skinport.service';
-import { OgmaModule } from '@ogma/nestjs-module';
 import { HttpModule } from '@nestjs/axios';
-import { SettingsModule } from '../settings.module';
+import { Module } from '@nestjs/common';
+import { OgmaModule } from '@ogma/nestjs-module';
+import { SkinportService } from '../../services/market/skinport.service';
 
 @Module({
-  imports: [OgmaModule.forFeature(SkinportService), HttpModule, SettingsModule],
+  imports: [OgmaModule.forFeature(SkinportService), HttpModule],
   providers: [SkinportService],
   exports: [SkinportService],
 })

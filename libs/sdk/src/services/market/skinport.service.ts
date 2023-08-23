@@ -8,7 +8,6 @@ import { skinToString } from '../../functions/skin-to-string';
 import { Market } from '../../types/market';
 import { SkinportSearchResponse } from '../../types/market/skinport.types';
 import { Skin } from '../../types/skins';
-import { SettingsService } from '../settings.service';
 
 @Injectable()
 export class SkinportService {
@@ -20,20 +19,7 @@ export class SkinportService {
   constructor(
     @OgmaLogger(SkinportService) private readonly logger: OgmaService,
     private httpService: HttpService,
-    private settingsService: SettingsService,
-  ) {
-    const token = this.settingsService.getMarketLoginToken(this.market);
-    if (!token) {
-      this.logger.error('DMarket login token not found');
-      return;
-    }
-    const keys = JSON.parse(token) as {
-      clientId: string;
-      clientSecret: string;
-    };
-    this.id = keys.clientId;
-    this.secret = keys.clientSecret;
-  }
+  ) {}
 
   buildStandardHeaders() {
     return {
@@ -42,24 +28,15 @@ export class SkinportService {
     };
   }
 
-  async getMinPrice(skin: Skin) {
-    if (!this.id || !this.secret) {
-      this.logger.error('Skinport login token not found');
-      return 'Not Logged In';
+  async getPrices(id?: string, secret?: string): Promise<SkinportSearchResponse> {
+    if (!id || !secret) {
+      throw new Error('Must provide a Skinport login token!');
     }
     const headers = this.buildStandardHeaders();
     const params = {
       currency: 'USD',
       // market_hash_name: skinToString(skin),
     };
-    const cachedResponse = this.settingsService.getCachedResponse(this.market);
-    if (cachedResponse) {
-      this.logger.verbose('Using cached response');
-      const minPrice = (cachedResponse as SkinportSearchResponse).filter(
-        (item) => item.market_hash_name === skinToString(skin),
-      )[0]?.min_price;
-      return `$${minPrice.toFixed(2).toString()}`;
-    }
     const response = await firstValueFrom(
       this.httpService
         .get<SkinportSearchResponse>(`https://${this.host}/items`, {
@@ -73,8 +50,11 @@ export class SkinportService {
           }),
         ),
     );
-    this.settingsService.cacheResponse(this.market, response.data);
-    const minPrice = response.data.filter((item) => item.market_hash_name === skinToString(skin))[0]?.min_price;
+    return response.data;
+  }
+
+  async getMinPrice(skin: Skin, id?: string, secret?: string): Promise<string> {
+    const minPrice = (await this.getPrices(id, secret)).filter((item) => item.market_hash_name === skinToString(skin))[0]?.min_price;
     return `$${minPrice.toFixed(2).toString()}`;
   }
 }

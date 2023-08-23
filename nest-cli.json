@@ -7,7 +7,7 @@
     "typeCheck": true,
     "deleteOutDir": true,
     "webpack": true,
-    "tsConfigPath": "apps/skintracker/tsconfig.app.json"
+    "tsConfigPath": "apps/cli/tsconfig.app.json"
   },
   "projects": {
     "sdk": {

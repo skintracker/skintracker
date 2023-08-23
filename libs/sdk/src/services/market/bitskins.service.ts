@@ -51,8 +51,9 @@ export class BitskinsService {
           }),
         ),
     );
+    this.logger.verbose(`[${response.status}]: ${JSON.stringify(response.data,null,2)}`);
     if (!response.data.list) {
-      this.logger.verbose(`[${response.status}]: ${JSON.stringify(response.data)}`);
+      this.logger.verbose(`[${response.status}]: ${JSON.stringify(response.data,null,2)}`);
       return 'N/A';
     }
     const minPrice = response.data.list[0]?.price / 1000;
