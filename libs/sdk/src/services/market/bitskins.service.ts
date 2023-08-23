@@ -1,11 +1,8 @@
-import { HttpService } from '@nestjs/axios';
 import { Injectable } from '@nestjs/common';
 import { OgmaLogger, OgmaService } from '@ogma/nestjs-module';
-import { catchError, firstValueFrom } from 'rxjs';
 
 import { skinToString } from '../../functions/skin-to-string';
 import { Market } from '../../types/market';
-import { BitskinsSearchResponse } from '../../types/market/bitskins.types';
 import { Skin } from '../../types/skins';
 
 @Injectable()
@@ -15,15 +12,16 @@ export class BitskinsService {
 
   constructor(
     @OgmaLogger(BitskinsService) private readonly logger: OgmaService,
-    private httpService: HttpService,
   ) {}
 
   async getMinPrice(skin: Skin, apiKey?: string): Promise<string> {
     if (!apiKey) {
       return 'API Key is required';
     }
+    const token = JSON.parse(apiKey);
     const headers = {
-      'x-apikey': apiKey,
+      'Content-Type': 'application/json',
+      'x-apikey': token.apiKey,
     };
     const body = {
       limit: 10,
@@ -38,25 +36,16 @@ export class BitskinsService {
         name: skinToString(skin),
       },
     };
-    const response = await firstValueFrom(
-      this.httpService
-        .post<BitskinsSearchResponse>(`https://${this.host}/market/search/730`, {
-          headers,
-          body,
-        })
-        .pipe(
-          catchError((error) => {
-            this.logger.error(error);
-            throw error;
-          }),
-        ),
-    );
-    this.logger.verbose(`[${response.status}]: ${JSON.stringify(response.data,null,2)}`);
-    if (!response.data.list) {
-      this.logger.verbose(`[${response.status}]: ${JSON.stringify(response.data,null,2)}`);
+    const response = await fetch(`https://${this.host}/market/search/730`, {
+      method: 'POST',
+      headers,
+      body: Buffer.from(JSON.stringify(body)),
+    }).then((res) => res.json());
+    if (!response.list) {
+      this.logger.verbose(`[${response.status}]: ${JSON.stringify(response.data)}`);
       return 'N/A';
     }
-    const minPrice = response.data.list[0]?.price / 1000;
+    const minPrice = response.list[0]?.price / 1000;
     return minPrice ? `$${minPrice.toFixed(2)}` : 'N/A';
   }
 }

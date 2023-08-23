@@ -85,7 +85,7 @@ export class SettingsService {
   getMarketLoginToken(market: Market): string | undefined {
     this.logger.verbose(`Getting market login token for ${market} from settings...`);
     const token = this.settings.userLoginTokens[market] || undefined;
-    this.logger.verbose(`Got market login token for ${market} from settings!`);
+    this.logger.verbose(`Got market login token for ${market} from settings! ${token}`);
     return token;
   }
 
