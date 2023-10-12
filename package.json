@@ -1,0 +1,13 @@
+{
+	"name": "skintracker",
+	"module": "index.ts",
+	"type": "module",
+	"private": true,
+	"workspaces": ["packages/api", "packages/client-web", "packages/types"],
+	"devDependencies": {
+		"bun-types": "latest"
+	},
+	"peerDependencies": {
+		"typescript": "^5.0.0"
+	}
+}
