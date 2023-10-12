@@ -16,6 +16,15 @@
     "noImplicitAny": false,
     "strictBindCallApply": false,
     "forceConsistentCasingInFileNames": false,
-    "noFallthroughCasesInSwitch": false
+    "noFallthroughCasesInSwitch": false,
+    "strict": true,
+    "paths": {
+      "@skintracker/sdk": [
+        "libs/sdk/src"
+      ],
+      "@skintracker/sdk/*": [
+        "libs/sdk/src/*"
+      ]
+    }
   }
 }
