@@ -30,7 +30,7 @@
     "moduleResolution": "node",                       /* Specify how TypeScript looks up a file from a given module specifier. */
     // "baseUrl": "./",                                  /* Specify the base directory to resolve non-relative module names. */
     "paths": {
-      "aponia": ["./node_modules/aponia/src"],
+      "aponia": ["../../node_modules/aponia/src"],
       "@/hooks": ["./src/hooks"],
       "@/hooks/*": ["./src/hooks/*"],
       "@/queries": ["./src/queries"],

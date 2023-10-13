@@ -1,5 +1,5 @@
 import {
-	STSkin,
+	type STSkin,
 	STSkinCategory,
 	STSkinExterior,
 	Weapon,

@@ -3,22 +3,28 @@
 	"module": "src/index.ts",
 	"type": "module",
 	"scripts": {
-		"test": "bun test ./src/**/*.test.ts",
+		"build": "bun run scripts/build.ts",
 		"dev": "bun run --watch src/index.ts",
 		"lint": "bunx biome check ./src",
 		"lint:fix": "bunx biome check ./src --apply",
 		"fmt": "bunx biome format ./src",
-		"fmt:fix": "bunx biome format ./src --write"
+		"fmt:fix": "bunx biome format ./src --write",
+		"seed:db": "bun run scripts/seed-db.ts",
+		"start": "bun run src/index.ts",
+		"start:db": "sh ./scripts/start-db.sh",
+		"test": "bun test ./src/**/*.test.ts",
+		"test:db-access": "bun run scripts/test-db-access.ts"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "1.2.2",
 		"bun-types": "latest",
-		"@skintracker/types": "link:@skintracker/types"
+		"@skintracker/types": "workspace:*"
 	},
 	"peerDependencies": {
 		"typescript": "^5.0.0"
 	},
 	"dependencies": {
+		"@libsql/client": "^0.3.5",
 		"aponia": "github:jacksonsalopek/aponia"
 	}
 }

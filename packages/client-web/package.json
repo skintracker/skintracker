@@ -1,15 +1,14 @@
 {
-  "name": "@skintracker/client-web",
-  "type": "module",
-  "version": "0.0.1",
-  "scripts": {
-    "dev": "astro dev",
-    "start": "astro dev",
-    "build": "astro build",
-    "preview": "astro preview",
-    "astro": "astro"
-  },
-  "dependencies": {
-    "astro": "^3.1.2"
-  }
+	"name": "@skintracker/client-web",
+	"type": "module",
+	"version": "0.0.1",
+	"scripts": {
+		"astro": "astro",
+		"dev": "bunx --bun astro dev",
+		"build": "bunx --bun astro build",
+		"start": "bunx --bun astro preview"
+	},
+	"dependencies": {
+		"astro": "^3.1.2"
+	}
 }
