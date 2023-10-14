@@ -28,8 +28,8 @@ export const getUserTracking: AponiaRouteHandlerFn<
 				({
 					item: row[0],
 					name: row[1],
-					exterior: intToExterior(row[2] as number),
-					category: intToCategory(row[3] as number),
+					category: intToCategory(row[2] as number),
+					exterior: intToExterior(row[3] as number),
 				}) as STSkin,
 		),
 	};
