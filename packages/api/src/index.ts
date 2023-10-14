@@ -1,9 +1,18 @@
 import { Aponia } from "aponia";
 import { dirname } from "path";
+import * as Sentry from "@sentry/bun";
 
 const start = performance.now();
 const moduleDir = dirname(Bun.fileURLToPath(new URL(import.meta.url)));
 const app = new Aponia({ routesDir: `${moduleDir}/routes` });
+
+if (Bun.env.NODE_ENV === "production") {
+	Sentry.init({
+		// Performance Monitoring
+		tracesSampleRate: 1.0, // Capture 100% of the transactions
+		integrations: [new Sentry.Integrations.Http({ tracing: true })],
+	});
+}
 
 await app.start().then(
 	(instance) => {

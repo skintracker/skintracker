@@ -52,3 +52,11 @@ Bun will automatically parse any environment variables stored in `.env`, `.env.p
 ## Deploying
 
 The entirety of the application is packaged due to the nature of the monorepo, so there's no additional steps for deployment. Simply build the root Docker container and deploy it to your server.
+
+## Documentation
+
+1. [Aponia](https://github.com/jacksonsalopek/aponia)
+2. [Bun](https://bun.sh/docs)
+3. [Turso](https://docs.turso.tech/)
+4. [Sentry for Bun](https://docs.sentry.io/platforms/javascript/guides/bun/)
+5. [Docker](https://www.docker.com/)

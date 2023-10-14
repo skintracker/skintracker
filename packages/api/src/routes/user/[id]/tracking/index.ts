@@ -6,6 +6,7 @@ import type {
 	AponiaRouteHandlerFn,
 } from "aponia";
 import { queries } from "@/utils/db";
+import { captureException } from "@/utils/sentry";
 import { intToCategory, intToExterior } from "@/utils/type-conversion";
 
 export interface UserTrackingResponse {
@@ -35,5 +36,5 @@ export const getUserTracking: AponiaRouteHandlerFn<
 };
 
 export const handler: AponiaRouteHandler = {
-	GET: [getUserTracking],
+	GET: [captureException(getUserTracking)],
 };

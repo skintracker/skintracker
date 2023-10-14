@@ -25,6 +25,7 @@
 	},
 	"dependencies": {
 		"@libsql/client": "^0.3.5",
+		"@sentry/bun": "^7.74.0",
 		"aponia": "github:jacksonsalopek/aponia"
 	}
 }
