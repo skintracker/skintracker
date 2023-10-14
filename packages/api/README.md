@@ -9,7 +9,15 @@ Below are the steps to get the API up and running locally.
 1. [Turso CLI](https://docs.turso.tech/)
 2. [Docker](https://www.docker.com/)
 
+#### WSL Only
+Turso depends on `libsql`, which is not available to install via Homebrew for Linux. To get around this limitation, you can install `libsql` via the following:
+
+```bash
+curl -sSL https://github.com/libsql/sqld/releases/download/v0.21.9/sqld-installer.sh | bash
+```
+
 ### Setup
+
 
 0. Ensure dependencies were installed during root repo setup.
 1. Setup your local instance of libsql/server by running the following:
