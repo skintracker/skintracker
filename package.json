@@ -3,19 +3,12 @@
 	"module": "index.ts",
 	"type": "module",
 	"private": true,
-	"workspaces": ["packages/api", "packages/client-web", "packages/types"],
+	"workspaces": ["packages/api", "packages/types"],
 	"scripts": {
-		"build": "concurrently -n api,client-web -c blue,green \"bun build:api\" \"bun build:client-web\"",
-		"build:api": "bun run --cwd packages/api build",
-		"build:client-web": "bun run --cwd packages/client-web build",
-		"dev": "concurrently -n api,client-web -c blue,green \"bun dev:api\" \"bun dev:client-web\"",
-		"dev:api": "bun run --cwd packages/api dev",
-		"dev:client-web": "bun run --cwd packages/client-web dev",
-		"prestart:api": "bun run --cwd packages/api build",
-		"prestart:client-web": "bun build:client-web",
-		"start": "concurrently -n api,client-web -c blue,green \"bun start:api\" \"bun start:client-web\"",
-		"start:api": "bun run packages/api/dist/index.js",
-		"start:client-web": "bun run --cwd packages/client-web start"
+		"build": "bun run --cwd packages/api build",
+		"dev": "bun run --cwd packages/api dev",
+		"prestart": "bun run --cwd packages/api build",
+		"start": "bun run packages/api/dist/index.js"
 	},
 	"devDependencies": {
 		"bun-types": "latest",
