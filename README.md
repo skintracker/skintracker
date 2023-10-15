@@ -6,27 +6,17 @@
 
 ## Getting Started
 
-1. Install deps for `@skintracker/types` and link the package:
+1. Link the `@skintracker/types` package:
 
 ```bash
 cd ./packages/types
-bun i
 bun link
 ```
 
-2. Install deps for other packages:
-
-**@skintracker/api**:
+2. Install deps:
 
 ```bash
-cd ./packages/api
-bun i
-```
-
-**@skintracker/client-web**:
-
-```bash
-cd ./packages/client-web
+cd ../..
 bun i
 ```
 
@@ -34,18 +24,16 @@ bun i
 
 ## Running Locally
 
-Running each project is relatively the same steps. Follow the code blocks to start each project locally:
-
-#### @skintracker/api
+To run the project in development mode, run the following in your terminal:
 
 ```bash
-cd ./packages/api
 bun dev
 ```
 
-#### @skintracker/client-web
+Alternatively, you can run the project in production by running:
 
 ```bash
-cd ./packages/api
-bun dev
+bun start
 ```
+
+This will transpile TS to JS and start the transpiled application.

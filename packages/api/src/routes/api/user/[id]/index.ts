@@ -1,4 +1,8 @@
-import type { AponiaCtx, AponiaRouteHandler, AponiaRouteHandlerFn } from "aponia";
+import type {
+	AponiaCtx,
+	AponiaRouteHandler,
+	AponiaRouteHandlerFn,
+} from "aponia";
 import type { STUser } from "@skintracker/types/src";
 
 export const getUser: AponiaRouteHandlerFn<STUser> = (ctx: AponiaCtx) => {
