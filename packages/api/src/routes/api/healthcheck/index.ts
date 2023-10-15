@@ -22,7 +22,8 @@ export const getHealthcheck: AponiaRouteHandlerFn<{
 	};
 };
 
-export const postGetHealthcheck: AponiaAfterRequestHandler = ({ set }) => {
+// biome-ignore lint/suspicious/noExplicitAny: set is of unknown type, but we don't care
+export const postGetHealthcheck: AponiaAfterRequestHandler = ({ set }: any) => {
 	set.headers["Content-Type"] = "application/json";
 };
 
