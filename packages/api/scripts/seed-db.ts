@@ -12,3 +12,5 @@ await db?.execute({
 	sql: "INSERT INTO tracked_skins VALUES (?, ?, ?, ?, ?, ?);",
 	args: [randomUUID(), Bun.env.STEAMID64, 0, 1, "Bayonet", "Doppler"],
 });
+
+console.log('Completed db seeding successfully!');
