@@ -10,6 +10,7 @@ Below are the steps to get the API up and running locally.
 2. [Docker](https://www.docker.com/)
 
 #### WSL Only
+
 Turso depends on `libsql`, which is not available to install via Homebrew for Linux. To get around this limitation, you can install `libsql` via the following:
 
 ```bash
@@ -17,7 +18,6 @@ curl -sSL https://github.com/libsql/sqld/releases/download/v0.21.9/sqld-installe
 ```
 
 ### Setup
-
 
 0. Ensure dependencies were installed during root repo setup.
 1. Setup your local instance of libsql/server by running the following:
@@ -30,7 +30,7 @@ bun seed:db
 Ensure you have access to the db by running `bun test:db-access`. This should print out the tables in the database.
 
 2. Start the API for local development by running `bun dev`. This will start a hot-reloading server on port 3000. However,
-Aponia's hot-reload doesn't exactly detect changes to the filesystem so you'll have to restart everytime a change is made (at least for now).
+   Aponia's hot-reload doesn't exactly detect changes to the filesystem so you'll have to restart everytime a change is made (at least for now).
 
 3. And that's it! This should connect your API to your local DB instance. For connecting a local instance to production, read the section below.
 
@@ -53,6 +53,7 @@ ST_SKINPORT_API_SECRET=test
 TURSO_DB=skintracker
 TURSO_URL=libsql://example.turso.io # Obtain this from the Turso dashboard
 TURSO_TOKEN=example # Obtain this from the Turso CLI by running `turso db tokens create skintracker`
+STEAMID64=76561198118324737 # Insert your own steamid64 here, used for seeding db
 ```
 
 Bun will automatically parse any environment variables stored in `.env`, `.env.prod`, or whatever postfix is applied to a .env file. To learn more about this parsing, see the [Bun env documentation](https://bun.sh/docs/runtime/env).
