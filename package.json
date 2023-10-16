@@ -2,6 +2,7 @@
 	"name": "skintracker",
 	"module": "index.ts",
 	"type": "module",
+	"version": "2023.3.1",
 	"private": true,
 	"workspaces": ["packages/api", "packages/types"],
 	"scripts": {
