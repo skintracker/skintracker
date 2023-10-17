@@ -36,4 +36,9 @@ Alternatively, you can run the project in production by running:
 bun start
 ```
 
-This will transpile TS to JS and start the transpiled application.
+This will transpile TS to JS and start the transpiled application. However, you will need to have created a symbolic link in the root directory to public assets:
+
+```bash
+# IN ROOT DIRECTORY!
+ln -s ./packages/api/public ./public
+```

@@ -36,6 +36,7 @@ export function BaseLayout({ children, title }: BaseLayoutProps) {
 				<link rel="stylesheet" href="/public/css/highlight.default.min.css" />
 				<script src="/public/js/highlight.min.js" />
 				<script src="/public/js/go.min.js" />
+				<script src="/public/js/hyperscript.js" />
 				<script>hljs.highlightAll();</script>
 				{styles()}
 			</head>

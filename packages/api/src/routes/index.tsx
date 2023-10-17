@@ -28,6 +28,19 @@ export const getIndex: AponiaRouteHandlerFn<JSX.Element> = (
 					text="Click me!"
 					htmx={{ method: "post", route: "/client/home/buttons" }}
 				/>
+				<br />
+				<br />
+				<h2 class="text-xl">Modal Test</h2>
+				<Divider />
+				<Button
+					text="Open Modal"
+					htmx={{
+						method: "get",
+						route: "/client/home/modal",
+						target: "body",
+						swap: "beforeend",
+					}}
+				/>
 			</div>
 		</BaseLayout>
 	);
