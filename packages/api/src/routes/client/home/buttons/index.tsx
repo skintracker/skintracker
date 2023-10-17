@@ -6,10 +6,21 @@ import type {
   AponiaRouteHandlerFn,
 } from "aponia";
 
+export function toggleClickState() {
+  let clicked = false;
+  return () => {
+    clicked = !clicked;
+    return clicked;
+  };
+}
+
+const clickState = toggleClickState();
+
 export const clickHomepageLogin: AponiaRouteHandlerFn<JSX.Element> = (
   ctx: AponiaCtx
 ) => {
-  return <h1>Clicked!</h1>;
+  const text = clickState() ? "Clicked! (Do it again!)" : "Click me!";
+  return <h1>{text}</h1>;
 };
 
 export const postClickHomepageLogin: AponiaAfterRequestHandler = ({
