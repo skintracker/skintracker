@@ -54,6 +54,7 @@ TURSO_DB=skintracker
 TURSO_URL=libsql://example.turso.io # Obtain this from the Turso dashboard
 TURSO_TOKEN=example # Obtain this from the Turso CLI by running `turso db tokens create skintracker`
 STEAMID64=76561198118324737 # Insert your own steamid64 here, used for seeding db
+LAUNCHDARKLY_SDK_KEY=example # Obtain this from the LaunchDarkly dashboard
 ```
 
 Bun will automatically parse any environment variables stored in `.env`, `.env.prod`, or whatever postfix is applied to a .env file. To learn more about this parsing, see the [Bun env documentation](https://bun.sh/docs/runtime/env).

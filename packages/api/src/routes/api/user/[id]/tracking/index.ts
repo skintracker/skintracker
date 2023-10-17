@@ -5,20 +5,42 @@ import type {
 	AponiaRouteHandler,
 	AponiaRouteHandlerFn,
 } from "aponia";
-import { queries } from "@/utils/db";
+import featureFlags, { initFFClient } from "@/utils/feature-flags";
+import queries from "@/queries";
 import { captureException } from "@/utils/sentry";
 import { intToCategory, intToExterior } from "@/utils/type-conversion";
+import { LDContext } from "launchdarkly-node-server-sdk";
 
 export interface UserTrackingResponse {
 	items: STSkin[];
 }
 
+export interface UserTrackingResponseError {
+	msg: string;
+}
+
+export type GetUserTrackingResponse =
+	| UserTrackingResponse
+	| UserTrackingResponseError;
+
 export const getUserTracking: AponiaRouteHandlerFn<
-	Promise<UserTrackingResponse>
-> = async (ctx: AponiaCtx): Promise<UserTrackingResponse> => {
+	Promise<GetUserTrackingResponse>
+> = async (ctx: AponiaCtx): Promise<GetUserTrackingResponse> => {
 	const { id } = ctx.params;
 	Aponia.log(`[GET] /user/${id}/tracking test`);
-	const res = await queries.getUserTrackedSkins(id);
+	const ffCtx: LDContext = {
+		kind: "user",
+		key: id,
+	};
+	const dbAccess = await featureFlags.DB_ACCESS(ffCtx);
+	Aponia.log(`[FEATURE_FLAG:DB_ACCESS] ${id}: ${dbAccess}`);
+	if (!dbAccess) {
+		ctx.set.status = 403;
+		return {
+			msg: `FEATURE_FLAG:DB_ACCESS is not enabled for ${id}!`,
+		};
+	}
+	const res = await queries.getTrackedSkins(id);
 	if (!res) {
 		throw new Error("Invalid or no response from Turso!");
 	}

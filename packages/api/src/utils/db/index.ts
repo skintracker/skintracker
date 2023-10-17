@@ -12,13 +12,4 @@ export const db = (() => {
 	});
 })() as ReturnType<typeof createClient> | undefined;
 
-export const queries = {
-	getUserTrackedSkins: (steamid: string) => {
-		return db?.execute({
-			sql: "SELECT item, name, category, exterior FROM tracked_skins WHERE steamid = ?",
-			args: [steamid],
-		});
-	},
-};
-
 export default db;
