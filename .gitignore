@@ -176,4 +176,3 @@ dist
 .DS_Store
 
 # Symlink to /packages/api/public
-public
