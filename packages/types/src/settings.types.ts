@@ -1,16 +1,16 @@
-import { Skin } from './skins';
+import type { STSkin } from "./skins";
 
 export interface Settings {
-  trackedSkins: Skin[];
-  userLoginTokens: {
-    [key: string]: string;
-  };
-  cache: {
-    [hash: string]: SettingsCacheItem;
-  };
+	trackedSkins: STSkin[];
+	userLoginTokens: {
+		[key: string]: string;
+	};
+	cache: {
+		[hash: string]: SettingsCacheItem;
+	};
 }
 
 export interface SettingsCacheItem {
-  ttl: number;
-  data: unknown;
+	ttl: number;
+	data: unknown;
 }

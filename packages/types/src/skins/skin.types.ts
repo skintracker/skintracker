@@ -1,6 +1,6 @@
-import { Gloves, GlovesSkins } from "./gloves";
-import { Knife, KnifeSkins } from "./knives";
-import { Weapon, WeaponSkins } from "./weapons";
+import { Gloves, type GlovesSkins } from "./gloves";
+import { Knife, type KnifeSkins } from "./knives";
+import { Weapon, type WeaponSkins } from "./weapons";
 
 export enum STSkinExterior {
 	FN = "Factory New",

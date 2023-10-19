@@ -32,12 +32,8 @@ export function BaseLayout({ children, title }: BaseLayoutProps) {
 				<title safe>Skintracker | {title}</title>
 				<meta name="viewport" content="width=device-width, initial-scale=1" />
 				<script src="/public/js/htmx.js" />
-				<link rel="stylesheet" href="/public/font/font.css" />
-				<link rel="stylesheet" href="/public/css/highlight.default.min.css" />
-				<script src="/public/js/highlight.min.js" />
-				<script src="/public/js/go.min.js" />
 				<script src="/public/js/hyperscript.js" />
-				<script>hljs.highlightAll();</script>
+				<link rel="stylesheet" href="/public/font/font.css" />
 				{styles()}
 			</head>
 			<body class="font-sans font-normal">

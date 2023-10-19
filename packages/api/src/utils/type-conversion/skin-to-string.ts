@@ -1,5 +1,5 @@
-import { type STSkin, STSkinCategory } from "@skintracker/types/src";
 import { isGloves, isKnife } from "@/utils/type-guards";
+import { type STSkin, STSkinCategory } from "@skintracker/types/src";
 
 export function skinToString(skin: STSkin): string {
 	const itemString =

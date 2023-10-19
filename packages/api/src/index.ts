@@ -1,8 +1,8 @@
-import { Aponia, AponiaPlugin } from "aponia";
 import { dirname } from "path";
 import { html } from "@elysiajs/html";
 import { staticPlugin } from "@elysiajs/static";
 import * as Sentry from "@sentry/bun";
+import { Aponia, AponiaPlugin } from "aponia";
 
 const start = performance.now();
 const moduleDir = dirname(Bun.fileURLToPath(new URL(import.meta.url)));

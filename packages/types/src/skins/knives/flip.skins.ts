@@ -1,3 +1,3 @@
-import { KnifeStandardFinishes } from './standard-finishes';
+import { KnifeStandardFinishes } from "./standard-finishes";
 
 export import FlipKnifeSkins = KnifeStandardFinishes;
