@@ -6,7 +6,7 @@ export interface BaseLayoutProps {
 }
 
 export function BaseLayout({ children, title }: BaseLayoutProps) {
-	const navItems: NavigationItem[] = [{ name: "Dashboard", route: "/" }];
+	const navItems: NavigationItem[] = [];
 	const styles = () => {
 		if (Bun.env.NODE_ENV === "production")
 			return <link rel="stylesheet" href="/public/css/styles.css" />;
