@@ -47,10 +47,7 @@ export const getIndex: AponiaRouteHandlerFn<JSX.Element> = (
 	return (
 		<BaseLayout title="Home">
 			<div class="overflow-scroll">
-				<h1 class="text-2xl font-semibold">Dashboard</h1>
 				<br />
-				<h2 class="text-xl">Tracking</h2>
-				<Divider />
 				<Table>
 					<TableHead>
 						<TableHeaderRow>
@@ -73,12 +70,18 @@ export const getIndex: AponiaRouteHandlerFn<JSX.Element> = (
 						{skins.map((skin) => (
 							<TableRow>
 								<TableCell>{skinToString(skin)}</TableCell>
-								<TableCell classes="hidden md:table-cell">$20.50</TableCell>
-								<TableCell classes="hidden md:table-cell">$10,000.23</TableCell>
-								<TableCell classes="hidden md:table-cell">
-									<span class="text-green-500">$0.69</span>
+								<TableCell classes="hidden md:table-cell bg-red-300">
+									$20.50
 								</TableCell>
-								<TableCell classes="hidden md:table-cell">N/A</TableCell>
+								<TableCell classes="hidden md:table-cell bg-orange-300">
+									$10,000.23
+								</TableCell>
+								<TableCell classes="hidden md:table-cell bg-green-300">
+									<span class="bold">$0.69</span>
+								</TableCell>
+								<TableCell classes="hidden md:table-cell bg-blue-300">
+									N/A
+								</TableCell>
 							</TableRow>
 						))}
 					</TableBody>

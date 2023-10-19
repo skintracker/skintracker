@@ -26,9 +26,9 @@ export const searchCommands: AponiaRouteHandlerFn<JSX.Element> = (
 
 	return results.length > 0 ? (
 		<ul>
-			{results.map((result, i) => (
+			{results.sort().map((result, i) => (
 				<>
-					<li>
+					<li class="px-4">
 						<Link
 							href={commands[result as keyof typeof commands]}
 							class="text-blue-600"
@@ -41,7 +41,7 @@ export const searchCommands: AponiaRouteHandlerFn<JSX.Element> = (
 			))}
 		</ul>
 	) : (
-		<p>No commands found.</p>
+		<p class="px-4">No commands found.</p>
 	);
 };
 

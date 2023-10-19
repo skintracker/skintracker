@@ -1,3 +1,4 @@
+import { networkInterfaces } from "os";
 import { dirname } from "path";
 import { html } from "@elysiajs/html";
 import { staticPlugin } from "@elysiajs/static";
@@ -19,12 +20,24 @@ if (Bun.env.NODE_ENV === "production") {
 	});
 }
 
+function getCurrentLocalIP() {
+	const interfaces = networkInterfaces();
+	const ips = Object.values(interfaces)?.flatMap((i) =>
+		i?.map((a) => a?.address),
+	);
+	return ips?.filter((ip?: string) => ip?.startsWith("192.168"))[0];
+}
+
 await app.start().then(
 	(instance) => {
 		const end = performance.now();
 		const timeToStart = end - start;
 		Aponia.log(
-			`🐎 Aponia started: ${instance.server?.hostname}:${instance.server?.port} (${timeToStart}ms)`,
+			`🐎 Aponia started successfully! (${timeToStart.toFixed(
+				4,
+			)}ms) \n\t\t\t 🖥️  Local: ${instance.server?.hostname}:${
+				instance.server?.port
+			} \n\t\t\t 🌐 Network: ${getCurrentLocalIP()}:${instance.server?.port}`,
 		);
 	},
 	(reason) => console.error(`Couldn't boostrap Aponia!\nreason: ${reason}`),

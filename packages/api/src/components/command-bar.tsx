@@ -15,8 +15,8 @@ export function CommandBar() {
 				hx-trigger="keyup changed delay:300ms, search"
 				hx-target="#command-bar-results"
 			/>
-			<div id="command-bar-results" class="p-4">
-				<p class="text-stone-400">Results will appear here</p>
+			<div id="command-bar-results" class="py-4">
+				<p class="text-stone-400 px-4">Results will appear here</p>
 			</div>
 		</Modal>
 	);
