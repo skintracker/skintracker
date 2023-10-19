@@ -1,6 +1,7 @@
 import { CommandBar } from "@/components/command-bar";
+import { setHTMLAsContentType } from "@/hooks";
+import { captureException } from "@/utils/sentry";
 import type {
-	AponiaAfterRequestHandler,
 	AponiaCtx,
 	AponiaHooks,
 	AponiaRouteHandler,
@@ -13,17 +14,10 @@ export const showCommandBar: AponiaRouteHandlerFn<JSX.Element> = (
 	return <CommandBar />;
 };
 
-export const postShowCommandBar: AponiaAfterRequestHandler = ({
-	set,
-}: // biome-ignore lint/suspicious/noExplicitAny: set is of unknown type, but we don't care
-any) => {
-	set.headers["Content-Type"] = "text/html";
-};
-
 export const showCommandBarHooks: AponiaHooks = {
-	afterHandle: [postShowCommandBar],
+	afterHandle: [setHTMLAsContentType],
 };
 
 export const handler: AponiaRouteHandler = {
-	GET: [showCommandBar, showCommandBarHooks],
+	GET: [captureException(showCommandBar), showCommandBarHooks],
 };

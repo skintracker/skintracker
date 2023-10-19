@@ -7,6 +7,12 @@ export interface BaseLayoutProps {
 
 export function BaseLayout({ children, title }: BaseLayoutProps) {
 	const navItems: NavigationItem[] = [];
+	if (Bun.env.NODE_ENV !== "production") {
+		navItems.push({
+			name: "Developer",
+			route: "/developer",
+		});
+	}
 	const styles = () => {
 		if (Bun.env.NODE_ENV === "production")
 			return <link rel="stylesheet" href="/public/css/styles.css" />;
@@ -43,3 +49,5 @@ export function BaseLayout({ children, title }: BaseLayoutProps) {
 		</html>
 	);
 }
+
+export default BaseLayout;

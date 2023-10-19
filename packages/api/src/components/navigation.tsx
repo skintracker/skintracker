@@ -20,7 +20,7 @@ export default function Navigation({ items }: NavigationProps) {
 				<ul class="justify-self-end self-center items-center inline-flex">
 					{items.map((item) => {
 						return (
-							<li class="mr-2">
+							<li class="mr-2 hidden md:inline-flex">
 								<Link class="p-2" href={item.route}>
 									{item.name}
 								</Link>

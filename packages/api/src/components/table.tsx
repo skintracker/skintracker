@@ -2,7 +2,10 @@ export interface TableHeadProps {
 	children: JSX.Element | JSX.Element[];
 }
 
-export function TableHead({ children, ...props }: TableHeadProps) {
+export function TableHead({
+	children,
+	...props
+}: TableHeadProps & JSX.IntrinsicElements["thead"]) {
 	return <thead {...props}>{children}</thead>;
 }
 
@@ -42,7 +45,7 @@ export function TableHeaderRow({
 	if (dark)
 		return (
 			<tr
-				class="bg-slate-800 hover:bg-slate-700 text-left text-white"
+				class="bg-slate-800 hover:bg-slate-700 text-left text-white/80"
 				{...props}
 			>
 				{children}
@@ -91,7 +94,7 @@ export interface TableProps {
 
 export function Table({ children, ...props }: TableProps) {
 	return (
-		<div class="table-container w-full overflow-scroll">
+		<div class="table-container w-full overflow-scroll rounded">
 			<table class="w-full" {...props}>
 				{children}
 			</table>

@@ -1,5 +1,6 @@
+import { setHTMLAsContentType } from "@/hooks";
+import { captureException } from "@/utils/sentry";
 import type {
-	AponiaAfterRequestHandler,
 	AponiaCtx,
 	AponiaHooks,
 	AponiaRouteHandler,
@@ -17,23 +18,16 @@ export function toggleClickState() {
 const clickState = toggleClickState();
 
 export const clickHomepageLogin: AponiaRouteHandlerFn<JSX.Element> = (
-	ctx: AponiaCtx,
+	_ctx: AponiaCtx,
 ) => {
 	const text = clickState() ? "Clicked! (Do it again!)" : "Click me!";
 	return <h1>{text}</h1>;
 };
 
-export const postClickHomepageLogin: AponiaAfterRequestHandler = ({
-	set,
-}: // biome-ignore lint/suspicious/noExplicitAny: set is of unknown type, but we don't care
-any) => {
-	set.headers["Content-Type"] = "text/html";
-};
-
 export const clickHomepageLoginHooks: AponiaHooks = {
-	afterHandle: [postClickHomepageLogin],
+	afterHandle: [setHTMLAsContentType],
 };
 
 export const handler: AponiaRouteHandler = {
-	POST: [clickHomepageLogin, clickHomepageLoginHooks],
+	POST: [captureException(clickHomepageLogin), clickHomepageLoginHooks],
 };

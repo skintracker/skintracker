@@ -1,5 +1,6 @@
+import { setJSONAsContentType } from "@/hooks";
+import { captureException } from "@/utils/sentry";
 import type {
-	AponiaAfterRequestHandler,
 	AponiaCtx,
 	AponiaDecorator,
 	AponiaHooks,
@@ -22,15 +23,15 @@ export const getHealthcheck: AponiaRouteHandlerFn<{
 	};
 };
 
-// biome-ignore lint/suspicious/noExplicitAny: set is of unknown type, but we don't care
-export const postGetHealthcheck: AponiaAfterRequestHandler = ({ set }: any) => {
-	set.headers["Content-Type"] = "application/json";
-};
-
 export const getHealthcheckHooks: AponiaHooks = {
-	afterHandle: [postGetHealthcheck],
+	afterHandle: [setJSONAsContentType],
 };
 
 export const handler: AponiaRouteHandler = {
-	GET: [getHealthcheck, getHealthcheckHooks, undefined, [getDateDecorator]],
+	GET: [
+		captureException(getHealthcheck),
+		getHealthcheckHooks,
+		undefined,
+		[getDateDecorator],
+	],
 };

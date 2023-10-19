@@ -1,3 +1,4 @@
+import { setJSONAsContentType } from "@/hooks";
 import { queries } from "@/utils/db";
 import { captureException } from "@/utils/sentry";
 import { intToCategory, intToExterior } from "@/utils/type-conversion";
@@ -5,6 +6,7 @@ import type { STSkin } from "@skintracker/types/src";
 import { Aponia } from "aponia";
 import type {
 	AponiaCtx,
+	AponiaHooks,
 	AponiaRouteHandler,
 	AponiaRouteHandlerFn,
 } from "aponia";
@@ -35,6 +37,10 @@ export const getUserTracking: AponiaRouteHandlerFn<
 	};
 };
 
+export const getUserTrackingHooks: AponiaHooks = {
+	afterHandle: [setJSONAsContentType],
+};
+
 export const handler: AponiaRouteHandler = {
-	GET: [captureException(getUserTracking)],
+	GET: [captureException(getUserTracking), getUserTrackingHooks],
 };

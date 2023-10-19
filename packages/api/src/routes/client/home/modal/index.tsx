@@ -1,15 +1,16 @@
 import Button from "@/components/button";
 import Divider from "@/components/divider";
 import { Modal, ModalClose, ModalTitle } from "@/components/modal";
+import { setHTMLAsContentType } from "@/hooks";
+import { captureException } from "@/utils/sentry";
 import type {
-	AponiaAfterRequestHandler,
 	AponiaCtx,
 	AponiaHooks,
 	AponiaRouteHandler,
 	AponiaRouteHandlerFn,
 } from "aponia";
 
-export const clickHomepageLogin: AponiaRouteHandlerFn<JSX.Element> = (
+export const showModal: AponiaRouteHandlerFn<JSX.Element> = (
 	_ctx: AponiaCtx,
 ) => {
 	const closeModalEventName = "INDEX_CLOSE_MODAL";
@@ -28,17 +29,10 @@ export const clickHomepageLogin: AponiaRouteHandlerFn<JSX.Element> = (
 	);
 };
 
-export const postClickHomepageLogin: AponiaAfterRequestHandler = ({
-	set,
-}: // biome-ignore lint/suspicious/noExplicitAny: set is of unknown type, but we don't care
-any) => {
-	set.headers["Content-Type"] = "text/html";
-};
-
-export const clickHomepageLoginHooks: AponiaHooks = {
-	afterHandle: [postClickHomepageLogin],
+export const showModalHooks: AponiaHooks = {
+	afterHandle: [setHTMLAsContentType],
 };
 
 export const handler: AponiaRouteHandler = {
-	GET: [clickHomepageLogin, clickHomepageLoginHooks],
+	GET: [captureException(showModal), showModalHooks],
 };

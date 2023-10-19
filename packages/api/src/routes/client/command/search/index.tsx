@@ -1,8 +1,9 @@
 import Divider from "@/components/divider";
 import { Link } from "@/components/link";
+import { setHTMLAsContentType } from "@/hooks";
 import { commands } from "@/utils/commands";
+import { captureException } from "@/utils/sentry";
 import type {
-	AponiaAfterRequestHandler,
 	AponiaCtx,
 	AponiaHooks,
 	AponiaRouteHandler,
@@ -20,9 +21,14 @@ export const searchCommands: AponiaRouteHandlerFn<JSX.Element> = (
 	};
 	const safeWords = words.map((word) => escapeRegExp(word));
 	const regex = new RegExp(`^(?=.*${safeWords.join(")(?=.*")}).+`, "i");
-	const results = Object.keys(commands).filter((command) =>
-		regex.test(command),
-	);
+	const results = Object.keys(commands)
+		.filter((command) => {
+			if (Bun.env.NODE_ENV === "production") {
+				return !command.startsWith("Developer:");
+			}
+			return true;
+		})
+		.filter((command) => regex.test(command));
 
 	return results.length > 0 ? (
 		<ul>
@@ -45,17 +51,10 @@ export const searchCommands: AponiaRouteHandlerFn<JSX.Element> = (
 	);
 };
 
-export const postSearchCommands: AponiaAfterRequestHandler = ({
-	set,
-}: // biome-ignore lint/suspicious/noExplicitAny: set is of unknown type, but we don't care
-any) => {
-	set.headers["Content-Type"] = "text/html";
-};
-
 export const searchCommandsHooks: AponiaHooks = {
-	afterHandle: [postSearchCommands],
+	afterHandle: [setHTMLAsContentType],
 };
 
 export const handler: AponiaRouteHandler = {
-	POST: [searchCommands, searchCommandsHooks],
+	POST: [captureException(searchCommands), searchCommandsHooks],
 };
