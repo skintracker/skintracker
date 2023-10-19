@@ -1,37 +1,37 @@
 {
-  "name": "@skintracker/api",
-  "module": "src/index.ts",
-  "type": "module",
-  "scripts": {
-    "build": "bun run scripts/build.ts",
+	"name": "@skintracker/api",
+	"module": "src/index.ts",
+	"type": "module",
+	"scripts": {
+		"build": "bun run scripts/build.ts",
 		"build:styles": "bunx tailwindcss -o ./public/css/styles.css",
-    "dev": "bun run --watch src/index.ts",
-    "lint": "bunx biome check ./src",
-    "lint:fix": "bunx biome check ./src --apply",
-    "fmt": "bunx biome format ./src",
-    "fmt:fix": "bunx biome format ./src --write",
-    "seed:db": "bun run scripts/seed-db.ts",
-    "prestart": "bun run build && bun run build:styles",
-    "start": "NODE_ENV=production bun run ./dist/index.js",
-    "start:db": "sh ./scripts/start-db.sh",
-    "test": "bun test ./src/**/*.test.ts",
-    "test:db-access": "bun run scripts/test-db-access.ts"
-  },
-  "devDependencies": {
-    "@biomejs/biome": "1.2.2",
-    "@skintracker/types": "workspace:*",
-    "bun-types": "latest",
-    "tailwindcss": "^3.3.3"
-  },
-  "peerDependencies": {
-    "typescript": "^5.0.0"
-  },
-  "dependencies": {
-    "@elysiajs/html": "^0.7.3",
-    "@elysiajs/static": "^0.7.1",
-    "@kitajs/ts-html-plugin": "^1.3.0",
-    "@libsql/client": "^0.3.5",
-    "@sentry/bun": "^7.74.0",
-    "aponia": "github:jacksonsalopek/aponia"
-  }
+		"dev": "bun run --watch src/index.ts",
+		"lint": "bunx biome check ./src",
+		"lint:fix": "bunx biome check ./src --apply",
+		"fmt": "bunx biome format ./src",
+		"fmt:fix": "bunx biome format ./src --write",
+		"seed:db": "bun run scripts/seed-db.ts",
+		"prestart": "bun run build && bun run build:styles",
+		"start": "NODE_ENV=production bun run ./dist/index.js",
+		"start:db": "sh ./scripts/start-db.sh",
+		"test": "bun test ./src/**/*.test.ts",
+		"test:db-access": "bun run scripts/test-db-access.ts"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "1.2.2",
+		"@skintracker/types": "workspace:*",
+		"bun-types": "latest",
+		"tailwindcss": "^3.3.3"
+	},
+	"peerDependencies": {
+		"typescript": "^5.0.0"
+	},
+	"dependencies": {
+		"@elysiajs/html": "^0.7.3",
+		"@elysiajs/static": "^0.7.1",
+		"@kitajs/ts-html-plugin": "^1.3.0",
+		"@libsql/client": "^0.3.5",
+		"@sentry/bun": "^7.74.0",
+		"aponia": "github:jacksonsalopek/aponia"
+	}
 }
