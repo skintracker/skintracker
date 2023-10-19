@@ -14,8 +14,10 @@ import { captureException } from "@/utils/sentry";
 import { skinToString } from "@/utils/type-conversion";
 import {
 	BayonetSkins,
+	Gloves,
 	Knife,
 	M4A4Skins,
+	MotoGlovesSkins,
 	STSkin,
 	STSkinCategory,
 	STSkinExterior,
@@ -43,6 +45,12 @@ export const getIndex: AponiaRouteHandlerFn<JSX.Element> = (
 			name: BayonetSkins.Doppler,
 			category: STSkinCategory.Normal,
 			exterior: STSkinExterior.FN,
+		},
+		{
+			item: Gloves.Moto,
+			name: MotoGlovesSkins.Eclipse,
+			category: STSkinCategory.Normal,
+			exterior: STSkinExterior.MW,
 		},
 	];
 	return (
@@ -92,19 +100,35 @@ export const getIndex: AponiaRouteHandlerFn<JSX.Element> = (
 						</TableHeaderRow>
 					</TableHead>
 					<TableBody>
-						{skins.map((skin) => (
-							<TableRow>
+						{skins.map((skin, i) => (
+							<TableRow class="odd:bg-slate-200 even:bg-slate-300 hover:bg-slate-400 hover:cursor-pointer">
 								<TableCell>{skinToString(skin)}</TableCell>
-								<TableCell classes="hidden md:table-cell bg-red-300">
+								<TableCell
+									classes={`hidden md:table-cell bg-red-${
+										i % 2 === 1 ? "400" : "300"
+									}`}
+								>
 									$20.50
 								</TableCell>
-								<TableCell classes="hidden md:table-cell bg-orange-300">
+								<TableCell
+									classes={`hidden md:table-cell bg-orange-${
+										i % 2 === 1 ? "400" : "300"
+									}`}
+								>
 									$10,000.23
 								</TableCell>
-								<TableCell classes="hidden md:table-cell bg-green-300">
+								<TableCell
+									classes={`hidden md:table-cell bg-green-${
+										i % 2 === 1 ? "400" : "300"
+									}`}
+								>
 									<span class="bold">$0.69</span>
 								</TableCell>
-								<TableCell classes="hidden md:table-cell bg-blue-300">
+								<TableCell
+									classes={`hidden md:table-cell bg-blue-${
+										i % 2 === 1 ? "400" : "300"
+									}`}
+								>
 									N/A
 								</TableCell>
 							</TableRow>

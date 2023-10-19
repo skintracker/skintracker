@@ -21,7 +21,10 @@ export interface TableRowProps {
 	children: JSX.Element | JSX.Element[];
 }
 
-export function TableRow({ children, ...props }: TableRowProps) {
+export function TableRow({
+	children,
+	...props
+}: TableRowProps & JSX.IntrinsicElements["tr"]) {
 	return (
 		<tr
 			class="border-b hover:bg-slate-200 text-left last:border-none"
@@ -92,7 +95,10 @@ export interface TableProps {
 	children: JSX.Element | JSX.Element[];
 }
 
-export function Table({ children, ...props }: TableProps) {
+export function Table({
+	children,
+	...props
+}: TableProps & JSX.IntrinsicElements["table"]) {
 	return (
 		<div class="table-container w-full overflow-scroll rounded">
 			<table class="w-full" {...props}>
