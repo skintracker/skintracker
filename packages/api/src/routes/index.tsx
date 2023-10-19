@@ -94,22 +94,16 @@ export const getIndex: AponiaRouteHandlerFn<JSX.Element> = (
         <br />
         <h2 class="text-xl">HTMX Test</h2>
         <Divider />
-        <Button
-          text="Click me!"
-          htmx={{ method: "post", route: "/client/home/buttons" }}
-        />
+        <Button text="Click me!" hx-post="/client/home/buttons" />
         <br />
         <br />
         <h2 class="text-xl">Modal Test</h2>
         <Divider />
         <Button
           text="Open Modal"
-          htmx={{
-            method: "get",
-            route: "/client/home/modal",
-            target: "body",
-            swap: "beforeend",
-          }}
+          hx-get="/client/home/modal"
+          hx-target="body"
+          hx-swap="beforeend"
         />
       </div>
     </BaseLayout>

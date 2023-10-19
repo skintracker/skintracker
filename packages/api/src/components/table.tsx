@@ -2,25 +2,28 @@ export interface TableHeadProps {
   children: JSX.Element | JSX.Element[];
 }
 
-export function TableHead({ children }: TableHeadProps) {
-  return <thead>{children}</thead>;
+export function TableHead({ children, ...props }: TableHeadProps) {
+  return <thead {...props}>{children}</thead>;
 }
 
 export interface TableBodyProps {
   children: JSX.Element | JSX.Element[];
 }
 
-export function TableBody({ children }: TableBodyProps) {
-  return <tbody>{children}</tbody>;
+export function TableBody({ children, ...props }: TableBodyProps) {
+  return <tbody {...props}>{children}</tbody>;
 }
 
 export interface TableRowProps {
   children: JSX.Element | JSX.Element[];
 }
 
-export function TableRow({ children }: TableRowProps) {
+export function TableRow({ children, ...props }: TableRowProps) {
   return (
-    <tr class="border-b hover:bg-slate-200 text-left last:border-none">
+    <tr
+      class="border-b hover:bg-slate-200 text-left last:border-none"
+      {...props}
+    >
       {children}
     </tr>
   );
@@ -31,15 +34,22 @@ export interface TableHeaderRowProps {
   children: JSX.Element | JSX.Element[];
 }
 
-export function TableHeaderRow({ children, dark }: TableHeaderRowProps) {
+export function TableHeaderRow({
+  children,
+  dark,
+  ...props
+}: TableHeaderRowProps) {
   if (dark)
     return (
-      <tr class="bg-slate-800 hover:bg-slate-700 text-left text-white">
+      <tr
+        class="bg-slate-800 hover:bg-slate-700 text-left text-white"
+        {...props}
+      >
         {children}
       </tr>
     );
   return (
-    <tr class="border-b hover:bg-slate-200 text-left text-slate-500">
+    <tr class="border-b hover:bg-slate-200 text-left text-slate-500" {...props}>
       {children}
     </tr>
   );
@@ -50,9 +60,11 @@ export interface TableCellProps {
   classes?: string;
 }
 
-export function TableCell({ children, classes }: TableCellProps) {
+export function TableCell({ children, classes, ...props }: TableCellProps) {
   return (
-    <td class={`p-2 text-black${classes ? ` ${classes}` : ""}`}>{children}</td>
+    <td class={`p-2 text-black${classes ? ` ${classes}` : ""}`} {...props}>
+      {children}
+    </td>
   );
 }
 
@@ -61,18 +73,28 @@ export interface TableHeaderCellProps {
   classes?: string;
 }
 
-export function TableHeaderCell({ children, classes }: TableHeaderCellProps) {
-  return <th class={`p-2${classes ? ` ${classes}` : ""}`}>{children}</th>;
+export function TableHeaderCell({
+  children,
+  classes,
+  ...props
+}: TableHeaderCellProps) {
+  return (
+    <th class={`p-2${classes ? ` ${classes}` : ""}`} {...props}>
+      {children}
+    </th>
+  );
 }
 
 export interface TableProps {
   children: JSX.Element | JSX.Element[];
 }
 
-export function Table({ children }: TableProps) {
+export function Table({ children, ...props }: TableProps) {
   return (
     <div class="table-container w-full overflow-scroll">
-      <table class="w-full">{children}</table>
+      <table class="w-full" {...props}>
+        {children}
+      </table>
     </div>
   );
 }
