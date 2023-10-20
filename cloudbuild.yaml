@@ -1,20 +1,23 @@
-  steps:
+options:
+  logging: CLOUD_LOGGING_ONLY
+
+steps:
   # Build the container image
-  - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t', 'gcr.io/$PROJECT_ID/skintracker:$COMMIT_SHA', '.']
+  - name: "gcr.io/cloud-builders/docker"
+    args: ["build", "-t", "gcr.io/$PROJECT_ID/skintracker:$COMMIT_SHA", "."]
   # Push the container image to Container Registry
-  - name: 'gcr.io/cloud-builders/docker'
-    args: ['push', 'gcr.io/$PROJECT_ID/skintracker:$COMMIT_SHA']
+  - name: "gcr.io/cloud-builders/docker"
+    args: ["push", "gcr.io/$PROJECT_ID/skintracker:$COMMIT_SHA"]
   # Deploy container image to Cloud Run
-  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+  - name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
     entrypoint: gcloud
     args:
-    - 'run'
-    - 'deploy'
-    - 'skintracker'
-    - '--image'
-    - 'gcr.io/skintracker-401919/skintracker:$COMMIT_SHA'
-    - '--region'
-    - 'us-east-4'
-  images:
-  - 'gcr.io/skintracker-401919/skintracker:$COMMIT_SHA'
+      - "run"
+      - "deploy"
+      - "skintracker"
+      - "--image"
+      - "gcr.io/$PROJECT_ID/skintracker:$COMMIT_SHA"
+      - "--region"
+      - "us-east-4"
+images:
+  - "gcr.io/$PROJECT_ID/skintracker:$COMMIT_SHA"
