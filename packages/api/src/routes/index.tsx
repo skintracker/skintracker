@@ -104,29 +104,29 @@ export const getIndex: AponiaRouteHandlerFn<JSX.Element> = (
 							<TableRow class="odd:bg-slate-200 even:bg-slate-300 hover:bg-slate-400 hover:cursor-pointer">
 								<TableCell>{skinToString(skin)}</TableCell>
 								<TableCell
-									classes={`hidden md:table-cell bg-red-${
-										i % 2 === 1 ? "400" : "300"
+									classes={`hidden md:table-cell ${
+										i % 2 === 1 ? "bg-red-400" : "bg-red-300"
 									}`}
 								>
 									$20.50
 								</TableCell>
 								<TableCell
-									classes={`hidden md:table-cell bg-orange-${
-										i % 2 === 1 ? "400" : "300"
+									classes={`hidden md:table-cell ${
+										i % 2 === 1 ? "bg-orange-400" : "bg-orange-300"
 									}`}
 								>
 									$10,000.23
 								</TableCell>
 								<TableCell
-									classes={`hidden md:table-cell bg-green-${
-										i % 2 === 1 ? "400" : "300"
+									classes={`hidden md:table-cell ${
+										i % 2 === 1 ? "bg-green-400" : "bg-green-300"
 									}`}
 								>
 									<span class="bold">$0.69</span>
 								</TableCell>
 								<TableCell
-									classes={`hidden md:table-cell bg-blue-${
-										i % 2 === 1 ? "400" : "300"
+									classes={`hidden md:table-cell ${
+										i % 2 === 1 ? "bg-blue-400" : "bg-blue-300"
 									}`}
 								>
 									N/A
