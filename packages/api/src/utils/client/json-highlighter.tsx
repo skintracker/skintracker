@@ -23,15 +23,12 @@ export function JsonHighlighter({ data }: JsonHighlighterProps) {
     }
 
     if (Array.isArray(value)) {
-      const elements: JSX.Element[] = [];
-      value.forEach((item, index) => {
-        elements.push(
-          <div class="ml-4">
-            {renderJsonValue(item)}
-            {index !== value.length - 1 && ","}
-          </div>,
-        );
-      });
+      const elements: JSX.Element[] = value.map((item, index) => (
+        <div class="ml-4">
+          {renderJsonValue(item)}
+          {index !== value.length - 1 && ","}
+        </div>
+      ));
 
       return (
         <div>
