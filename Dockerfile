@@ -1,10 +1,10 @@
 FROM oven/bun:latest
+WORKDIR /usr/src/app
 
-COPY package.json ./
-COPY bun.lockb ./
-COPY tsconfig.json ./
-COPY packages ./
+COPY . .
+RUN bun install --frozen-lockfile --production
 
-RUN bun install
+RUN ln -s ./packages/api/public ./public
 
-CMD ["bun", "start"]
+EXPOSE 3001/tcp
+ENTRYPOINT ["bun", "start"]
