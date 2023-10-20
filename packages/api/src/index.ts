@@ -2,7 +2,7 @@ import { networkInterfaces } from "os";
 import { dirname } from "path";
 import { html } from "@elysiajs/html";
 import { staticPlugin } from "@elysiajs/static";
-import * as Sentry from "@sentry/bun";
+import { Integrations, captureMessage, init } from "@sentry/bun";
 import { Aponia, AponiaPlugin } from "aponia";
 
 const start = performance.now();
@@ -14,12 +14,13 @@ const app = new Aponia({
 
 if (Bun.env.NODE_ENV === "production") {
 	Aponia.log("Initializing Sentry...");
-	Sentry.init({
+	init({
 		// Performance Monitoring
 		tracesSampleRate: 1.0, // Capture 100% of the transactions
-		integrations: [new Sentry.Integrations.Http({ tracing: true })],
+		integrations: [new Integrations.Http({ tracing: true })],
 		dsn: Bun.env.SENTRY_DSN,
 	});
+	captureMessage("skintracker-api started successfully!");
 	Aponia.log("🔥 Sentry is enabled!");
 }
 
