@@ -13,11 +13,14 @@ const app = new Aponia({
 });
 
 if (Bun.env.NODE_ENV === "production") {
+	Aponia.log("Initializing Sentry...");
 	Sentry.init({
 		// Performance Monitoring
 		tracesSampleRate: 1.0, // Capture 100% of the transactions
 		integrations: [new Sentry.Integrations.Http({ tracing: true })],
+		dsn: Bun.env.SENTRY_DSN,
 	});
+	Aponia.log("🔥 Sentry is enabled!");
 }
 
 function getCurrentLocalIP() {
