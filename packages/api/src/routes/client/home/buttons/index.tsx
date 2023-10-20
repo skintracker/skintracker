@@ -17,17 +17,17 @@ export function toggleClickState() {
 
 const clickState = toggleClickState();
 
-export const clickHomepageLogin: AponiaRouteHandlerFn<JSX.Element> = (
+export const toggleButton: AponiaRouteHandlerFn<JSX.Element> = (
 	_ctx: AponiaCtx,
 ) => {
 	const text = clickState() ? "Clicked! (Do it again!)" : "Click me!";
 	return <h1>{text}</h1>;
 };
 
-export const clickHomepageLoginHooks: AponiaHooks = {
+export const toggleButtonHooks: AponiaHooks = {
 	afterHandle: [setHTMLAsContentType],
 };
 
 export const handler: AponiaRouteHandler = {
-	POST: [captureException(clickHomepageLogin), clickHomepageLoginHooks],
+	POST: [captureException(toggleButton), toggleButtonHooks],
 };

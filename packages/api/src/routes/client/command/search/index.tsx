@@ -3,18 +3,16 @@ import { Link } from "@/components/link";
 import { setHTMLAsContentType } from "@/hooks";
 import { commands } from "@/utils/commands";
 import { captureException } from "@/utils/sentry";
-import {
-	Aponia,
-	type AponiaCtx,
-	type AponiaHooks,
-	type AponiaRouteHandler,
-	type AponiaRouteHandlerFn,
+import type {
+	AponiaCtx,
+	AponiaHooks,
+	AponiaRouteHandler,
+	AponiaRouteHandlerFn,
 } from "aponia";
 
 export const searchCommands: AponiaRouteHandlerFn<JSX.Element> = (
 	ctx: AponiaCtx,
 ) => {
-	Aponia.log(ctx);
 	const searchQuery = (ctx.body as { query?: string }).query || "";
 	const words = searchQuery.split(/\s+/);
 
