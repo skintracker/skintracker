@@ -1,4 +1,0 @@
-- [ ] Finish porting DMarket and Skinport services to no longer use settings services
-- [ ] Port CLI to continue using SettingsService by passing values to service calls
-- [ ] Setup API controllers to query for min price
-- [ ] Bootstrap Next.JS app to be served with Nest.JS: https://github.com/kyle-mccarthy/nest-next#monorepo
