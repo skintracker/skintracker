@@ -1,37 +1,44 @@
-# SkinTracker
+# skintracker
 
-## Description
+## Prerequisites
 
-SkinTracker is a NestJS & Commander-based CLI that allows users to quickly view CSGO skin prices. Users can add skins to a tracking list, and then query the list across multiple CSGO markets (i.e. BitSkins). Instructions are provided below.
+1. [Bun v1.0.6+](https://bun.sh/)
 
-## Installation
+## Getting Started
+
+1. Link the `@skintracker/types` package:
 
 ```bash
-$ pnpm install
+cd ./packages/types
+bun link
 ```
 
-## Running the app
+2. Install deps:
 
 ```bash
-# development
-$ pnpm run start
-
-# watch mode
-$ pnpm run start:dev
-
-# production mode
-$ pnpm run start:prod
+cd ../..
+bun i
 ```
 
-## Test
+3. ... and that should be it!
+
+## Running Locally
+
+To run the project in development mode, run the following in your terminal:
 
 ```bash
-# unit tests
-$ pnpm run test
+bun dev
+```
 
-# e2e tests
-$ pnpm run test:e2e
+Alternatively, you can run the project in production by running:
 
-# test coverage
-$ pnpm run test:cov
+```bash
+bun start
+```
+
+This will transpile TS to JS and start the transpiled application. However, you will need to have created a symbolic link in the root directory to public assets:
+
+```bash
+# IN ROOT DIRECTORY!
+ln -s ./packages/api/public ./public
 ```
