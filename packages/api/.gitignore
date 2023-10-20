@@ -175,4 +175,6 @@ dist
 # Finder (MacOS) folder config
 .DS_Store
 
-# Symlink to /packages/api/public
+# Local sqlite files
+*.sqlite
+*.sqlite-*
