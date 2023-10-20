@@ -1,3 +1,3 @@
 export function getMinPrice() {
-	return "not implemented";
+  return "not implemented";
 }

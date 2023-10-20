@@ -11,14 +11,14 @@ import { SG553Skins } from "./sg553.skins";
 import { SSG08Skins } from "./ssg08.skins";
 
 export type WeaponRifleSkins =
-	| AK47Skins
-	| AUGSkins
-	| AWPSkins
-	| FAMASSkins
-	| G3SG1Skins
-	| GalilSkins
-	| M4A1SSkins
-	| M4A4Skins
-	| SCAR20Skins
-	| SG553Skins
-	| SSG08Skins;
+  | AK47Skins
+  | AUGSkins
+  | AWPSkins
+  | FAMASSkins
+  | G3SG1Skins
+  | GalilSkins
+  | M4A1SSkins
+  | M4A4Skins
+  | SCAR20Skins
+  | SG553Skins
+  | SSG08Skins;

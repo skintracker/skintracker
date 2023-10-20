@@ -1,18 +1,18 @@
 {
-	"name": "@skintracker/types",
-	"module": "src/index.ts",
-	"type": "module",
-	"scripts": {
-		"lint": "bunx biome check ./src",
-		"lint:fix": "bunx biome check ./src --apply",
-		"fmt": "bunx biome format ./src",
-		"fmt:fix": "bunx biome format ./src --write"
-	},
-	"devDependencies": {
-		"@biomejs/biome": "1.2.2",
-		"bun-types": "latest"
-	},
-	"peerDependencies": {
-		"typescript": "^5.0.0"
-	}
+  "name": "@skintracker/types",
+  "module": "src/index.ts",
+  "type": "module",
+  "scripts": {
+    "lint": "bunx biome check ./src",
+    "lint:fix": "bunx biome check ./src --apply",
+    "fmt": "bunx biome format ./src",
+    "fmt:fix": "bunx biome format ./src --write"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "latest",
+    "bun-types": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  }
 }

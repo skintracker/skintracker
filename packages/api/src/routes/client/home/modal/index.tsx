@@ -1,46 +1,35 @@
 import Button from "@/components/button";
 import Divider from "@/components/divider";
 import { Modal, ModalClose, ModalTitle } from "@/components/modal";
-import {
-	deriveSentryTransaction,
-	finishSentryTransaction,
-	setHTMLAsContentType,
-} from "@/hooks";
+import { deriveSentryTransaction, finishSentryTransaction, setHTMLAsContentType } from "@/hooks";
 import { captureException } from "@/utils/sentry";
-import type {
-	AponiaCtx,
-	AponiaHooks,
-	AponiaRouteHandler,
-	AponiaRouteHandlerFn,
-} from "aponia";
+import type { AponiaCtx, AponiaHooks, AponiaRouteHandler, AponiaRouteHandlerFn } from "aponia";
 
-export const showModal: AponiaRouteHandlerFn<JSX.Element> = (
-	_ctx: AponiaCtx,
-) => {
-	const closeModalEventName = "INDEX_CLOSE_MODAL";
-	return (
-		<Modal closeEvent={closeModalEventName}>
-			<ModalTitle>Modal</ModalTitle>
-			<Divider />
-			<p>Modal content text!</p>
-			<br />
-			<br />
-			<Divider />
-			<ModalClose closeEvent={closeModalEventName}>
-				<Button text="Close" classes="float-right" />
-			</ModalClose>
-		</Modal>
-	);
+export const showModal: AponiaRouteHandlerFn<JSX.Element> = (_ctx: AponiaCtx) => {
+  const closeModalEventName = "INDEX_CLOSE_MODAL";
+  return (
+    <Modal closeEvent={closeModalEventName}>
+      <ModalTitle>Modal</ModalTitle>
+      <Divider />
+      <p>Modal content text!</p>
+      <br />
+      <br />
+      <Divider />
+      <ModalClose closeEvent={closeModalEventName}>
+        <Button text="Close" classes="float-right" />
+      </ModalClose>
+    </Modal>
+  );
 };
 
 export const showModalHooks: AponiaHooks = {
-	afterHandle: [setHTMLAsContentType, finishSentryTransaction],
+  afterHandle: [setHTMLAsContentType, finishSentryTransaction],
 };
 
 export const handler: AponiaRouteHandler = {
-	GET: {
-		fn: captureException(showModal),
-		hooks: showModalHooks,
-		derivedState: [deriveSentryTransaction],
-	},
+  GET: {
+    fn: captureException(showModal),
+    hooks: showModalHooks,
+    derivedState: [deriveSentryTransaction],
+  },
 };

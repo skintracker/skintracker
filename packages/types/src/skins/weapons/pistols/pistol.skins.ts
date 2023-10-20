@@ -10,13 +10,13 @@ import { Tec9Skins } from "./tec-9.skins";
 import { USPSSkins } from "./usp-s.skins";
 
 export type WeaponPistolSkins =
-	| CZ75AutoSkins
-	| DesertEagleSkins
-	| DualBerettasSkins
-	| FiveSevenSkins
-	| Glock18Skins
-	| P2000Skins
-	| P250Skins
-	| R8RevolverSkins
-	| Tec9Skins
-	| USPSSkins;
+  | CZ75AutoSkins
+  | DesertEagleSkins
+  | DualBerettasSkins
+  | FiveSevenSkins
+  | Glock18Skins
+  | P2000Skins
+  | P250Skins
+  | R8RevolverSkins
+  | Tec9Skins
+  | USPSSkins;
