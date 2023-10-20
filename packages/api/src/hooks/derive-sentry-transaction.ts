@@ -7,7 +7,9 @@ export async function deriveSentryTransaction(ctx: AponiaCtx) {
   const path = urlObj.pathname;
   let body = undefined;
   try {
-    body = ctx.request.body ? await ctx.request.json() : undefined;
+    if (ctx.request.body) {
+      body = await ctx.request.json();
+    }
   } catch (e) {
     Aponia.log("🔥 Couldn't parse request body!");
   }
