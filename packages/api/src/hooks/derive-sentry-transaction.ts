@@ -2,13 +2,14 @@ import { startTransaction } from "@sentry/bun";
 import { Aponia, type AponiaCtx } from "aponia";
 
 export async function deriveSentryTransaction(ctx: AponiaCtx) {
-  Aponia.log("🔥 Deriving Sentry transaction...");
   const { headers, method, url } = ctx.request;
   const urlObj = new URL(url);
   const path = urlObj.pathname;
   let body = undefined;
   try {
-    body = ctx.request.body ? await ctx.request.json() : undefined;
+    if (ctx.request.body) {
+      body = await ctx.request.json();
+    }
   } catch (e) {
     Aponia.log("🔥 Couldn't parse request body!");
   }
@@ -31,8 +32,9 @@ export async function deriveSentryTransaction(ctx: AponiaCtx) {
   if (Bun.env.NODE_ENV === "production") {
     const transaction = startTransaction(transactionInit);
     return { transaction };
+  } else {
+    Aponia.log("🔥 Sentry is disabled!");
+    console.log("transactionInit", transactionInit);
+    return {};
   }
-  Aponia.log("🔥 Sentry is disabled!");
-  console.log("transactionInit", transactionInit);
-  return {};
 }
