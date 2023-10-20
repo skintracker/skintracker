@@ -55,6 +55,7 @@ export const searchCommands: AponiaRouteHandlerFn<JSX.Element> = (
 
 export const searchCommandsHooks: AponiaHooks = {
 	afterHandle: [setHTMLAsContentType],
+	type: "urlencoded",
 };
 
 export const handler: AponiaRouteHandler = {
