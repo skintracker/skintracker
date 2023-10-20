@@ -46,6 +46,5 @@ export const handler: AponiaRouteHandler = {
   GET: {
     fn: captureException(getDeveloper),
     hooks: getDeveloperHooks,
-    derivedState: [deriveSentryTransaction],
   },
 };

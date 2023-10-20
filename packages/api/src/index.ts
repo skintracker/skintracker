@@ -1,6 +1,9 @@
 import { networkInterfaces } from "os";
 import { dirname } from "path";
+import { plugin as sentryPlugin } from "@/utils/plugins/sentry-plugin";
+// DO NOT REMOVE ME!! I PROVIDE INTELLISENSE FOR THE WHOLE PROJECT
 import { html } from "@elysiajs/html";
+// END DO NOT REMOVE ME!!
 import { staticPlugin } from "@elysiajs/static";
 import { Integrations, init } from "@sentry/bun";
 import { Aponia, AponiaPlugin } from "aponia";
@@ -9,7 +12,7 @@ const start = performance.now();
 const moduleDir = dirname(Bun.fileURLToPath(new URL(import.meta.url)));
 const app = new Aponia({
   routesDir: `${moduleDir}/routes`,
-  plugins: [html(), staticPlugin() as unknown as AponiaPlugin],
+  plugins: [html({ autoDetect: false }), staticPlugin() as unknown as AponiaPlugin, sentryPlugin],
 });
 
 if (Bun.env.NODE_ENV === "production") {

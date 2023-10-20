@@ -31,11 +31,12 @@ export function BaseLayout({ children, title }: BaseLayoutProps) {
       </>
     );
   };
-  return (
+  const el = (
     <html lang="en">
       <head>
         <title safe>Skintracker | {title}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta charset="UTF-8" />
         <script src="/public/js/htmx.js" />
         <script src="/public/js/hyperscript.js" />
         <link rel="stylesheet" href="/public/font/font.css" />
@@ -47,6 +48,7 @@ export function BaseLayout({ children, title }: BaseLayoutProps) {
       </body>
     </html>
   );
+  return `<!DOCTYPE html>${el}`;
 }
 
 export default BaseLayout;

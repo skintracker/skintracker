@@ -1,7 +1,7 @@
 import Button from "@/components/button";
 import Divider from "@/components/divider";
 import { Modal, ModalClose, ModalTitle } from "@/components/modal";
-import { deriveSentryTransaction, finishSentryTransaction, setHTMLAsContentType } from "@/hooks";
+import { finishSentryTransaction, setHTMLAsContentType } from "@/hooks";
 import { captureException } from "@/utils/sentry";
 import type { AponiaCtx, AponiaHooks, AponiaRouteHandler, AponiaRouteHandlerFn } from "aponia";
 
@@ -30,6 +30,5 @@ export const handler: AponiaRouteHandler = {
   GET: {
     fn: captureException(showModal),
     hooks: showModalHooks,
-    derivedState: [deriveSentryTransaction],
   },
 };

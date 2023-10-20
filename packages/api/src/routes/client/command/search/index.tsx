@@ -50,6 +50,5 @@ export const handler: AponiaRouteHandler = {
   POST: {
     fn: captureException(searchCommands),
     hooks: searchCommandsHooks,
-    derivedState: [deriveSentryTransaction],
   },
 };

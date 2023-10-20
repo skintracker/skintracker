@@ -1,5 +1,5 @@
 import { CommandBar } from "@/components/command-bar";
-import { deriveSentryTransaction, finishSentryTransaction, setHTMLAsContentType } from "@/hooks";
+import { finishSentryTransaction, setHTMLAsContentType } from "@/hooks";
 import { captureException } from "@/utils/sentry";
 import type { AponiaCtx, AponiaHooks, AponiaRouteHandler, AponiaRouteHandlerFn } from "aponia";
 
@@ -15,6 +15,5 @@ export const handler: AponiaRouteHandler = {
   GET: {
     fn: captureException(showCommandBar),
     hooks: showCommandBarHooks,
-    derivedState: [deriveSentryTransaction],
   },
 };
