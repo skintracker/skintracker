@@ -14,7 +14,6 @@ import {
 export const searchCommands: AponiaRouteHandlerFn<JSX.Element> = (
 	ctx: AponiaCtx,
 ) => {
-	Aponia.log(ctx);
 	const searchQuery = (ctx.body as { query?: string }).query || "";
 	const words = searchQuery.split(/\s+/);
 
