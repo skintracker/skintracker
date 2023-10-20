@@ -41,15 +41,12 @@ export function JsonHighlighter({ data }: JsonHighlighterProps) {
     }
 
     const entries = Object.entries(value);
-    const elements: JSX.Element[] = [];
-    entries.forEach(([key, val], index) => {
-      elements.push(
-        <div class="ml-4">
-          <span class="text-blue-600">"{key}"</span>: {renderJsonValue(val)}
-          {index !== entries.length - 1 && ","}
-        </div>,
-      );
-    });
+    const elements: JSX.Element[] = entries.map(([key, val], index) => (
+      <div class="ml-4">
+        <span class="text-blue-600">"{key}"</span>: {renderJsonValue(val)}
+        {index !== entries.length - 1 && ","}
+      </div>
+    ));
 
     return (
       <div class="p-2 bg-slate-200 rounded">
