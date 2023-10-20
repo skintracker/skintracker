@@ -1,18 +1,21 @@
-import * as Sentry from "@sentry/bun";
+import {
+	captureException as sentryCapture,
+	startTransaction,
+} from "@sentry/bun";
 import type { AponiaRouteHandlerFn } from "aponia/src";
 
 export function captureException(fn: AponiaRouteHandlerFn, name?: string) {
 	const routeHandler = fn;
 	if (Bun.env.NODE_ENV !== "production") return routeHandler;
 	return (...args: Parameters<AponiaRouteHandlerFn>) => {
-		const tx = Sentry.startTransaction({
+		const tx = startTransaction({
 			op: "api-request",
 			name: name ?? routeHandler.name,
 		});
 		try {
 			return routeHandler(...args);
 		} catch (e) {
-			Sentry.captureException(e);
+			sentryCapture(e);
 			throw e;
 		} finally {
 			tx.finish();

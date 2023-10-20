@@ -20,7 +20,6 @@ if (Bun.env.NODE_ENV === "production") {
 		integrations: [new Integrations.Http({ tracing: true })],
 		dsn: Bun.env.SENTRY_DSN,
 	});
-	captureMessage("skintracker-api started successfully!");
 	Aponia.log("🔥 Sentry is enabled!");
 }
 
