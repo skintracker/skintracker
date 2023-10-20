@@ -10,6 +10,9 @@
 		}
 	},
 	"formatter": {
-		"enabled": true
+		"enabled": true,
+		"indentStyle": "space",
+		"indentSize": 2,
+		"lineWidth": 120
 	}
 }
