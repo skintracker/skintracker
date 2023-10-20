@@ -8,7 +8,11 @@ import {
 	TableHeaderRow,
 	TableRow,
 } from "@/components/table";
-import { setHTMLAsContentType } from "@/hooks";
+import {
+	deriveSentryTransaction,
+	finishSentryTransaction,
+	setHTMLAsContentType,
+} from "@/hooks";
 import { BaseLayout } from "@/layouts/base";
 import { captureException } from "@/utils/sentry";
 import { skinToString } from "@/utils/type-conversion";
@@ -342,9 +346,13 @@ export const getIndex: AponiaRouteHandlerFn<JSX.Element> = (
 };
 
 export const getIndexHooks: AponiaHooks = {
-	afterHandle: [setHTMLAsContentType],
+	afterHandle: [setHTMLAsContentType, finishSentryTransaction],
 };
 
 export const handler: AponiaRouteHandler = {
-	GET: [captureException(getIndex), getIndexHooks],
+	GET: {
+		fn: captureException(getIndex),
+		hooks: getIndexHooks,
+		derivedState: [deriveSentryTransaction],
+	},
 };

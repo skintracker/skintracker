@@ -1,4 +1,8 @@
-import { setJSONAsContentType } from "@/hooks";
+import {
+	deriveSentryTransaction,
+	finishSentryTransaction,
+	setJSONAsContentType,
+} from "@/hooks";
 import { queries } from "@/utils/db";
 import { captureException } from "@/utils/sentry";
 import { intToCategory, intToExterior } from "@/utils/type-conversion";
@@ -38,9 +42,13 @@ export const getUserTracking: AponiaRouteHandlerFn<
 };
 
 export const getUserTrackingHooks: AponiaHooks = {
-	afterHandle: [setJSONAsContentType],
+	afterHandle: [setJSONAsContentType, finishSentryTransaction],
 };
 
 export const handler: AponiaRouteHandler = {
-	GET: [captureException(getUserTracking), getUserTrackingHooks],
+	GET: {
+		fn: captureException(getUserTracking),
+		hooks: getUserTrackingHooks,
+		derivedState: [deriveSentryTransaction],
+	},
 };

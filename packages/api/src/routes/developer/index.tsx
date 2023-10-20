@@ -1,6 +1,10 @@
 import Button from "@/components/button";
 import Divider from "@/components/divider";
-import { setHTMLAsContentType } from "@/hooks";
+import {
+	deriveSentryTransaction,
+	finishSentryTransaction,
+	setHTMLAsContentType,
+} from "@/hooks";
 import BaseLayout from "@/layouts/base";
 import { JsonHighlighter } from "@/utils/client";
 import { captureException } from "@/utils/sentry";
@@ -51,9 +55,13 @@ export const getDeveloper: AponiaRouteHandlerFn<JSX.Element | undefined> = (
 };
 
 export const getDeveloperHooks: AponiaHooks = {
-	afterHandle: [setHTMLAsContentType],
+	afterHandle: [setHTMLAsContentType, finishSentryTransaction],
 };
 
 export const handler: AponiaRouteHandler = {
-	GET: [captureException(getDeveloper), getDeveloperHooks],
+	GET: {
+		fn: captureException(getDeveloper),
+		hooks: getDeveloperHooks,
+		derivedState: [deriveSentryTransaction],
+	},
 };

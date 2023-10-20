@@ -1,5 +1,9 @@
 import { CommandBar } from "@/components/command-bar";
-import { setHTMLAsContentType } from "@/hooks";
+import {
+	deriveSentryTransaction,
+	finishSentryTransaction,
+	setHTMLAsContentType,
+} from "@/hooks";
 import { captureException } from "@/utils/sentry";
 import type {
 	AponiaCtx,
@@ -15,9 +19,13 @@ export const showCommandBar: AponiaRouteHandlerFn<JSX.Element> = (
 };
 
 export const showCommandBarHooks: AponiaHooks = {
-	afterHandle: [setHTMLAsContentType],
+	afterHandle: [setHTMLAsContentType, finishSentryTransaction],
 };
 
 export const handler: AponiaRouteHandler = {
-	GET: [captureException(showCommandBar), showCommandBarHooks],
+	GET: {
+		fn: captureException(showCommandBar),
+		hooks: showCommandBarHooks,
+		derivedState: [deriveSentryTransaction],
+	},
 };

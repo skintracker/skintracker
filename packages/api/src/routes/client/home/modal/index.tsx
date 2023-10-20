@@ -1,7 +1,11 @@
 import Button from "@/components/button";
 import Divider from "@/components/divider";
 import { Modal, ModalClose, ModalTitle } from "@/components/modal";
-import { setHTMLAsContentType } from "@/hooks";
+import {
+	deriveSentryTransaction,
+	finishSentryTransaction,
+	setHTMLAsContentType,
+} from "@/hooks";
 import { captureException } from "@/utils/sentry";
 import type {
 	AponiaCtx,
@@ -30,9 +34,13 @@ export const showModal: AponiaRouteHandlerFn<JSX.Element> = (
 };
 
 export const showModalHooks: AponiaHooks = {
-	afterHandle: [setHTMLAsContentType],
+	afterHandle: [setHTMLAsContentType, finishSentryTransaction],
 };
 
 export const handler: AponiaRouteHandler = {
-	GET: [captureException(showModal), showModalHooks],
+	GET: {
+		fn: captureException(showModal),
+		hooks: showModalHooks,
+		derivedState: [deriveSentryTransaction],
+	},
 };

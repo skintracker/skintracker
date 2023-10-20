@@ -1,4 +1,8 @@
-import { setJSONAsContentType } from "@/hooks";
+import {
+	deriveSentryTransaction,
+	finishSentryTransaction,
+	setJSONAsContentType,
+} from "@/hooks";
 import { captureException } from "@/utils/sentry";
 import type {
 	AponiaCtx,
@@ -24,14 +28,14 @@ export const getHealthcheck: AponiaRouteHandlerFn<{
 };
 
 export const getHealthcheckHooks: AponiaHooks = {
-	afterHandle: [setJSONAsContentType],
+	afterHandle: [setJSONAsContentType, finishSentryTransaction],
 };
 
 export const handler: AponiaRouteHandler = {
-	GET: [
-		captureException(getHealthcheck),
-		getHealthcheckHooks,
-		undefined,
-		[getDateDecorator],
-	],
+	GET: {
+		fn: captureException(getHealthcheck),
+		hooks: getHealthcheckHooks,
+		decorators: [getDateDecorator],
+		derivedState: [deriveSentryTransaction],
+	},
 };

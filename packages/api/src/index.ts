@@ -2,7 +2,7 @@ import { networkInterfaces } from "os";
 import { dirname } from "path";
 import { html } from "@elysiajs/html";
 import { staticPlugin } from "@elysiajs/static";
-import { Integrations, captureMessage, init } from "@sentry/bun";
+import { Integrations, init } from "@sentry/bun";
 import { Aponia, AponiaPlugin } from "aponia";
 
 const start = performance.now();
