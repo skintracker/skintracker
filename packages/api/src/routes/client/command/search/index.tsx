@@ -11,9 +11,9 @@ import type {
 } from "aponia";
 
 export const searchCommands: AponiaRouteHandlerFn<JSX.Element> = (
-	_ctx: AponiaCtx,
+	ctx: AponiaCtx,
 ) => {
-	const searchQuery = (_ctx.body as { query: string }).query;
+	const searchQuery = (ctx.body as { query?: string }).query || "";
 	const words = searchQuery.split(/\s+/);
 
 	const escapeRegExp = (str: string) => {
