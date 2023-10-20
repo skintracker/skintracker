@@ -17,40 +17,40 @@ import { StilettoKnifeSkins } from "./stiletto.skins";
 import { UrsusKnifeSkins } from "./ursus.skins";
 
 export enum Knife {
-	Bayonet = "Bayonet",
-	BowieKnife = "Bowie Knife",
-	ButterflyKnife = "Butterfly Knife",
-	ClassicKnife = "Classic Knife",
-	FalchionKnife = "Falchion Knife",
-	FlipKnife = "Flip Knife",
-	GutKnife = "Gut Knife",
-	HuntsmanKnife = "Huntsman Knife",
-	Karambit = "Karambit",
-	M9Bayonet = "M9 Bayonet",
-	NavajaKnife = "Navaja Knife",
-	NomadKnife = "Nomad Knife",
-	ParacordKnife = "Paracord Knife",
-	ShadowDaggers = "Shadow Daggers",
-	SkeletonKnife = "Skeleton Knife",
-	StilettoKnife = "Stiletto Knife",
-	UrsusKnife = "Ursus Knife",
+  Bayonet = "Bayonet",
+  BowieKnife = "Bowie Knife",
+  ButterflyKnife = "Butterfly Knife",
+  ClassicKnife = "Classic Knife",
+  FalchionKnife = "Falchion Knife",
+  FlipKnife = "Flip Knife",
+  GutKnife = "Gut Knife",
+  HuntsmanKnife = "Huntsman Knife",
+  Karambit = "Karambit",
+  M9Bayonet = "M9 Bayonet",
+  NavajaKnife = "Navaja Knife",
+  NomadKnife = "Nomad Knife",
+  ParacordKnife = "Paracord Knife",
+  ShadowDaggers = "Shadow Daggers",
+  SkeletonKnife = "Skeleton Knife",
+  StilettoKnife = "Stiletto Knife",
+  UrsusKnife = "Ursus Knife",
 }
 
 export type KnifeSkins =
-	| BayonetSkins
-	| BowieKnifeSkins
-	| ButterflyKnifeSkins
-	| ClassicKnifeSkins
-	| FalchionKnifeSkins
-	| FlipKnifeSkins
-	| GutKnifeSkins
-	| HuntsmanKnifeSkins
-	| KarambitSkins
-	| M9BayonetSkins
-	| NavajaKnifeSkins
-	| NomadKnifeSkins
-	| ParacordKnifeSkins
-	| ShadowDaggersSkins
-	| SkeletonKnifeSkins
-	| StilettoKnifeSkins
-	| UrsusKnifeSkins;
+  | BayonetSkins
+  | BowieKnifeSkins
+  | ButterflyKnifeSkins
+  | ClassicKnifeSkins
+  | FalchionKnifeSkins
+  | FlipKnifeSkins
+  | GutKnifeSkins
+  | HuntsmanKnifeSkins
+  | KarambitSkins
+  | M9BayonetSkins
+  | NavajaKnifeSkins
+  | NomadKnifeSkins
+  | ParacordKnifeSkins
+  | ShadowDaggersSkins
+  | SkeletonKnifeSkins
+  | StilettoKnifeSkins
+  | UrsusKnifeSkins;
