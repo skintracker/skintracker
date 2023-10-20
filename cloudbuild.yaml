@@ -18,6 +18,6 @@ steps:
       - "--image"
       - "gcr.io/$PROJECT_ID/skintracker:$COMMIT_SHA"
       - "--region"
-      - "us-east-4"
+      - "us-east4"
 images:
   - "gcr.io/$PROJECT_ID/skintracker:$COMMIT_SHA"
