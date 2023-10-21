@@ -2,7 +2,7 @@ FROM oven/bun:latest
 WORKDIR /usr/src/app
 
 COPY . .
-RUN bun install --frozen-lockfile --production
+RUN bun install
 
 RUN ln -s ./packages/api/public ./public
 
