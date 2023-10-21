@@ -1,5 +1,4 @@
-import { finishSentryTransaction, setHTMLAsContentType } from "@/hooks";
-import { captureException } from "@/utils/sentry";
+import { setHTMLAsContentType } from "@/hooks";
 import type { AponiaCtx, AponiaHooks, AponiaRouteHandler, AponiaRouteHandlerFn } from "aponia";
 
 export function toggleClickState() {
@@ -18,12 +17,12 @@ export const toggleButton: AponiaRouteHandlerFn<JSX.Element> = (_ctx: AponiaCtx)
 };
 
 export const toggleButtonHooks: AponiaHooks = {
-  afterHandle: [setHTMLAsContentType, finishSentryTransaction],
+  afterHandle: [setHTMLAsContentType],
 };
 
 export const handler: AponiaRouteHandler = {
   POST: {
-    fn: captureException(toggleButton),
+    fn: toggleButton,
     hooks: toggleButtonHooks,
   },
 };

@@ -1,8 +1,7 @@
 import Divider from "@/components/divider";
 import { Table, TableBody, TableCell, TableHead, TableHeaderCell, TableHeaderRow, TableRow } from "@/components/table";
-import { finishSentryTransaction, setHTMLAsContentType } from "@/hooks";
+import { setHTMLAsContentType } from "@/hooks";
 import { BaseLayout } from "@/layouts/base";
-import { captureException } from "@/utils/sentry";
 import { skinToString } from "@/utils/type-conversion";
 import {
   BayonetSkins,
@@ -304,13 +303,12 @@ export const getIndex: AponiaRouteHandlerFn<JSX.Element> = (_ctx: AponiaCtx) => 
 };
 
 export const getIndexHooks: AponiaHooks = {
-  beforeHandle: [setHTMLAsContentType],
-  afterHandle: [setHTMLAsContentType, finishSentryTransaction],
+  afterHandle: [setHTMLAsContentType],
 };
 
 export const handler: AponiaRouteHandler = {
   GET: {
-    fn: captureException(getIndex),
+    fn: getIndex,
     hooks: getIndexHooks,
   },
 };
