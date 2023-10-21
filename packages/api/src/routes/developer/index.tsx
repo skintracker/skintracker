@@ -1,9 +1,8 @@
 import Button from "@/components/button";
 import Divider from "@/components/divider";
-import { deriveSentryTransaction, finishSentryTransaction, setHTMLAsContentType } from "@/hooks";
+import { setHTMLAsContentType } from "@/hooks";
 import BaseLayout from "@/layouts/base";
 import { JsonHighlighter } from "@/utils/client";
-import { captureException } from "@/utils/sentry";
 import type { AponiaCtx, AponiaHooks, AponiaRouteHandler, AponiaRouteHandlerFn } from "aponia";
 import { getHealthcheck } from "../api/healthcheck";
 
@@ -39,12 +38,12 @@ export const getDeveloper: AponiaRouteHandlerFn<JSX.Element | undefined> = (ctx:
 };
 
 export const getDeveloperHooks: AponiaHooks = {
-  afterHandle: [setHTMLAsContentType, finishSentryTransaction],
+  afterHandle: [setHTMLAsContentType],
 };
 
 export const handler: AponiaRouteHandler = {
   GET: {
-    fn: captureException(getDeveloper),
+    fn: getDeveloper,
     hooks: getDeveloperHooks,
   },
 };

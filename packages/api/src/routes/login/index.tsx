@@ -1,6 +1,5 @@
-import { finishSentryTransaction, setHTMLAsContentType } from "@/hooks";
+import { setHTMLAsContentType } from "@/hooks";
 import { BaseLayout } from "@/layouts/base";
-import { captureException } from "@/utils/sentry";
 import { AponiaCtx, AponiaHooks, AponiaRouteHandler, AponiaRouteHandlerFn } from "aponia";
 
 export const getLogin: AponiaRouteHandlerFn<JSX.Element> = (_ctx: AponiaCtx) => {
@@ -14,12 +13,12 @@ export const getLogin: AponiaRouteHandlerFn<JSX.Element> = (_ctx: AponiaCtx) => 
 };
 
 export const getLoginHooks: AponiaHooks = {
-  afterHandle: [setHTMLAsContentType, finishSentryTransaction],
+  afterHandle: [setHTMLAsContentType],
 };
 
 export const handler: AponiaRouteHandler = {
   GET: {
-    fn: captureException(getLogin),
+    fn: getLogin,
     hooks: getLoginHooks,
   },
 };

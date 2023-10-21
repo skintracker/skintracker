@@ -1,8 +1,7 @@
 import Divider from "@/components/divider";
 import { Link } from "@/components/link";
-import { deriveSentryTransaction, finishSentryTransaction, setHTMLAsContentType } from "@/hooks";
+import { setHTMLAsContentType } from "@/hooks";
 import { commands } from "@/utils/commands";
-import { captureException } from "@/utils/sentry";
 import type { AponiaCtx, AponiaHooks, AponiaRouteHandler, AponiaRouteHandlerFn } from "aponia";
 
 export const searchCommands: AponiaRouteHandlerFn<JSX.Element> = (ctx: AponiaCtx) => {
@@ -42,13 +41,13 @@ export const searchCommands: AponiaRouteHandlerFn<JSX.Element> = (ctx: AponiaCtx
 };
 
 export const searchCommandsHooks: AponiaHooks = {
-  afterHandle: [setHTMLAsContentType, finishSentryTransaction],
+  afterHandle: [setHTMLAsContentType],
   type: "urlencoded",
 };
 
 export const handler: AponiaRouteHandler = {
   POST: {
-    fn: captureException(searchCommands),
+    fn: searchCommands,
     hooks: searchCommandsHooks,
   },
 };

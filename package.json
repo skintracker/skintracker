@@ -20,5 +20,8 @@
     "start": "bun run packages/api/dist/index.js"
   },
   "type": "module",
-  "workspaces": ["packages/*"]
+  "workspaces": ["packages/*"],
+  "dependencies": {
+    "aponia": "github:jacksonsalopek/aponia"
+  }
 }

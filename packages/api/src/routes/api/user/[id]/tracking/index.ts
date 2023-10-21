@@ -1,9 +1,8 @@
-import { finishSentryTransaction, setJSONAsContentType } from "@/hooks";
+import { setJSONAsContentType } from "@/hooks";
 import { queries } from "@/utils/db";
-import { captureException } from "@/utils/sentry";
+import logger from "@/utils/logging";
 import { intToCategory, intToExterior } from "@/utils/type-conversion";
 import type { STSkin } from "@skintracker/types/src";
-import { Aponia } from "aponia";
 import type { AponiaCtx, AponiaHooks, AponiaRouteHandler, AponiaRouteHandlerFn } from "aponia";
 
 export interface UserTrackingResponse {
@@ -14,7 +13,7 @@ export const getUserTracking: AponiaRouteHandlerFn<Promise<UserTrackingResponse>
   ctx: AponiaCtx,
 ): Promise<UserTrackingResponse> => {
   const { id } = ctx.params;
-  Aponia.log(`[GET] /user/${id}/tracking test`);
+  logger.debug(`[GET] /user/${id}/tracking test`);
   const res = await queries.getUserTrackedSkins(id);
   if (!res) {
     throw new Error("Invalid or no response from Turso!");
@@ -33,12 +32,12 @@ export const getUserTracking: AponiaRouteHandlerFn<Promise<UserTrackingResponse>
 };
 
 export const getUserTrackingHooks: AponiaHooks = {
-  afterHandle: [setJSONAsContentType, finishSentryTransaction],
+  afterHandle: [setJSONAsContentType],
 };
 
 export const handler: AponiaRouteHandler = {
   GET: {
-    fn: captureException(getUserTracking),
+    fn: getUserTracking,
     hooks: getUserTrackingHooks,
   },
 };
