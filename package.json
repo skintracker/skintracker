@@ -1,24 +1,24 @@
 {
-	"name": "skintracker",
-	"module": "index.ts",
-	"type": "module",
-	"private": true,
-	"workspaces": ["packages/*"],
-	"scripts": {
-		"build": "bun run --cwd packages/api build",
-		"build:docker": "docker build -t skintracker .",
-		"dev": "bun run --cwd packages/api dev",
-		"lint": "bun run --cwd packages/api lint && bun run --cwd packages/types lint",
-		"lint:fix": "bun run --cwd packages/api lint:fix && bun run --cwd packages/types lint:fix",
-		"fmt": "bun run --cwd packages/api fmt && bun run --cwd packages/types fmt",
-		"fmt:fix": "bun run --cwd packages/api fmt:fix && bun run --cwd packages/types fmt:fix",
-		"prestart": "bun run --cwd packages/api build",
-		"start": "bun run packages/api/dist/index.js"
-	},
-	"devDependencies": {
-		"bun-types": "latest"
-	},
-	"peerDependencies": {
-		"typescript": "^5.0.0"
-	}
+  "name": "skintracker",
+  "module": "index.ts",
+  "devDependencies": {
+    "bun-types": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "private": true,
+  "scripts": {
+    "build": "bun run --cwd packages/api build",
+    "build:docker": "docker build -t skintracker .",
+    "dev": "bun run --cwd packages/api dev",
+    "lint": "bun run --cwd packages/api lint && bun run --cwd packages/types lint",
+    "lint:fix": "bun run --cwd packages/api lint:fix && bun run --cwd packages/types lint:fix",
+    "fmt": "bun run --cwd packages/api fmt && bun run --cwd packages/types fmt",
+    "fmt:fix": "bun run --cwd packages/api fmt:fix && bun run --cwd packages/types fmt:fix",
+    "prestart": "bun run --cwd packages/api build",
+    "start": "bun run packages/api/dist/index.js"
+  },
+  "type": "module",
+  "workspaces": ["packages/*"]
 }
