@@ -1,5 +1,13 @@
 import Divider from "@/components/divider";
-import { Table, TableBody, TableCell, TableHead, TableHeaderCell, TableHeaderRow, TableRow } from "@/components/table";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeaderCell,
+  TableHeaderRow,
+  TableRow,
+} from "@/components/table";
 import { setHTMLAsContentType } from "@/hooks";
 import { BaseLayout } from "@/layouts/base";
 import { skinToString } from "@/utils/type-conversion";
@@ -14,9 +22,16 @@ import {
   STSkinExterior,
   Weapon,
 } from "@skintracker/types/src";
-import { AponiaCtx, AponiaHooks, AponiaRouteHandler, AponiaRouteHandlerFn } from "aponia";
+import {
+  AponiaCtx,
+  AponiaHooks,
+  AponiaRouteHandler,
+  AponiaRouteHandlerFn,
+} from "aponia";
 
-export const getIndex: AponiaRouteHandlerFn<JSX.Element> = (_ctx: AponiaCtx) => {
+export const getIndex: AponiaRouteHandlerFn<JSX.Element> = (
+  _ctx: AponiaCtx
+) => {
   const skins: STSkin[] = [
     {
       item: Weapon.M4A4,
@@ -47,24 +62,11 @@ export const getIndex: AponiaRouteHandlerFn<JSX.Element> = (_ctx: AponiaCtx) => 
               <TableHeaderCell>Skin</TableHeaderCell>
               <TableHeaderCell classes="hidden md:table-cell">
                 <span class="inline-grid grid-cols-[39px_1fr]">
-                  {/* biome-ignore lint/a11y/noSvgWithoutTitle: it has one */}
-                  <svg
-                    title="Bitskins logo"
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="39"
-                    height="31.402"
-                    viewBox="0 0 39 31.402"
+                  <img
+                    alt="Bitskins Logo"
+                    src="/public/svg/bitskins.svg"
                     class="h-[17px] pt-[3px]"
-                  >
-                    <g id="Group_6694" data-name="Group 6694" transform="translate(-208.873 -254.543)">
-                      <path
-                        id="path420"
-                        d="M239.8 263.486l3.013-4.445 2.321 3.427-.686 1.018zm-8.8 19.968h-5.017l-13.457-19.987H217.3L224.59 274.3l1.286-1.868 4.8-.014-.015.023-3.671 5.424 1.531 2.274 6.942-10.245h-3.078v.006h-7.748l-4.328-6.433h4.812l1.725 2.511h15.933zm-15.458-26.421h25.621l-4.375 6.453-4.9-.019 1.662-2.49H212.892zm27.231-2.49h-28.57v.018l-5.336 7.94 15.791 23.444h7.668l15.811-23.481z"
-                        transform="translate(0 0)"
-                        fill="rgb(248 113 113)"
-                      />
-                    </g>
-                  </svg>
+                  />
                   <span class="text-red-400">Bitskins</span>
                 </span>
               </TableHeaderCell>
@@ -72,10 +74,24 @@ export const getIndex: AponiaRouteHandlerFn<JSX.Element> = (_ctx: AponiaCtx) => 
                 <span class="text-orange-400">BUFF.Market</span>
               </TableHeaderCell>
               <TableHeaderCell classes="hidden md:table-cell">
-                <span class="text-green-400">DMarket</span>
+                <span class="inline-grid grid-cols-[39px_1fr]">
+                  <img
+                    alt="DMarket Logo"
+                    src="/public/svg/dmarket.svg"
+                    class="h-[17px] pt-[3px]"
+                  />
+                  <span class="text-green-400">DMarket</span>
+                </span>
               </TableHeaderCell>
               <TableHeaderCell classes="hidden md:table-cell">
-                <span class="text-blue-400">Skinport</span>
+                <span class="inline-grid grid-cols-[39px_1fr]">
+                  <img
+                    alt="Skinport Logo"
+                    src="/public/svg/skinport.svg"
+                    class="h-[17px] pt-[3px]"
+                  />
+                  <span class="text-blue-400">Skinport</span>
+                </span>
               </TableHeaderCell>
             </TableHeaderRow>
           </TableHead>
@@ -83,16 +99,32 @@ export const getIndex: AponiaRouteHandlerFn<JSX.Element> = (_ctx: AponiaCtx) => 
             {skins.map((skin, i) => (
               <TableRow class="odd:bg-slate-200 even:bg-slate-300 hover:bg-slate-400 hover:cursor-pointer">
                 <TableCell>{skinToString(skin)}</TableCell>
-                <TableCell classes={`hidden md:table-cell ${i % 2 === 1 ? "bg-red-400" : "bg-red-300"}`}>
+                <TableCell
+                  classes={`hidden md:table-cell ${
+                    i % 2 === 1 ? "bg-red-400" : "bg-red-300"
+                  }`}
+                >
                   $20.50
                 </TableCell>
-                <TableCell classes={`hidden md:table-cell ${i % 2 === 1 ? "bg-orange-400" : "bg-orange-300"}`}>
+                <TableCell
+                  classes={`hidden md:table-cell ${
+                    i % 2 === 1 ? "bg-orange-400" : "bg-orange-300"
+                  }`}
+                >
                   $10,000.23
                 </TableCell>
-                <TableCell classes={`hidden md:table-cell ${i % 2 === 1 ? "bg-green-400" : "bg-green-300"}`}>
+                <TableCell
+                  classes={`hidden md:table-cell ${
+                    i % 2 === 1 ? "bg-green-400" : "bg-green-300"
+                  }`}
+                >
                   <span class="bold">$0.69</span>
                 </TableCell>
-                <TableCell classes={`hidden md:table-cell ${i % 2 === 1 ? "bg-blue-400" : "bg-blue-300"}`}>
+                <TableCell
+                  classes={`hidden md:table-cell ${
+                    i % 2 === 1 ? "bg-blue-400" : "bg-blue-300"
+                  }`}
+                >
                   N/A
                 </TableCell>
               </TableRow>
@@ -104,7 +136,10 @@ export const getIndex: AponiaRouteHandlerFn<JSX.Element> = (_ctx: AponiaCtx) => 
         <br />
         <h2 class="text-2xl font-semibold">Market Index</h2>
         <Divider />
-        <div id="market-index-chart-container" class="w-full min-h-[450px] rounded" />
+        <div
+          id="market-index-chart-container"
+          class="w-full min-h-[450px] rounded"
+        />
       </div>
       <script src="https://unpkg.com/lightweight-charts@4.1.0/dist/lightweight-charts.standalone.production.js" />
       <script>

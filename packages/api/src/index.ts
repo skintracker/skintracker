@@ -31,6 +31,8 @@ function getCurrentLocalIP() {
   return ips?.filter((ip?: string) => ip?.startsWith("192.168"))[0];
 }
 
+// test
+
 await app.start().then(
   (instance) => {
     const end = performance.now();
