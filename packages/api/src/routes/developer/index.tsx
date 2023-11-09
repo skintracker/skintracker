@@ -3,10 +3,17 @@ import Divider from "@/components/divider";
 import { setHTMLAsContentType } from "@/hooks";
 import BaseLayout from "@/layouts/base";
 import { JsonHighlighter } from "@/utils/client";
-import type { AponiaCtx, AponiaHooks, AponiaRouteHandler, AponiaRouteHandlerFn } from "aponia";
+import type {
+  AponiaCtx,
+  AponiaHooks,
+  AponiaRouteHandler,
+  AponiaRouteHandlerFn,
+} from "aponia";
 import { getHealthcheck } from "../api/healthcheck";
 
-export const getDeveloper: AponiaRouteHandlerFn<JSX.Element | undefined> = (ctx: AponiaCtx) => {
+export const getDeveloper: AponiaRouteHandlerFn<
+  Promise<JSX.Element | undefined>
+> = async (ctx: AponiaCtx) => {
   // Gets the healthceck and embeds into markdown.
   if (Bun.env.NODE_ENV === "production") {
     ctx.set.status = 404;
@@ -31,7 +38,12 @@ export const getDeveloper: AponiaRouteHandlerFn<JSX.Element | undefined> = (ctx:
         <br />
         <h2 class="text-xl">Modal Test</h2>
         <Divider />
-        <Button text="Open Modal" hx-get="/client/home/modal" hx-target="body" hx-swap="beforeend" />
+        <Button
+          text="Open Modal"
+          hx-get="/client/home/modal"
+          hx-target="body"
+          hx-swap="beforeend"
+        />
       </div>
     </BaseLayout>
   );

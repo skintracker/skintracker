@@ -15,7 +15,7 @@ export const db = (() => {
 export const queries = {
   getUserTrackedSkins: (steamid: string) => {
     return db?.execute({
-      sql: "SELECT item, name, category, exterior FROM tracked_skins WHERE steamid = ?",
+      sql: "SELECT item, name, category, exterior, phase FROM tracked_skins WHERE steamid = ?",
       args: [steamid],
     });
   },

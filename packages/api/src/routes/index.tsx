@@ -10,6 +10,7 @@ import {
 } from "@/components/table";
 import { setHTMLAsContentType } from "@/hooks";
 import { BaseLayout } from "@/layouts/base";
+import { Bitskins, BuffMarket, DMarket, Skinport } from "@/utils";
 import { skinToString } from "@/utils/type-conversion";
 import {
   BayonetSkins,
@@ -29,8 +30,8 @@ import {
   AponiaRouteHandlerFn,
 } from "aponia";
 
-export const getIndex: AponiaRouteHandlerFn<JSX.Element> = (
-  _ctx: AponiaCtx
+export const getIndex: AponiaRouteHandlerFn<JSX.Element> = async (
+  _ctx: AponiaCtx,
 ) => {
   const skins: STSkin[] = [
     {
@@ -44,6 +45,7 @@ export const getIndex: AponiaRouteHandlerFn<JSX.Element> = (
       name: BayonetSkins.Doppler,
       category: STSkinCategory.Normal,
       exterior: STSkinExterior.FN,
+      phase: 1,
     },
     {
       item: Gloves.Moto,
@@ -52,6 +54,63 @@ export const getIndex: AponiaRouteHandlerFn<JSX.Element> = (
       exterior: STSkinExterior.MW,
     },
   ];
+
+  // get the min price for each skin for each site
+  const minPricesResult = await Promise.allSettled(
+    skins.map(async (skin) => ({
+      bitskins: await Bitskins.getMinPrice(skin),
+      // buffmarket: await BuffMarket.getMinPrice(skin),
+      dmarket: await DMarket.getMinPrice(skin),
+      skinport: await Skinport.getMinPrice(skin),
+    })),
+  );
+  const minPrices = minPricesResult.map((result) => {
+    if (result.status === "fulfilled") {
+      return result.value;
+    } else {
+      return {
+        bitskins: "N/A",
+        // buffmarket: "N/A",
+        dmarket: "N/A",
+        skinport: "N/A",
+      };
+    }
+  });
+
+  const tableRows = skins.map((skin, i) => (
+    <TableRow class="odd:bg-slate-200 even:bg-slate-300 hover:bg-slate-400 hover:cursor-pointer">
+      <TableCell>{skinToString({ skin })}</TableCell>
+      <TableCell
+        classes={`hidden md:table-cell ${
+          i % 2 === 1 ? "bg-red-400" : "bg-red-300"
+        }`}
+      >
+        {minPrices[i].bitskins}
+      </TableCell>
+      {/* <TableCell
+        classes={`hidden md:table-cell ${
+          i % 2 === 1 ? "bg-orange-400" : "bg-orange-300"
+        }`}
+      >
+        {minPrices[i].buffmarket}
+      </TableCell> */}
+      <TableCell
+        classes={`hidden md:table-cell ${
+          i % 2 === 1 ? "bg-green-400" : "bg-green-300"
+        }`}
+      >
+        {minPrices[i].dmarket}
+      </TableCell>
+      <TableCell
+        classes={`hidden md:table-cell ${
+          i % 2 === 1 ? "bg-blue-400" : "bg-blue-300"
+        }`}
+      >
+        {minPrices[i].skinport}
+      </TableCell>
+    </TableRow>
+  ));
+
   return (
     <BaseLayout title="Home">
       <div class="overflow-scroll">
@@ -70,9 +129,9 @@ export const getIndex: AponiaRouteHandlerFn<JSX.Element> = (
                   <span class="text-red-400">Bitskins</span>
                 </span>
               </TableHeaderCell>
-              <TableHeaderCell classes="hidden md:table-cell">
+              {/* <TableHeaderCell classes="hidden md:table-cell">
                 <span class="text-orange-400">BUFF.Market</span>
-              </TableHeaderCell>
+              </TableHeaderCell> */}
               <TableHeaderCell classes="hidden md:table-cell">
                 <span class="inline-grid grid-cols-[39px_1fr]">
                   <img
@@ -95,41 +154,7 @@ export const getIndex: AponiaRouteHandlerFn<JSX.Element> = (
               </TableHeaderCell>
             </TableHeaderRow>
           </TableHead>
-          <TableBody>
-            {skins.map((skin, i) => (
-              <TableRow class="odd:bg-slate-200 even:bg-slate-300 hover:bg-slate-400 hover:cursor-pointer">
-                <TableCell>{skinToString(skin)}</TableCell>
-                <TableCell
-                  classes={`hidden md:table-cell ${
-                    i % 2 === 1 ? "bg-red-400" : "bg-red-300"
-                  }`}
-                >
-                  $20.50
-                </TableCell>
-                <TableCell
-                  classes={`hidden md:table-cell ${
-                    i % 2 === 1 ? "bg-orange-400" : "bg-orange-300"
-                  }`}
-                >
-                  $10,000.23
-                </TableCell>
-                <TableCell
-                  classes={`hidden md:table-cell ${
-                    i % 2 === 1 ? "bg-green-400" : "bg-green-300"
-                  }`}
-                >
-                  <span class="bold">$0.69</span>
-                </TableCell>
-                <TableCell
-                  classes={`hidden md:table-cell ${
-                    i % 2 === 1 ? "bg-blue-400" : "bg-blue-300"
-                  }`}
-                >
-                  N/A
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
+          <TableBody>{tableRows}</TableBody>
         </Table>
         <br />
         <Divider />

@@ -19,6 +19,7 @@ export enum STSkinCategory {
 export type STSkinBase = {
   exterior: STSkinExterior;
   category: STSkinCategory;
+  phase?: 1 | 2 | 3 | 4;
 };
 
 export type STSkin =
