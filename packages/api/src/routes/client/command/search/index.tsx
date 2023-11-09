@@ -2,9 +2,16 @@ import Divider from "@/components/divider";
 import { Link } from "@/components/link";
 import { setHTMLAsContentType } from "@/hooks";
 import { commands } from "@/utils/commands";
-import type { AponiaCtx, AponiaHooks, AponiaRouteHandler, AponiaRouteHandlerFn } from "aponia";
+import type {
+  AponiaCtx,
+  AponiaHooks,
+  AponiaRouteHandler,
+  AponiaRouteHandlerFn,
+} from "aponia";
 
-export const searchCommands: AponiaRouteHandlerFn<JSX.Element> = (ctx: AponiaCtx) => {
+export const searchCommands: AponiaRouteHandlerFn<JSX.Element> = (
+  ctx: AponiaCtx,
+) => {
   const searchQuery = (ctx.body as { query?: string }).query || "";
   const words = searchQuery.split(/\s+/);
 
@@ -27,7 +34,10 @@ export const searchCommands: AponiaRouteHandlerFn<JSX.Element> = (ctx: AponiaCtx
       {results.sort().map((result, i) => (
         <>
           <li class="px-4">
-            <Link href={commands[result as keyof typeof commands]} class="text-blue-600">
+            <Link
+              href={commands[result as keyof typeof commands]}
+              class="text-blue-600"
+            >
               {result}
             </Link>
           </li>

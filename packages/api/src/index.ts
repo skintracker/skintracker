@@ -11,7 +11,10 @@ const start = performance.now();
 const moduleDir = dirname(Bun.fileURLToPath(new URL(import.meta.url)));
 const app = new Aponia({
   routesDir: `${moduleDir}/routes`,
-  plugins: [html({ autoDetect: false }), staticPlugin() as unknown as AponiaPlugin],
+  plugins: [
+    html({ autoDetect: false }),
+    staticPlugin() as unknown as AponiaPlugin,
+  ],
 });
 
 if (Bun.env.NODE_ENV === "production") {
@@ -27,7 +30,9 @@ if (Bun.env.NODE_ENV === "production") {
 
 function getCurrentLocalIP() {
   const interfaces = networkInterfaces();
-  const ips = Object.values(interfaces)?.flatMap((i) => i?.map((a) => a?.address));
+  const ips = Object.values(interfaces)?.flatMap((i) =>
+    i?.map((a) => a?.address),
+  );
   return ips?.filter((ip?: string) => ip?.startsWith("192.168"))[0];
 }
 
@@ -38,7 +43,9 @@ await app.start().then(
     const end = performance.now();
     const timeToStart = end - start;
     logger.info(
-      `🐎 Aponia started successfully! (${timeToStart.toFixed(4)}ms) \n\t\t\t 🖥️  Local: ${instance.server?.hostname}:${
+      `🐎 Aponia started successfully! (${timeToStart.toFixed(
+        4,
+      )}ms) \n\t\t\t 🖥️  Local: ${instance.server?.hostname}:${
         instance.server?.port
       } \n\t\t\t 🌐 Network: ${getCurrentLocalIP()}:${instance.server?.port}`,
     );

@@ -1,5 +1,11 @@
 import { setJSONAsContentType } from "@/hooks";
-import type { AponiaCtx, AponiaDecorator, AponiaHooks, AponiaRouteHandler, AponiaRouteHandlerFn } from "aponia";
+import type {
+  AponiaCtx,
+  AponiaDecorator,
+  AponiaHooks,
+  AponiaRouteHandler,
+  AponiaRouteHandlerFn,
+} from "aponia";
 
 export const getDateDecorator: AponiaDecorator = ["getDate", () => Date.now()];
 

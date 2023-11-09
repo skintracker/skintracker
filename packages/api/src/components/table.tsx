@@ -2,7 +2,10 @@ export interface TableHeadProps {
   children: JSX.Element | JSX.Element[];
 }
 
-export function TableHead({ children, ...props }: TableHeadProps & JSX.IntrinsicElements["thead"]) {
+export function TableHead({
+  children,
+  ...props
+}: TableHeadProps & JSX.IntrinsicElements["thead"]) {
   return <thead {...props}>{children}</thead>;
 }
 
@@ -18,9 +21,15 @@ export interface TableRowProps {
   children: JSX.Element | JSX.Element[];
 }
 
-export function TableRow({ children, ...props }: TableRowProps & JSX.IntrinsicElements["tr"]) {
+export function TableRow({
+  children,
+  ...props
+}: TableRowProps & JSX.IntrinsicElements["tr"]) {
   return (
-    <tr class="border-b hover:bg-slate-200 text-left last:border-none" {...props}>
+    <tr
+      class="border-b hover:bg-slate-200 text-left last:border-none"
+      {...props}
+    >
       {children}
     </tr>
   );
@@ -31,10 +40,17 @@ export interface TableHeaderRowProps {
   children: JSX.Element | JSX.Element[];
 }
 
-export function TableHeaderRow({ children, dark, ...props }: TableHeaderRowProps) {
+export function TableHeaderRow({
+  children,
+  dark,
+  ...props
+}: TableHeaderRowProps) {
   if (dark)
     return (
-      <tr class="bg-slate-800 hover:bg-slate-700 text-left text-white/80" {...props}>
+      <tr
+        class="bg-slate-800 hover:bg-slate-700 text-left text-white/80"
+        {...props}
+      >
         {children}
       </tr>
     );
@@ -63,7 +79,11 @@ export interface TableHeaderCellProps {
   classes?: string;
 }
 
-export function TableHeaderCell({ children, classes, ...props }: TableHeaderCellProps) {
+export function TableHeaderCell({
+  children,
+  classes,
+  ...props
+}: TableHeaderCellProps) {
   return (
     <th class={`p-2${classes ? ` ${classes}` : ""}`} {...props}>
       {children}
@@ -75,7 +95,10 @@ export interface TableProps {
   children: JSX.Element | JSX.Element[];
 }
 
-export function Table({ children, ...props }: TableProps & JSX.IntrinsicElements["table"]) {
+export function Table({
+  children,
+  ...props
+}: TableProps & JSX.IntrinsicElements["table"]) {
   return (
     <div class="table-container w-full overflow-scroll rounded">
       <table class="w-full" {...props}>

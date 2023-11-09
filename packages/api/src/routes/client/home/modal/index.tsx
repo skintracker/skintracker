@@ -2,9 +2,16 @@ import Button from "@/components/button";
 import Divider from "@/components/divider";
 import { Modal, ModalClose, ModalTitle } from "@/components/modal";
 import { setHTMLAsContentType } from "@/hooks";
-import type { AponiaCtx, AponiaHooks, AponiaRouteHandler, AponiaRouteHandlerFn } from "aponia";
+import type {
+  AponiaCtx,
+  AponiaHooks,
+  AponiaRouteHandler,
+  AponiaRouteHandlerFn,
+} from "aponia";
 
-export const showModal: AponiaRouteHandlerFn<JSX.Element> = (_ctx: AponiaCtx) => {
+export const showModal: AponiaRouteHandlerFn<JSX.Element> = (
+  _ctx: AponiaCtx,
+) => {
   const closeModalEventName = "INDEX_CLOSE_MODAL";
   return (
     <Modal closeEvent={closeModalEventName}>

@@ -11,17 +11,31 @@ export interface ButtonProps {
   href?: string;
 }
 
-export function Button({ children, classes, type, text, href, ...props }: ButtonProps) {
+export function Button({
+  children,
+  classes,
+  type,
+  text,
+  href,
+  ...props
+}: ButtonProps) {
   const classStr = (() => {
     switch (type) {
       case ButtonType.Ghost:
         return `flex p-2${classes ? ` ${classes}` : ""}`;
       default:
-        return `flex border border-solid border-slate-200 rounded p-2${classes ? ` ${classes}` : ""}`;
+        return `flex border border-solid border-slate-200 rounded p-2${
+          classes ? ` ${classes}` : ""
+        }`;
     }
   })();
   return (
-    <button type="button" class={classStr} {...(href ? { onclick: `location.href='${href}'` } : {})} {...props}>
+    <button
+      type="button"
+      class={classStr}
+      {...(href ? { onclick: `location.href='${href}'` } : {})}
+      {...props}
+    >
       {children ?? text ?? ""}
     </button>
   );

@@ -14,7 +14,8 @@ export function BaseLayout({ children, title }: BaseLayoutProps) {
     });
   }
   const styles = () => {
-    if (Bun.env.NODE_ENV === "production") return <link rel="stylesheet" href="/public/css/styles.css" />;
+    if (Bun.env.NODE_ENV === "production")
+      return <link rel="stylesheet" href="/public/css/styles.css" />;
     return (
       <>
         <script src="/public/js/tailwind.js" />

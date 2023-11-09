@@ -3,15 +3,20 @@ import { queries } from "@/utils/db";
 import logger from "@/utils/logging";
 import { intToCategory, intToExterior } from "@/utils/type-conversion";
 import type { STSkin } from "@skintracker/types/src";
-import type { AponiaCtx, AponiaHooks, AponiaRouteHandler, AponiaRouteHandlerFn } from "aponia";
+import type {
+  AponiaCtx,
+  AponiaHooks,
+  AponiaRouteHandler,
+  AponiaRouteHandlerFn,
+} from "aponia";
 
 export interface UserTrackingResponse {
   items: STSkin[];
 }
 
-export const getUserTracking: AponiaRouteHandlerFn<Promise<UserTrackingResponse>> = async (
-  ctx: AponiaCtx,
-): Promise<UserTrackingResponse> => {
+export const getUserTracking: AponiaRouteHandlerFn<
+  Promise<UserTrackingResponse>
+> = async (ctx: AponiaCtx): Promise<UserTrackingResponse> => {
   const { id } = ctx.params;
   logger.debug(`[GET] /user/${id}/tracking test`);
   const res = await queries.getUserTrackedSkins(id);

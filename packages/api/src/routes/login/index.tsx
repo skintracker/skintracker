@@ -1,8 +1,15 @@
 import { setHTMLAsContentType } from "@/hooks";
 import { BaseLayout } from "@/layouts/base";
-import { AponiaCtx, AponiaHooks, AponiaRouteHandler, AponiaRouteHandlerFn } from "aponia";
+import {
+  AponiaCtx,
+  AponiaHooks,
+  AponiaRouteHandler,
+  AponiaRouteHandlerFn,
+} from "aponia";
 
-export const getLogin: AponiaRouteHandlerFn<JSX.Element> = (_ctx: AponiaCtx) => {
+export const getLogin: AponiaRouteHandlerFn<JSX.Element> = (
+  _ctx: AponiaCtx,
+) => {
   return (
     <BaseLayout title="Home">
       <div>

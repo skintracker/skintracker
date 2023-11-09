@@ -1,7 +1,7 @@
-import type { STSkin, BitskinsSearchResponse } from "@skintracker/types/src";
+import type { BitskinsSearchResponse, STSkin } from "@skintracker/types/src";
+import httpRequestCache from "../cache";
 import logger from "../logging";
 import { skinToString } from "../type-conversion";
-import httpRequestCache from "../cache";
 
 export async function getMinPrice(skin: STSkin): Promise<string> {
   if (!Bun.env.ST_BITSKINS_API_KEY) {
