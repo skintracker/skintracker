@@ -36,7 +36,7 @@ export const getIndex = async (ctx: AponiaCtx) => {
     return (
       <SplashLayout title="Home">
         <div class="py-40 bg-[linear-gradient(135deg,#6C66C9_0%,#F97C73_100%)]">
-          <h1 class="text-6xl font-bold text-center text-white">
+          <h1 class="text-5xl font-bold text-center text-white">
             <img
               alt="Counter-Strike 2 Logo"
               src="/public/svg/cs2.svg"
@@ -88,7 +88,7 @@ export const getIndex = async (ctx: AponiaCtx) => {
       // buffmarket: await BuffMarket.getMinPrice(skin),
       dmarket: await DMarket.getMinPrice(skin),
       skinport: await Skinport.getMinPrice(skin),
-    })),
+    }))
   );
   const minPrices = minPricesResult.map((result) => {
     if (result.status === "fulfilled") {
