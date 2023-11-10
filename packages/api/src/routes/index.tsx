@@ -35,10 +35,7 @@ export const getIndex = async (ctx: AponiaCtx) => {
   if (!user) {
     return (
       <SplashLayout title="Home">
-        <div
-          style="background: linear-gradient(135deg, #6C66C9 0%, #F97C73 100%);"
-          class="py-40"
-        >
+        <div class="py-40 bg-[linear-gradient(135deg,#6C66C9_0%,#F97C73_100%)]">
           <h1 class="text-6xl font-bold text-center text-white">
             <img
               alt="Counter-Strike 2 Logo"

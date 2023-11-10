@@ -2,7 +2,7 @@
 
 ## Prerequisites
 
-1. [Bun v1.0.6+](https://bun.sh/)
+1. [Bun v1.0.11+](https://bun.sh/)
 
 ## Getting Started
 
@@ -20,7 +20,17 @@ cd ../..
 bun i
 ```
 
-3. ... and that should be it!
+3. Configure .env files in both root of the project and in the root of the API package:
+
+```
+touch .env
+vim|nano|code .env
+cp ./.env ./packages/api/.env
+```
+
+Values can be obtained from Google Cloud Secret Manager.
+
+4. ... and that should be it!
 
 ## Running Locally
 
