@@ -6,4 +6,11 @@ import { P90Skins } from "./p90.skins";
 import { PPBizonSkins } from "./ppbizon.skins";
 import { UMP45Skins } from "./ump.skins";
 
-export type WeaponSMGSkins = MAC10Skins | MP5Skins | MP7Skins | MP9Skins | P90Skins | PPBizonSkins | UMP45Skins;
+export type WeaponSMGSkins =
+  | MAC10Skins
+  | MP5Skins
+  | MP7Skins
+  | MP9Skins
+  | P90Skins
+  | PPBizonSkins
+  | UMP45Skins;

@@ -9,8 +9,8 @@ import {
   TableRow,
 } from "@/components/table";
 import { setHTMLAsContentType } from "@/hooks";
-import { SplashLayout } from "@/layouts/splash";
 import { BaseLayout } from "@/layouts/base";
+import { SplashLayout } from "@/layouts/splash";
 import { Bitskins, DMarket, Skinport } from "@/utils";
 import { skinToString } from "@/utils/type-conversion";
 import { AponiaCtxExtended } from "@/utils/types/context";
@@ -88,7 +88,7 @@ export const getIndex = async (ctx: AponiaCtx) => {
       // buffmarket: await BuffMarket.getMinPrice(skin),
       dmarket: await DMarket.getMinPrice(skin),
       skinport: await Skinport.getMinPrice(skin),
-    }))
+    })),
   );
   const minPrices = minPricesResult.map((result) => {
     if (result.status === "fulfilled") {

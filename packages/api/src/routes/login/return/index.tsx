@@ -18,7 +18,7 @@ export const getLoginFailure = (query: unknown) => (
 );
 
 export const getLogin: AponiaRouteHandlerFn<Promise<string>> = async (
-  ctx: AponiaCtx
+  ctx: AponiaCtx,
 ) => {
   const { query } = ctx;
 
@@ -58,7 +58,7 @@ export const getLogin: AponiaRouteHandlerFn<Promise<string>> = async (
     {
       httpOnly: true,
       maxAge: 86400 * 7,
-    }
+    },
   );
 
   return (

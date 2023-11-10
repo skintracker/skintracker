@@ -10,7 +10,7 @@ import type {
 } from "aponia";
 
 export const showModal: AponiaRouteHandlerFn<JSX.Element> = (
-  _ctx: AponiaCtx
+  _ctx: AponiaCtx,
 ) => {
   const closeModalEventName = "DEV_CLOSE_MODAL";
   return (
