@@ -9,6 +9,7 @@ import {
   TableRow,
 } from "@/components/table";
 import { setHTMLAsContentType } from "@/hooks";
+import { SplashLayout } from "@/layouts/splash";
 import { BaseLayout } from "@/layouts/base";
 import { Bitskins, DMarket, Skinport } from "@/utils";
 import { skinToString } from "@/utils/type-conversion";
@@ -30,6 +31,36 @@ import { AponiaCtx, AponiaHooks, AponiaRouteHandler } from "aponia";
 export const getIndex = async (ctx: AponiaCtx) => {
   const { jwt } = ctx as AponiaCtxExtended;
   const user = await jwt.verify<STUser>(ctx.cookie.auth);
+
+  if (!user) {
+    return (
+      <SplashLayout title="Home">
+        <div
+          style="background: linear-gradient(135deg, #6C66C9 0%, #F97C73 100%);"
+          class="py-40"
+        >
+          <h1 class="text-6xl font-bold text-center text-white">
+            <img
+              alt="Counter-Strike 2 Logo"
+              src="/public/svg/cs2.svg"
+              class="w-32 mx-auto mb-4"
+            />
+            Skintracker is in development.
+          </h1>
+        </div>
+        <br />
+        <div class="py-2 px-8">
+          <h1 class="text-2xl font-bold">What is this?</h1>
+          <p>
+            We're actively working on this project and are excited to provide
+            details soon!
+          </p>
+          <br />
+          <p>However, the name and logo should give you a hint 😉</p>
+        </div>
+      </SplashLayout>
+    );
+  }
 
   const skins: STSkin[] = [
     {
