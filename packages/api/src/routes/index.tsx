@@ -10,8 +10,9 @@ import {
 } from "@/components/table";
 import { setHTMLAsContentType } from "@/hooks";
 import { BaseLayout } from "@/layouts/base";
-import { Bitskins, BuffMarket, DMarket, Skinport } from "@/utils";
+import { Bitskins, DMarket, Skinport } from "@/utils";
 import { skinToString } from "@/utils/type-conversion";
+import { AponiaCtxExtended } from "@/utils/types/context";
 import {
   BayonetSkins,
   Gloves,
@@ -21,18 +22,15 @@ import {
   STSkin,
   STSkinCategory,
   STSkinExterior,
+  STUser,
   Weapon,
 } from "@skintracker/types/src";
-import {
-  AponiaCtx,
-  AponiaHooks,
-  AponiaRouteHandler,
-  AponiaRouteHandlerFn,
-} from "aponia";
+import { AponiaCtx, AponiaHooks, AponiaRouteHandler } from "aponia";
 
-export const getIndex: AponiaRouteHandlerFn<JSX.Element> = async (
-  _ctx: AponiaCtx,
-) => {
+export const getIndex = async (ctx: AponiaCtx) => {
+  const { jwt } = ctx as AponiaCtxExtended;
+  const user = await jwt.verify<STUser>(ctx.cookie.auth);
+
   const skins: STSkin[] = [
     {
       item: Weapon.M4A4,
@@ -62,7 +60,7 @@ export const getIndex: AponiaRouteHandlerFn<JSX.Element> = async (
       // buffmarket: await BuffMarket.getMinPrice(skin),
       dmarket: await DMarket.getMinPrice(skin),
       skinport: await Skinport.getMinPrice(skin),
-    })),
+    }))
   );
   const minPrices = minPricesResult.map((result) => {
     if (result.status === "fulfilled") {
@@ -112,7 +110,7 @@ export const getIndex: AponiaRouteHandlerFn<JSX.Element> = async (
   ));
 
   return (
-    <BaseLayout title="Home">
+    <BaseLayout title="Home" user={user}>
       <div class="overflow-scroll">
         <br />
         <Table>
@@ -363,7 +361,7 @@ export const getIndex: AponiaRouteHandlerFn<JSX.Element> = async (
 };
 
 export const getIndexHooks: AponiaHooks = {
-  afterHandle: [setHTMLAsContentType],
+  beforeHandle: [setHTMLAsContentType],
 };
 
 export const handler: AponiaRouteHandler = {

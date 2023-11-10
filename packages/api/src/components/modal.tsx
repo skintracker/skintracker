@@ -6,16 +6,17 @@ export interface ModalCloseProps {
 export function ModalClose({ children, closeEvent }: ModalCloseProps) {
   const closeEventName = closeEvent ?? "closeModal";
   return (
-    <div data-script={`on click trigger ${closeEventName}`}>{children}</div>
+    <span data-script={`on click trigger ${closeEventName}`}>{children}</span>
   );
 }
 
 export interface ModalTitleProps {
+  center?: boolean;
   children?: JSX.Element | JSX.Element[];
 }
 
-export function ModalTitle({ children }: ModalTitleProps) {
-  return <h1 class="text-xl">{children}</h1>;
+export function ModalTitle({ children, center }: ModalTitleProps) {
+  return <h1 class={`text-xl${center ? " text-center" : ""}`}>{children}</h1>;
 }
 
 export interface ModalProps {

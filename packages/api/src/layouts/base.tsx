@@ -1,11 +1,13 @@
 import Navigation, { NavigationItem } from "@/components/navigation";
+import { STUser } from "@skintracker/types/src";
 
 export interface BaseLayoutProps {
   children: JSX.Element | JSX.Element[];
   title: string;
+  user?: STUser;
 }
 
-export function BaseLayout({ children, title }: BaseLayoutProps) {
+export function BaseLayout({ children, title, user }: BaseLayoutProps) {
   const navItems: NavigationItem[] = [];
   if (Bun.env.NODE_ENV !== "production") {
     navItems.push({
@@ -44,7 +46,7 @@ export function BaseLayout({ children, title }: BaseLayoutProps) {
         {styles()}
       </head>
       <body class="font-sans font-normal">
-        <Navigation items={navItems} />
+        <Navigation items={navItems} user={user} />
         <main class="py-2 px-8">{children}</main>
       </body>
     </html>

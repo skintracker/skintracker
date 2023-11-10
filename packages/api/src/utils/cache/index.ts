@@ -16,9 +16,9 @@ export class HTTPRequestCache {
   }
 
   static createHash(data: unknown) {
-    logger.info(`Creating hash for ${JSON.stringify(data)}`);
+    logger.debug(`Creating hash for ${JSON.stringify(data)}`);
     const hash = Bun.hash.crc32(JSON.stringify(data));
-    logger.info(`Hash: ${hash}`);
+    logger.debug(`Hash: ${hash}`);
     return hash;
   }
 
