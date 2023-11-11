@@ -52,14 +52,14 @@ export async function getMinPrice(skin: STSkin): Promise<string> {
     !Bun.env.ST_DMARKET_API_PUBLIC_KEY ||
     !Bun.env.ST_DMARKET_API_PRIVATE_KEY
   ) {
-    logger.info("DMarket API key not found");
+    logger.debug("DMarket API key not found");
     return "N/A";
   }
 
-  logger.info(
+  logger.debug(
     `Fetching DMarket price for ${skinToString({ skin, includePhase: true })}`
   );
-  logger.info(`DMarket API key: ${Bun.env.ST_DMARKET_API_PUBLIC_KEY}`);
+  logger.debug(`DMarket API key: ${Bun.env.ST_DMARKET_API_PUBLIC_KEY}`);
 
   const timestamp = Math.floor(Date.now() / 1000);
   const path = "/exchange/v1/market/items";
@@ -92,15 +92,15 @@ export async function getMinPrice(skin: STSkin): Promise<string> {
   // Response Caching
   const cachedRes = httpRequestCache.get(requestUrl, requestOptions);
   if (cachedRes) {
-    logger.info(`Cache hit: ${JSON.stringify(cachedRes)}`);
+    logger.debug(`Cache hit: ${JSON.stringify(cachedRes)}`);
     return cachedRes;
   }
-  logger.info(`Request options: ${JSON.stringify(requestOptions)}`);
+  logger.debug(`Request options: ${JSON.stringify(requestOptions)}`);
 
   const response = await fetch(requestUrl, requestOptions);
 
   const json = await response.json<DMarketItemsSearchResponse>();
-  logger.info(`[${response.status}]: ${JSON.stringify(json)}`);
+  logger.debug(`[${response.status}]: ${JSON.stringify(json)}`);
 
   // No results
   if (!json.objects || json.objects.length === 0) {
