@@ -5,14 +5,14 @@ import { skinToString } from "../type-conversion";
 
 export async function getMinPrice(skin: STSkin): Promise<string> {
   if (!Bun.env.ST_BITSKINS_API_KEY) {
-    logger.info("Bitskins API key not found");
+    logger.debug("Bitskins API key not found");
     return "N/A";
   }
 
-  logger.info(
+  logger.debug(
     `Fetching Bitskins price for ${skinToString({ skin, includePhase: true })}`,
   );
-  logger.info(`Bitskins API key: ${Bun.env.ST_BITSKINS_API_KEY}`);
+  logger.debug(`Bitskins API key: ${Bun.env.ST_BITSKINS_API_KEY}`);
 
   const requestUrl = "https://api.bitskins.com/market/search/730";
 
@@ -38,17 +38,17 @@ export async function getMinPrice(skin: STSkin): Promise<string> {
   };
   const cachedRes = httpRequestCache.get(requestUrl, requestOptions);
   if (cachedRes) {
-    logger.info(`Cache hit: ${JSON.stringify(cachedRes)}`);
+    logger.debug(`Cache hit: ${JSON.stringify(cachedRes)}`);
     return cachedRes;
   }
-  logger.info(`Request options: ${JSON.stringify(requestOptions)}`);
+  logger.debug(`Request options: ${JSON.stringify(requestOptions)}`);
 
   const response = await fetch(
     "https://api.bitskins.com/market/search/730",
     requestOptions,
   );
   const json = await response.json<BitskinsSearchResponse>();
-  logger.info(`[${response.status}]: ${JSON.stringify(json)}`);
+  logger.debug(`[${response.status}]: ${JSON.stringify(json)}`);
 
   if (!json.list) {
     return "N/A";

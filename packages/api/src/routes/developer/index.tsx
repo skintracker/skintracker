@@ -11,9 +11,9 @@ import type {
 } from "aponia";
 import { getHealthcheck } from "../api/healthcheck";
 
-export const getDeveloper: AponiaRouteHandlerFn<
-  Promise<JSX.Element | undefined>
-> = async (ctx: AponiaCtx) => {
+export const getDeveloper: AponiaRouteHandlerFn<JSX.Element | undefined> = (
+  ctx: AponiaCtx,
+) => {
   // Gets the healthceck and embeds into markdown.
   if (Bun.env.NODE_ENV === "production") {
     ctx.set.status = 404;
@@ -33,14 +33,14 @@ export const getDeveloper: AponiaRouteHandlerFn<
         <br />
         <h2 class="text-xl">HTMX Test</h2>
         <Divider />
-        <Button text="Click me!" hx-post="/client/home/buttons" />
+        <Button text="Click me!" hx-post="/client/developer/buttons" />
         <br />
         <br />
         <h2 class="text-xl">Modal Test</h2>
         <Divider />
         <Button
           text="Open Modal"
-          hx-get="/client/home/modal"
+          hx-get="/client/developer/modal"
           hx-target="body"
           hx-swap="beforeend"
         />

@@ -40,4 +40,8 @@ export enum Weapon {
   XM1014 = "XM1014",
 }
 
-export type WeaponSkins = WeaponHeavySkins | WeaponPistolSkins | WeaponRifleSkins | WeaponSMGSkins;
+export type WeaponSkins =
+  | WeaponHeavySkins
+  | WeaponPistolSkins
+  | WeaponRifleSkins
+  | WeaponSMGSkins;
