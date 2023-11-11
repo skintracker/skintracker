@@ -1,5 +1,6 @@
 import { setHTMLAsContentType } from "@/hooks";
 import BaseLayout from "@/layouts/base";
+import SplashLayout from "@/layouts/splash";
 import { JsonHighlighter } from "@/utils/client";
 import { getPlayerSummaries } from "@/utils/steam";
 import { AponiaCtxExtended } from "@/utils/types/context";
@@ -18,7 +19,7 @@ export const getLoginFailure = (query: unknown) => (
 );
 
 export const getLogin: AponiaRouteHandlerFn<Promise<string>> = async (
-  ctx: AponiaCtx,
+  ctx: AponiaCtx
 ) => {
   const { query } = ctx;
 
@@ -48,24 +49,55 @@ export const getLogin: AponiaRouteHandlerFn<Promise<string>> = async (
 
   const { setCookie, jwt } = ctx as AponiaCtxExtended;
 
-  setCookie(
-    "auth",
-    await jwt.sign({
-      steamId,
-      avatar: userData.response.players[0].avatarfull,
-      displayName: userData.response.players[0].personaname,
-    }),
-    {
-      httpOnly: true,
-      maxAge: 86400 * 7,
-    },
-  );
+  const user = {
+    steamId,
+    avatar: userData.response.players[0].avatarfull,
+    displayName: userData.response.players[0].personaname,
+  };
+
+  setCookie("auth", await jwt.sign(user), {
+    httpOnly: true,
+    maxAge: 86400 * 7,
+  });
 
   return (
-    <BaseLayout title="Login Result">
-      <p>Login Success</p>
-      <JsonHighlighter data={userData} />
-    </BaseLayout>
+    <SplashLayout title="Login Success">
+      <div class="py-40 bg-[linear-gradient(135deg,#6C66C9_0%,#F97C73_100%)] bg-[length:200%_200%] animate-[gradient_15s_ease-in-out_infinite] full-height">
+        <h1 class="text-5xl font-bold text-center text-white">
+          <img
+            alt="Counter-Strike 2 Logo"
+            src={user.avatar}
+            class="w-32 mx-auto mb-4 rounded-md"
+          />
+          Welcome to Skintracker
+        </h1>
+        <h2 class="text-3xl font-bold text-center text-white mt-4" safe>
+          {user.displayName} logged in.
+        </h2>
+        <p class="text-center mt-16">
+          <a href="/" class="text-white underline underline-offset-8">
+            go to dashboard →
+          </a>
+        </p>
+      </div>
+      <style>
+        {`@keyframes gradient {
+            0% {
+              background-position: 0% 50%;
+            }
+            50% {
+              background-position: 100% 50%;
+            }
+            100% {
+              background-position: 0% 50%;
+            }
+          }
+          .full-height {
+            height: calc(100vh - 74px);
+          }
+        `}
+      </style>
+    </SplashLayout>
   );
 };
 
