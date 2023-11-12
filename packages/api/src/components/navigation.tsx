@@ -19,7 +19,9 @@ export default function Navigation({ items, user }: NavigationProps) {
       hx-target="body"
       hx-swap="beforeend"
     >
-      <span class="px-1">{user.displayName}</span>
+      <span class="px-1 hidden lg:inline-block" safe>
+        {user.displayName}
+      </span>
       <img src={user.avatar} alt="Steam Logo" width="24px" />
     </Button>
   ) : (

@@ -61,7 +61,7 @@ export const getLogin: AponiaRouteHandlerFn<Promise<string>> = async (
   });
 
   return (
-    <SplashLayout title="Login Success">
+    <SplashLayout title="Login Success" user={user}>
       <div class="py-40 bg-[linear-gradient(135deg,#6C66C9_0%,#F97C73_100%)] bg-[length:200%_200%] animate-[gradient_15s_ease-in-out_infinite] full-height">
         <h1 class="text-5xl font-bold text-center text-white">
           <img
