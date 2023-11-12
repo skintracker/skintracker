@@ -31,19 +31,21 @@ async function getPrices(
   const requestUrl = `https://${host}/items?${queryParamsToString(params)}`;
   const response = await fetch(requestUrl, requestOptions);
   const json = await response.json<SkinportSearchResponse>();
-  logger.info(`[${response.status}]: ${JSON.stringify(json)}`);
+  logger.debug(`[${response.status}]: ${JSON.stringify(json)}`);
   return json;
 }
 
-// Cache Response
-// const cachedRes = httpRequestCache.get(requestUrl, requestOptions);
-// if (cachedRes) {
-//   logger.debug(`Cache hit: ${JSON.stringify(cachedRes)}`);
-//   return cachedRes;
-// }
-
 // Get min price from response
 export async function getMinPrice(skin: STSkin): Promise<string> {
+  const cacheKey = `min-price-${skinToString({ skin })}`;
+
+  // Check cache first
+  const cachedMinPrice = httpRequestCache.get(cacheKey, {});
+  if (cachedMinPrice) {
+    logger.info(`Cache hit for min price: ${cachedMinPrice}`);
+    return cachedMinPrice;
+  }
+
   const minPrice = (
     await getPrices(
       Bun.env.ST_SKINPORT_CLIENT_ID,
@@ -51,5 +53,12 @@ export async function getMinPrice(skin: STSkin): Promise<string> {
     )
   ).filter((item) => item.market_hash_name === skinToString({ skin }))[0]
     ?.min_price;
-  return `$${minPrice.toFixed(2).toString()}`;
+
+  if (!minPrice) {
+    return "N/A";
+  } else {
+    const formattedMinPrice = `$${minPrice.toFixed(2).toString()}`;
+    httpRequestCache.add(cacheKey, {}, formattedMinPrice);
+    return formattedMinPrice;
+  }
 }
