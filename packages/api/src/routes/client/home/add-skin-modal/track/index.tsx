@@ -1,4 +1,5 @@
-import { setJSONAsContentType } from "@/hooks";
+import { setHTMLAsContentType } from "@/hooks";
+import { renderSkinsTableRows } from "@/utils/client/render-skins-table-rows";
 import { STGenericError, STGenericErrorType } from "@/utils/error";
 import logger from "@/utils/logging";
 import { AponiaCtxExtended } from "@/utils/types/context";
@@ -25,6 +26,7 @@ export interface AddUserTrackingFormBody {
   skin: string;
   exterior: string;
   category: string;
+  hasSkins: string;
 }
 
 export const addUserTracking: AponiaRouteHandlerFn<
@@ -52,12 +54,22 @@ export const addUserTracking: AponiaRouteHandlerFn<
     category: formData.category as STSkinCategory,
   } as STSkin;
 
-  logger.info({ user, skin });
-  return "";
+  const skins = [skin];
+  if (formData.hasSkins === "true") {
+    // fetch pre-existing skins
+    logger.info("Fetching pre-existing skins");
+  }
+
+  const tableRows: JSX.Element | JSX.Element[] =
+    await renderSkinsTableRows(skins);
+  if (typeof tableRows === "string") {
+    return tableRows;
+  }
+  return tableRows.length > 0 ? tableRows.join("") : "";
 };
 
 export const addUserTrackingHooks: AponiaHooks = {
-  afterHandle: [setJSONAsContentType],
+  afterHandle: [setHTMLAsContentType],
 };
 
 export const handler: AponiaRouteHandler = {

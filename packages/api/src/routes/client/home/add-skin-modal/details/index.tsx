@@ -11,7 +11,7 @@ import type {
 } from "aponia";
 
 export const getAddSkinModalDetails: AponiaRouteHandlerFn<JSX.Element> = (
-  ctx: AponiaCtx
+  ctx: AponiaCtx,
 ) => {
   const { query, set } = ctx;
   const skin = (query as { skin?: string }).skin;
@@ -25,41 +25,51 @@ export const getAddSkinModalDetails: AponiaRouteHandlerFn<JSX.Element> = (
       <form
         id="add-skin-form"
         hx-post="/client/home/add-skin-modal/track"
-        hx-target="#tracked-skins-table"
-        hx-swap="beforeend"
-        data-script={`on submit trigger ${closeModalEventName}}`}
+        hx-target="#tracked-skins-table-body"
+        hx-swap="innerHTML"
+        data-script={`on submit trigger ${closeModalEventName}`}
       >
+        <input
+          id="has-skins-field"
+          type="hidden"
+          name="hasSkins"
+          value="false"
+        />
         <input type="hidden" name="skin" value={skin} />
         <input
           title={`Skin: ${skin}`}
           id="skin-input"
           type="search"
           name="skin"
-          class="w-full p-4 bg-slate-200 text-black rounded"
+          class="w-full p-4 bg-slate-200 text-black text-center rounded"
           value={skin}
           disabled
         />
         <div class="py-4">
-          <p class="text-stone-400 px-4">Exterior</p>
-          <select
-            title="Select skin exterior"
-            class="border rounded-md border-slate-300 mx-4 px-2 py-1"
-            name="exterior"
-          >
-            {Object.values(STSkinExterior).map((exterior) => (
-              <option value={exterior}>{exterior}</option>
-            ))}
-          </select>
-          <p class="text-stone-400 px-4 mt-2">Category</p>
-          <select
-            title="Select skin exterior"
-            class="border rounded-md border-slate-300 mx-4 px-2 py-1"
-            name="category"
-          >
-            {Object.values(STSkinCategory).map((category) => (
-              <option value={category}>{category}</option>
-            ))}
-          </select>
+          <div class="form-field grid grid-cols-2 items-center px-2">
+            <p class="text-stone-400">Exterior</p>
+            <select
+              title="Select skin exterior"
+              class="border rounded-md border-slate-300 px-2 py-1"
+              name="exterior"
+            >
+              {Object.values(STSkinExterior).map((exterior) => (
+                <option value={exterior}>{exterior}</option>
+              ))}
+            </select>
+          </div>
+          <div class="form-field grid grid-cols-2 items-center px-2 mt-2">
+            <p class="text-stone-400">Category</p>
+            <select
+              title="Select skin exterior"
+              class="border rounded-md border-slate-300 px-2 py-1"
+              name="category"
+            >
+              {Object.values(STSkinCategory).map((category) => (
+                <option value={category}>{category}</option>
+              ))}
+            </select>
+          </div>
         </div>
         <Divider />
         <div class="grid grid-cols-[70px_58px] align-center justify-center gap-2">
@@ -73,6 +83,14 @@ export const getAddSkinModalDetails: AponiaRouteHandlerFn<JSX.Element> = (
           />
         </div>
       </form>
+      <script>
+        {`
+          const hasSkinsField = document.getElementById("has-skins-field");
+          const tableBody = document.getElementById("tracked-skins-table-body");
+          const hasSkins = tableBody.children[0].innerHTML.includes("No skins found");
+          hasSkinsField.value = hasSkins;
+        `}
+      </script>
     </>
   );
 };

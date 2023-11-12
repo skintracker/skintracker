@@ -13,7 +13,10 @@ export interface TableBodyProps {
   children: JSX.Element | JSX.Element[];
 }
 
-export function TableBody({ children, ...props }: TableBodyProps) {
+export function TableBody({
+  children,
+  ...props
+}: TableBodyProps & JSX.IntrinsicElements["tbody"]) {
   return <tbody {...props}>{children}</tbody>;
 }
 
