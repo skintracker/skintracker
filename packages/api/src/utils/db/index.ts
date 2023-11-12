@@ -1,6 +1,6 @@
+import { randomUUID } from "crypto";
 import { createClient } from "@libsql/client";
 import { STSkin } from "@skintracker/types/src";
-import { randomUUID } from "crypto";
 import { skinCategoryToInt, skinExteriorToInt } from "../type-conversion";
 
 export const db = (() => {

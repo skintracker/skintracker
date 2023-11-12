@@ -12,12 +12,12 @@ import { setHTMLAsContentType } from "@/hooks";
 import { BaseLayout } from "@/layouts/base";
 import { SplashLayout } from "@/layouts/splash";
 import { Bitskins, DMarket, Skinport } from "@/utils";
+import logger from "@/utils/logging";
 import { skinToString } from "@/utils/type-conversion";
 import type { AponiaCtxExtended } from "@/utils/types/context";
+import { getTracking } from "@/utils/user";
 import type { STSkin, STUser } from "@skintracker/types/src";
 import type { AponiaCtx, AponiaHooks, AponiaRouteHandler } from "aponia";
-import { getTracking } from "@/utils/user";
-import logger from "@/utils/logging";
 
 export const getIndex = async (ctx: AponiaCtx) => {
   const { jwt } = ctx as AponiaCtxExtended;
@@ -65,7 +65,7 @@ export const getIndex = async (ctx: AponiaCtx) => {
       // buffmarket: await BuffMarket.getMinPrice(skin),
       dmarket: await DMarket.getMinPrice(skin),
       skinport: await Skinport.getMinPrice(skin),
-    }))
+    })),
   );
   const minPrices = minPricesResult.map((result) => {
     if (result.status === "fulfilled") {

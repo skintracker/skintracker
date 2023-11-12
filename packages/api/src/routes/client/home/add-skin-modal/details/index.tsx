@@ -11,7 +11,7 @@ import type {
 } from "aponia";
 
 export const getAddSkinModalDetails: AponiaRouteHandlerFn<JSX.Element> = (
-  ctx: AponiaCtx
+  ctx: AponiaCtx,
 ) => {
   const { query, set } = ctx;
   const skin = (query as { skin?: string }).skin;

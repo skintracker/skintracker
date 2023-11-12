@@ -13,7 +13,7 @@ import type {
 } from "aponia";
 
 export const searchSkins: AponiaRouteHandlerFn<JSX.Element> = (
-  ctx: AponiaCtx
+  ctx: AponiaCtx,
 ) => {
   const searchQuery = (ctx.body as { query?: string }).query || "";
   const words = searchQuery.split(/\s+/);

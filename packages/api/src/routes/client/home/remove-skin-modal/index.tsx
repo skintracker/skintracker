@@ -10,7 +10,7 @@ import type {
 } from "aponia";
 
 export const showLogoutModal: AponiaRouteHandlerFn<JSX.Element> = (
-  _ctx: AponiaCtx
+  _ctx: AponiaCtx,
 ) => {
   const closeModalEventName = "HOME_SHOW_REMOVE_SKIN_MODAL";
   return (
