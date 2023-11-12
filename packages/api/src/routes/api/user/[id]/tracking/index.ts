@@ -2,8 +2,8 @@ import { setJSONAsContentType } from "@/hooks";
 import { queries } from "@/utils/db";
 import { STGenericError, STGenericErrorType } from "@/utils/error";
 import logger from "@/utils/logging";
-import { intToCategory, intToExterior } from "@/utils/type-conversion";
 import { AponiaCtxExtended } from "@/utils/types/context";
+import { getTracking } from "@/utils/user";
 import type { STSkin, STUser } from "@skintracker/types/src";
 import type {
   AponiaCtx,
@@ -33,8 +33,11 @@ export const getUserTracking: AponiaRouteHandlerFn<
 
   const { id } = ctx.params;
   logger.debug(`[GET] /user/${id}/tracking`);
-  const res = await queries.getUserTrackedSkins(id);
-  if (!res) {
+
+  try {
+    const res = await getTracking(id);
+    return res;
+  } catch (e) {
     const error = STGenericErrorType.TursoError;
     set.status = error;
     return {
@@ -42,19 +45,6 @@ export const getUserTracking: AponiaRouteHandlerFn<
       message: "TursoError: Invalid or no response from Turso!",
     };
   }
-
-  return {
-    items: res.rows.map(
-      (row) =>
-        ({
-          item: row[0],
-          name: row[1],
-          category: intToCategory(row[2] as number),
-          exterior: intToExterior(row[3] as number),
-          phase: row[4] as number | null,
-        }) as STSkin,
-    ),
-  };
 };
 
 export const addUserTracking: AponiaRouteHandlerFn<
@@ -73,7 +63,7 @@ export const addUserTracking: AponiaRouteHandlerFn<
   }
 
   const { id } = ctx.params;
-  const { item, name, category, exterior, phase } = ctx.body as STSkin;
+  const { item, name, category, exterior } = ctx.body as STSkin;
   logger.debug(`[POST] /user/${id}/tracking`);
   if (!item || !name || !category || !exterior) {
     const error = STGenericErrorType.InternalServerError;
@@ -94,16 +84,7 @@ export const addUserTracking: AponiaRouteHandlerFn<
   }
 
   return {
-    items: res.rows.map(
-      (row) =>
-        ({
-          item: row[0],
-          name: row[1],
-          category: intToCategory(row[2] as number),
-          exterior: intToExterior(row[3] as number),
-          phase: row[4] as number | null,
-        }) as STSkin,
-    ),
+    items: [ctx.body as STSkin],
   };
 };
 
@@ -111,9 +92,17 @@ export const getUserTrackingHooks: AponiaHooks = {
   afterHandle: [setJSONAsContentType],
 };
 
+export const addUserTrackingHooks: AponiaHooks = {
+  afterHandle: [setJSONAsContentType],
+};
+
 export const handler: AponiaRouteHandler = {
   GET: {
     fn: getUserTracking,
     hooks: getUserTrackingHooks,
+  },
+  POST: {
+    fn: addUserTracking,
+    hooks: addUserTrackingHooks,
   },
 };

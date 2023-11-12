@@ -2,6 +2,7 @@ import Divider from "@/components/divider";
 import { Link } from "@/components/link";
 import { setHTMLAsContentType } from "@/hooks";
 import { commands } from "@/utils/commands";
+import { isGoToCommand } from "@/utils/type-guards/is-go-to-command";
 import type {
   AponiaCtx,
   AponiaHooks,
@@ -10,7 +11,7 @@ import type {
 } from "aponia";
 
 export const searchCommands: AponiaRouteHandlerFn<JSX.Element> = (
-  ctx: AponiaCtx,
+  ctx: AponiaCtx
 ) => {
   const searchQuery = (ctx.body as { query?: string }).query || "";
   const words = searchQuery.split(/\s+/);
@@ -29,25 +30,46 @@ export const searchCommands: AponiaRouteHandlerFn<JSX.Element> = (
     })
     .filter((command) => regex.test(command));
 
-  return results.length > 0 ? (
-    <ul>
-      {results.sort().map((result, i) => (
+  if (results.length === 0) {
+    return <p class="px-4">No commands found.</p>;
+  }
+
+  const sortedResults = results.sort();
+  const resultElements = sortedResults.map((result, i) => {
+    const command = commands[result];
+    if (isGoToCommand(command)) {
+      return (
+        <>
+          <li class="px-4">
+            <Link href={command.href} class="text-blue-600 hover:underline">
+              {result}
+            </Link>
+          </li>
+          {i < results.length - 1 ? <Divider class="my-2" /> : null}
+        </>
+      );
+    } else {
+      return (
         <>
           <li class="px-4">
             <Link
-              href={commands[result as keyof typeof commands]}
-              class="text-blue-600"
+              href="#"
+              hx-get={command["hx-get"]}
+              hx-target="body"
+              hx-swap="beforeend"
+              class="text-blue-600 hover:cursor-pointer hover:underline"
+              data-script="on click trigger closeCommandBar"
             >
               {result}
             </Link>
           </li>
           {i < results.length - 1 ? <Divider class="my-2" /> : null}
         </>
-      ))}
-    </ul>
-  ) : (
-    <p class="px-4">No commands found.</p>
-  );
+      );
+    }
+  });
+
+  return <ul>{resultElements}</ul>;
 };
 
 export const searchCommandsHooks: AponiaHooks = {

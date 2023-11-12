@@ -13,20 +13,11 @@ import { BaseLayout } from "@/layouts/base";
 import { SplashLayout } from "@/layouts/splash";
 import { Bitskins, DMarket, Skinport } from "@/utils";
 import { skinToString } from "@/utils/type-conversion";
-import { AponiaCtxExtended } from "@/utils/types/context";
-import {
-  BayonetSkins,
-  Gloves,
-  Knife,
-  M4A4Skins,
-  MotoGlovesSkins,
-  STSkin,
-  STSkinCategory,
-  STSkinExterior,
-  STUser,
-  Weapon,
-} from "@skintracker/types/src";
-import { AponiaCtx, AponiaHooks, AponiaRouteHandler } from "aponia";
+import type { AponiaCtxExtended } from "@/utils/types/context";
+import type { STSkin, STUser } from "@skintracker/types/src";
+import type { AponiaCtx, AponiaHooks, AponiaRouteHandler } from "aponia";
+import { getTracking } from "@/utils/user";
+import logger from "@/utils/logging";
 
 export const getIndex = async (ctx: AponiaCtx) => {
   const { jwt } = ctx as AponiaCtxExtended;
@@ -59,27 +50,13 @@ export const getIndex = async (ctx: AponiaCtx) => {
     );
   }
 
-  const skins: STSkin[] = [
-    {
-      item: Weapon.M4A4,
-      name: M4A4Skins.EyeOfHorus,
-      category: STSkinCategory.Normal,
-      exterior: STSkinExterior.FN,
-    },
-    {
-      item: Knife.Bayonet,
-      name: BayonetSkins.Doppler,
-      category: STSkinCategory.Normal,
-      exterior: STSkinExterior.FN,
-      phase: 1,
-    },
-    {
-      item: Gloves.Moto,
-      name: MotoGlovesSkins.Eclipse,
-      category: STSkinCategory.Normal,
-      exterior: STSkinExterior.MW,
-    },
-  ];
+  let skins: STSkin[] = [];
+  try {
+    const res = await getTracking(user.steamId);
+    skins = res.items;
+  } catch (e) {
+    logger.debug(e);
+  }
 
   // get the min price for each skin for each site
   const minPricesResult = await Promise.allSettled(
@@ -103,45 +80,55 @@ export const getIndex = async (ctx: AponiaCtx) => {
     }
   });
 
-  const tableRows = skins.map((skin, i) => (
-    <TableRow class="odd:bg-slate-200 even:bg-slate-300 hover:bg-slate-400 hover:cursor-pointer">
-      <TableCell>{skinToString({ skin })}</TableCell>
-      <TableCell
-        classes={`hidden md:table-cell ${
-          i % 2 === 1 ? "bg-red-400" : "bg-red-300"
-        }`}
-      >
-        {minPrices[i].bitskins}
-      </TableCell>
-      {/* <TableCell
-        classes={`hidden md:table-cell ${
-          i % 2 === 1 ? "bg-orange-400" : "bg-orange-300"
-        }`}
-      >
-        {minPrices[i].buffmarket}
-      </TableCell> */}
-      <TableCell
-        classes={`hidden md:table-cell ${
-          i % 2 === 1 ? "bg-green-400" : "bg-green-300"
-        }`}
-      >
-        {minPrices[i].dmarket}
-      </TableCell>
-      <TableCell
-        classes={`hidden md:table-cell ${
-          i % 2 === 1 ? "bg-blue-400" : "bg-blue-300"
-        }`}
-      >
-        {minPrices[i].skinport}
-      </TableCell>
-    </TableRow>
-  ));
+  const tableRows =
+    skins.length === 0 ? (
+      <TableRow class="bg-slate-200">
+        <TableCell classes="text-center text-slate-400 py-12" colspan="4">
+          <p>No skins found.</p>
+          <p>Add a skin using the Actions button above!</p>
+        </TableCell>
+      </TableRow>
+    ) : (
+      skins.map((skin, i) => (
+        <TableRow class="odd:bg-slate-200 even:bg-slate-300 hover:bg-slate-400 hover:cursor-pointer">
+          <TableCell>{skinToString({ skin })}</TableCell>
+          <TableCell
+            classes={`hidden md:table-cell ${
+              i % 2 === 1 ? "bg-red-400" : "bg-red-300"
+            }`}
+          >
+            {minPrices[i].bitskins}
+          </TableCell>
+          {/* <TableCell
+                classes={`hidden md:table-cell ${
+                  i % 2 === 1 ? "bg-orange-400" : "bg-orange-300"
+                }`}
+              >
+                {minPrices[i].buffmarket}
+              </TableCell> */}
+          <TableCell
+            classes={`hidden md:table-cell ${
+              i % 2 === 1 ? "bg-green-400" : "bg-green-300"
+            }`}
+          >
+            {minPrices[i].dmarket}
+          </TableCell>
+          <TableCell
+            classes={`hidden md:table-cell ${
+              i % 2 === 1 ? "bg-blue-400" : "bg-blue-300"
+            }`}
+          >
+            {minPrices[i].skinport}
+          </TableCell>
+        </TableRow>
+      ))
+    );
 
   return (
     <BaseLayout title="Home" user={user}>
       <div class="overflow-scroll">
         <br />
-        <Table>
+        <Table id="tracked-skins-table">
           <TableHead class="uppercase text-sm">
             <TableHeaderRow dark>
               <TableHeaderCell>Skin</TableHeaderCell>

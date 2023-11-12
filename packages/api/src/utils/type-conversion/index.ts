@@ -1,5 +1,7 @@
 export * from "./byte-array-to-hex-string";
+export * from "./category-to-int";
 export * from "./cookies-to-string";
+export * from "./exterior-to-int";
 export * from "./hex-string-to-ascii-string";
 export * from "./hex-string-to-byte-array";
 export * from "./int-to-category";

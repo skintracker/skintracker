@@ -12,7 +12,7 @@ import type {
 import { getHealthcheck } from "../api/healthcheck";
 
 export const getDeveloper: AponiaRouteHandlerFn<JSX.Element | undefined> = (
-  ctx: AponiaCtx,
+  ctx: AponiaCtx
 ) => {
   // Gets the healthceck and embeds into markdown.
   if (Bun.env.NODE_ENV === "production") {
