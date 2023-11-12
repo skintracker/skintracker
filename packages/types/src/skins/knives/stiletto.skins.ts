@@ -1,3 +1,3 @@
-import { KnifeNewReleaseFinishes } from "./new-release-finishes";
+import { KnifeMidReleaseFinishes } from "./mid-release-finishes";
 
-export import StilettoKnifeSkins = KnifeNewReleaseFinishes;
+export import StilettoKnifeSkins = KnifeMidReleaseFinishes;

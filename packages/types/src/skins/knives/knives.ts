@@ -14,6 +14,8 @@ import { ParacordKnifeSkins } from "./paracord.skins";
 import { ShadowDaggersSkins } from "./shadow-daggers.skins";
 import { SkeletonKnifeSkins } from "./skeleton.skins";
 import { StilettoKnifeSkins } from "./stiletto.skins";
+import { SurvivalKnifeSkins } from "./survival.skins";
+import { TalonKnifeSkins } from "./talon.skins";
 import { UrsusKnifeSkins } from "./ursus.skins";
 
 export enum Knife {
@@ -33,6 +35,8 @@ export enum Knife {
   ShadowDaggers = "Shadow Daggers",
   SkeletonKnife = "Skeleton Knife",
   StilettoKnife = "Stiletto Knife",
+  SurvivalKnife = "Survival Knife",
+  TalonKnife = "Talon Knife",
   UrsusKnife = "Ursus Knife",
 }
 
@@ -53,4 +57,6 @@ export type KnifeSkins =
   | ShadowDaggersSkins
   | SkeletonKnifeSkins
   | StilettoKnifeSkins
+  | SurvivalKnifeSkins
+  | TalonKnifeSkins
   | UrsusKnifeSkins;
