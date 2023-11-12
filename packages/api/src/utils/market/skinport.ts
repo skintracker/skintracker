@@ -42,7 +42,7 @@ export async function getMinPrice(skin: STSkin): Promise<string> {
   // Check cache first
   const cachedMinPrice = httpRequestCache.get(cacheKey, {});
   if (cachedMinPrice) {
-    logger.info(`Cache hit for min price: ${cachedMinPrice}`);
+    logger.debug(`Cache hit for min price: ${cachedMinPrice}`);
     return cachedMinPrice;
   }
 
