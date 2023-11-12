@@ -11,7 +11,7 @@ import type {
 } from "aponia";
 
 export const getAddSkinModalDetails: AponiaRouteHandlerFn<JSX.Element> = (
-  ctx: AponiaCtx,
+  ctx: AponiaCtx
 ) => {
   const { query, set } = ctx;
   const skin = (query as { skin?: string }).skin;
@@ -27,17 +27,15 @@ export const getAddSkinModalDetails: AponiaRouteHandlerFn<JSX.Element> = (
         hx-post="/client/home/add-skin-modal/track"
         hx-target="#tracked-skins-table"
         hx-swap="beforeend"
-        data-script={`on submit trigger ${closeModalEventName}`}
+        data-script={`on submit trigger ${closeModalEventName}}`}
       >
         <input type="hidden" name="skin" value={skin} />
         <input
+          title={`Skin: ${skin}`}
           id="skin-input"
           type="search"
           name="skin"
           class="w-full p-4 bg-slate-200 text-black rounded"
-          placeholder="Search for a skin..."
-          data-script={`on keydown[key is 'Escape'] trigger ${closeModalEventName}`}
-          autofocus="true"
           value={skin}
           disabled
         />
@@ -64,13 +62,13 @@ export const getAddSkinModalDetails: AponiaRouteHandlerFn<JSX.Element> = (
           </select>
         </div>
         <Divider />
-        <div class="grid grid-cols-[70px_53px] align-center justify-center gap-2">
+        <div class="grid grid-cols-[70px_58px] align-center justify-center gap-2">
           <ModalClose closeEvent={closeModalEventName}>
             <Button text="Cancel" />
           </ModalClose>
           <input
             type="submit"
-            class="flex border border-solid border-slate-200 rounded p-2 bg-green-600 text-white border-transparent hover:cursor-pointer"
+            class="flex border border-solid border-slate-200 rounded p-2 bg-green-600 text-white text-center border-transparent hover:cursor-pointer"
             value="Track"
           />
         </div>
