@@ -1,7 +1,7 @@
 import { STSkin, SkinportSearchResponse } from "@skintracker/types/src";
-import { queryParamsToString, skinToString } from "../type-conversion";
-import logger from "../logging";
 import httpRequestCache from "../cache";
+import logger from "../logging";
+import { queryParamsToString, skinToString } from "../type-conversion";
 
 const host = "api.skinport.com/v1";
 

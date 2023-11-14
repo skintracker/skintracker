@@ -1,8 +1,7 @@
+import { TableCell, TableRow } from "@/components/table";
 import { STSkin } from "@skintracker/types/src";
 import { Bitskins, DMarket, Skinport } from "../market";
-import { TableCell, TableRow } from "@/components/table";
 import { skinToString } from "../type-conversion";
-import logger from "../logging";
 
 export async function renderSkinsTableRows(
   skins: STSkin[]
