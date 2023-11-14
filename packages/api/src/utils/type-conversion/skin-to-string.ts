@@ -15,7 +15,7 @@ export function skinToString({
   const itemString =
     isGloves(skin.item) || isKnife(skin.item)
       ? `★ ${prefix}${skin.item}`
-      : skin.item;
+      : `${prefix}${skin.item}`;
   return `${itemString} | ${skin.name}${
     skin.phase && includePhase ? ` Phase ${skin.phase}` : ""
   } (${skin.exterior})`;
