@@ -1,6 +1,8 @@
 import { setHTMLAsContentType } from "@/hooks";
 import { renderSkinsTableRows } from "@/utils/client/render-skins-table-rows";
+import { queries } from "@/utils/db";
 import { STGenericError, STGenericErrorType } from "@/utils/error";
+import logger from "@/utils/logging";
 import { AponiaCtxExtended } from "@/utils/types/context";
 import {
   Gloves,
@@ -52,6 +54,20 @@ export const addUserTracking: AponiaRouteHandlerFn<
     exterior: formData.exterior as STSkinExterior,
     category: formData.category as STSkinCategory,
   } as STSkin;
+
+  try {
+    const res = await queries.addUserTrackedSkin(user.steamId, skin);
+    if (!res) {
+      const error = STGenericErrorType.TursoError;
+      set.status = error;
+      return {
+        error,
+        message: "TursoError: Invalid or no response from Turso!",
+      };
+    }
+  } catch (e) {
+    logger.info(e);
+  }
 
   const tableRows: JSX.Element | JSX.Element[] = await renderSkinsTableRows([
     skin,
