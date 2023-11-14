@@ -11,7 +11,7 @@ import type {
 } from "aponia";
 
 export const getAddSkinModalDetails: AponiaRouteHandlerFn<JSX.Element> = (
-  ctx: AponiaCtx,
+  ctx: AponiaCtx
 ) => {
   const { query, set } = ctx;
   const skin = (query as { skin?: string }).skin;
@@ -85,10 +85,17 @@ export const getAddSkinModalDetails: AponiaRouteHandlerFn<JSX.Element> = (
       </form>
       <script>
         {`
-          const hasSkinsField = document.getElementById("has-skins-field");
-          const tableBody = document.getElementById("tracked-skins-table-body");
-          const hasSkins = tableBody.children[0].innerHTML.includes("No skins found");
-          hasSkinsField.value = hasSkins;
+          window.setHasSkinsField = () => {
+            const hasSkinsField = document.getElementById("has-skins-field");
+            const tableBody = document.getElementById("tracked-skins-table-body");
+            const hasSkins = !tableBody.children[0].innerHTML.includes("No skins found");
+            if (hasSkins) {
+              const form = document.getElementById("add-skin-form");
+              form.setAttribute("hx-swap", "beforeend")
+            }
+            hasSkinsField.value = hasSkins;
+          }
+          window.setHasSkinsField();
         `}
       </script>
     </>

@@ -7,7 +7,8 @@ export const logger = pino({
       colorize: true,
     },
   },
-  level: Bun.env.NODE_ENV === "production" ? "warn" : "info",
+  // level: Bun.env.NODE_ENV === "production" ? "warn" : "info",
+  level: "debug",
 });
 
 export default logger;

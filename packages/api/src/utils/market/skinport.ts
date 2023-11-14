@@ -14,7 +14,7 @@ function buildStandardHeaders(id: string, secret: string) {
 
 async function getPrices(
   id?: string,
-  secret?: string
+  secret?: string,
 ): Promise<SkinportSearchResponse> {
   if (!id || !secret) {
     throw new Error("Must provide a Skinport login token!");
@@ -29,15 +29,23 @@ async function getPrices(
     headers: headers,
   };
   const requestUrl = `https://${host}/items?${queryParamsToString(params)}`;
+  const cachedPrices = httpRequestCache.get(requestUrl, requestOptions);
+  if (cachedPrices) {
+    logger.debug("Cache hit for skinport prices");
+    return JSON.parse(cachedPrices);
+  }
   const response = await fetch(requestUrl, requestOptions);
   const json = await response.json<SkinportSearchResponse>();
   logger.debug(`[${response.status}]: ${JSON.stringify(json)}`);
+  if (response.status === 200) {
+    httpRequestCache.add(requestUrl, requestOptions, JSON.stringify(json));
+  }
   return json;
 }
 
 // Get min price from response
 export async function getMinPrice(skin: STSkin): Promise<string> {
-  const cacheKey = `min-price-${skinToString({ skin })}`;
+  const cacheKey = `skinport-min-price-${Bun.hash.crc32(JSON.stringify(skin))}`;
 
   // Check cache first
   const cachedMinPrice = httpRequestCache.get(cacheKey, {});
@@ -49,16 +57,15 @@ export async function getMinPrice(skin: STSkin): Promise<string> {
   const minPrice = (
     await getPrices(
       Bun.env.ST_SKINPORT_CLIENT_ID,
-      Bun.env.ST_SKINPORT_API_SECRET
+      Bun.env.ST_SKINPORT_API_SECRET,
     )
   ).filter((item) => item.market_hash_name === skinToString({ skin }))[0]
     ?.min_price;
 
   if (!minPrice) {
     return "N/A";
-  } else {
-    const formattedMinPrice = `$${minPrice.toFixed(2).toString()}`;
-    httpRequestCache.add(cacheKey, {}, formattedMinPrice);
-    return formattedMinPrice;
   }
+  const formattedMinPrice = `$${minPrice.toFixed(2).toString()}`;
+  httpRequestCache.add(cacheKey, {}, formattedMinPrice);
+  return formattedMinPrice;
 }
