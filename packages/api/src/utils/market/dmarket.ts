@@ -2,10 +2,10 @@ import {
   type DMarketItemsSearchResponse,
   type STSkin,
 } from "@skintracker/types/src";
+import { sign } from "tweetnacl";
 import httpRequestCache from "../cache";
 import logger from "../logging";
 import { queryParamsToString, skinToString } from "../type-conversion";
-import { sign } from "tweetnacl";
 import { byteArrayToHexString, hexStringToByteArray } from "../type-conversion";
 
 function buildSignature(
@@ -13,12 +13,12 @@ function buildSignature(
   path: string,
   body: string,
   timestamp: number,
-  secretKey: string
+  secretKey: string,
 ) {
   const str = `${method}${path}${body}${timestamp}`;
   const signatureRaw = sign(
     new TextEncoder().encode(str),
-    hexStringToByteArray(secretKey)
+    hexStringToByteArray(secretKey),
   );
   return byteArrayToHexString(signatureRaw).substring(0, 128);
 }
@@ -29,7 +29,7 @@ function buildStandardHeaders(
   body: string,
   timestamp: number,
   publicKey: string,
-  secretKey: string
+  secretKey: string,
 ) {
   return {
     "Content-Type": "application/json",
@@ -39,7 +39,7 @@ function buildStandardHeaders(
       path,
       body,
       timestamp,
-      secretKey
+      secretKey,
     )}`,
     "X-Sign-Date": timestamp.toString(),
   };
@@ -56,8 +56,15 @@ export async function getMinPrice(skin: STSkin): Promise<string> {
     return "N/A";
   }
 
+  const cacheKey = `dmarket-min-price-${Bun.hash.crc32(JSON.stringify(skin))}`;
+  const cachedMinPrice = httpRequestCache.get(cacheKey, {});
+  if (cachedMinPrice) {
+    logger.debug("Cache hit for DMarket");
+    return cachedMinPrice;
+  }
+
   logger.debug(
-    `Fetching DMarket price for ${skinToString({ skin, includePhase: true })}`
+    `Fetching DMarket price for ${skinToString({ skin, includePhase: true })}`,
   );
   logger.debug(`DMarket API key: ${Bun.env.ST_DMARKET_API_PUBLIC_KEY}`);
 
@@ -85,22 +92,14 @@ export async function getMinPrice(skin: STSkin): Promise<string> {
       "",
       timestamp,
       Bun.env.ST_DMARKET_API_PUBLIC_KEY,
-      Bun.env.ST_DMARKET_API_PRIVATE_KEY
+      Bun.env.ST_DMARKET_API_PRIVATE_KEY,
     ),
   };
-
-  // Response Caching
-  const cachedRes = httpRequestCache.get(requestUrl, requestOptions);
-  if (cachedRes) {
-    logger.debug(`Cache hit: ${JSON.stringify(cachedRes)}`);
-    return cachedRes;
-  }
   logger.debug(`Request options: ${JSON.stringify(requestOptions)}`);
 
   const response = await fetch(requestUrl, requestOptions);
-
   const json = await response.json<DMarketItemsSearchResponse>();
-  logger.debug(`[${response.status}]: ${JSON.stringify(json)}`);
+  logger.debug({ status: response.status, json });
 
   // No results
   if (!json.objects || json.objects.length === 0) {
@@ -116,7 +115,7 @@ export async function getMinPrice(skin: STSkin): Promise<string> {
   const minPriceUSD = parseFloat(minPriceObject.price.USD) / 100;
   const minPriceStr = minPriceUSD ? `$${minPriceUSD.toFixed(2)}` : "N/A";
   if (minPriceStr !== "N/A") {
-    httpRequestCache.add(requestUrl, requestOptions, minPriceStr);
+    httpRequestCache.add(cacheKey, {}, minPriceStr);
   }
   return minPriceStr;
 }

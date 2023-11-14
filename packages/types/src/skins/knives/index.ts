@@ -15,4 +15,6 @@ export * from "./paracord.skins";
 export * from "./shadow-daggers.skins";
 export * from "./skeleton.skins";
 export * from "./stiletto.skins";
+export * from "./survival.skins";
+export * from "./talon.skins";
 export * from "./ursus.skins";

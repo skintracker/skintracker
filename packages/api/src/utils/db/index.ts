@@ -1,6 +1,7 @@
+import { randomUUID } from "crypto";
 import { createClient } from "@libsql/client";
 import { STSkin } from "@skintracker/types/src";
-import { randomUUID } from "crypto";
+import { skinCategoryToInt, skinExteriorToInt } from "../type-conversion";
 
 export const db = (() => {
   if (!Bun.env.TURSO_URL) {
@@ -29,8 +30,8 @@ export const queries = {
         steamid,
         skin.item,
         skin.name,
-        skin.category,
-        skin.exterior,
+        skinCategoryToInt(skin.category),
+        skinExteriorToInt(skin.exterior),
         skin.phase ?? null,
       ],
     });
@@ -42,8 +43,8 @@ export const queries = {
         steamid,
         skin.item,
         skin.name,
-        skin.category,
-        skin.exterior,
+        skinCategoryToInt(skin.category),
+        skinExteriorToInt(skin.exterior),
         skin.phase ?? null,
       ],
     });

@@ -13,7 +13,10 @@ export interface TableBodyProps {
   children: JSX.Element | JSX.Element[];
 }
 
-export function TableBody({ children, ...props }: TableBodyProps) {
+export function TableBody({
+  children,
+  ...props
+}: TableBodyProps & JSX.IntrinsicElements["tbody"]) {
   return <tbody {...props}>{children}</tbody>;
 }
 
@@ -66,7 +69,11 @@ export interface TableCellProps {
   classes?: string;
 }
 
-export function TableCell({ children, classes, ...props }: TableCellProps) {
+export function TableCell({
+  children,
+  classes,
+  ...props
+}: TableCellProps & Omit<JSX.IntrinsicElements["td"], "class">) {
   return (
     <td class={`p-2 text-black${classes ? ` ${classes}` : ""}`} {...props}>
       {children}
