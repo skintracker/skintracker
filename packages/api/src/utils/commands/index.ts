@@ -10,7 +10,10 @@ export const commands: Record<string, GoToCommand | ShowModalCommand> = {
   "Go to: Dashboard/Home": {
     href: "/",
   },
-  Logout: {
+  Login: {
+    href: "/login",
+  },
+  "Log Out": {
     "hx-get": "/client/home/logout-modal",
   },
   "Add Skin": {

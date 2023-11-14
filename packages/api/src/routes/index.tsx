@@ -42,6 +42,7 @@ export const getIndex = async (ctx: AponiaCtx) => {
           </p>
           <br />
           <p>However, the name and logo should give you a hint 😉</p>
+          <br />
         </div>
       </SplashLayout>
     );
