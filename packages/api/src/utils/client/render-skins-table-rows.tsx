@@ -4,7 +4,7 @@ import { Bitskins, DMarket, Skinport } from "../market";
 import { skinToString } from "../type-conversion";
 
 export async function renderSkinsTableRows(
-  skins: STSkin[]
+  skins: STSkin[],
 ): Promise<JSX.Element | JSX.Element[]> {
   if (skins.length === 0) {
     return (
@@ -23,7 +23,7 @@ export async function renderSkinsTableRows(
       bitskins: await Bitskins.getMinPrice(skin),
       dmarket: await DMarket.getMinPrice(skin),
       skinport: await Skinport.getMinPrice(skin),
-    }))
+    })),
   );
   const minPrices = minPricesResult.map((result) => {
     if (result.status === "fulfilled") {

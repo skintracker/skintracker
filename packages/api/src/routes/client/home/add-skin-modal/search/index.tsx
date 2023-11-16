@@ -1,10 +1,7 @@
 import Divider from "@/components/divider";
 import { Link } from "@/components/link";
 import { setHTMLAsContentType } from "@/hooks";
-import {
-  ALL_SUPPORTED_WEAPONS,
-  ALL_SUPPORTED_WEAPON_SKIN_STRINGS,
-} from "@/utils/skins";
+import { ALL_SUPPORTED_WEAPON_SKIN_STRINGS } from "@/utils/skins";
 import type {
   AponiaCtx,
   AponiaHooks,

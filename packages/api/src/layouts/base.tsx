@@ -29,6 +29,9 @@ export function BaseLayout({ children, title, user }: BaseLayoutProps) {
 					.font-mono {
 						font-family: "Basier Square Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !important;
 					}
+          *::-webkit-scrollbar {
+            display: none;
+          }
 				`}
         </style>
       </>

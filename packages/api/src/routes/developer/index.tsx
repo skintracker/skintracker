@@ -1,4 +1,5 @@
 import Button from "@/components/button";
+import Chart from "@/components/chart";
 import Divider from "@/components/divider";
 import { setHTMLAsContentType } from "@/hooks";
 import BaseLayout from "@/layouts/base";
@@ -10,10 +11,9 @@ import type {
   AponiaRouteHandlerFn,
 } from "aponia";
 import { getHealthcheck } from "../api/healthcheck";
-import Chart from "@/components/chart";
 
 export const getDeveloper: AponiaRouteHandlerFn<JSX.Element | undefined> = (
-  ctx: AponiaCtx
+  ctx: AponiaCtx,
 ) => {
   // Gets the healthceck and embeds into markdown.
   if (Bun.env.NODE_ENV === "production") {
