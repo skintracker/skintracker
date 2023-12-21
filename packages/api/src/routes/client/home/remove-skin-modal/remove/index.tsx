@@ -54,18 +54,30 @@ export const removeUserTracking: AponiaRouteHandlerFn<
     skinStringParts[0].indexOf("★ ") !== -1
       ? (skinStringParts[0].substring(1).trim() as Gloves | Knife | Weapon)
       : (skinStringParts[0].trim() as Gloves | Knife | Weapon);
+  const initialName = skinStringParts[1]
+    .trim()
+    .substring(0, skinStringParts[1].indexOf("(") - 2);
+  const name =
+    skinStringParts[1].indexOf("Doppler") !== -1
+      ? initialName.substring(0, skinStringParts[1].indexOf("Phase") - 1).trim()
+      : initialName;
 
   const skin: STSkin = {
     item,
-    name: skinStringParts[1]
-      .trim()
-      .substring(0, skinStringParts[1].indexOf("(") - 2) as
-      | GlovesSkins
-      | KnifeSkins
-      | WeaponSkins,
+    name: name as GlovesSkins | KnifeSkins | WeaponSkins,
     exterior: formData.exterior as STSkinExterior,
     category: formData.category as STSkinCategory,
   } as STSkin;
+
+  logger.info({ formData });
+
+  if (skin.name.indexOf("Doppler") !== -1) {
+    skin.phase = +initialName.substring(initialName.indexOf("Phase") + 6) as
+      | 1
+      | 2
+      | 3
+      | 4;
+  }
 
   try {
     const res = await queries.removeUserTrackedSkin(user.steamId, skin);

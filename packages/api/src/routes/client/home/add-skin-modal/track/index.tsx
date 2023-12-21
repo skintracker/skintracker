@@ -48,11 +48,14 @@ export const addUserTracking: AponiaRouteHandlerFn<
   const formData = body as AddUserTrackingFormBody;
   const skinStringParts = formData.skin.split("|");
 
+  logger.info({ formData });
+
   const skin: STSkin = {
     item: skinStringParts[0].trim() as Gloves | Knife | Weapon,
     name: skinStringParts[1].trim() as GlovesSkins | KnifeSkins | WeaponSkins,
     exterior: formData.exterior as STSkinExterior,
     category: formData.category as STSkinCategory,
+    phase: (formData.phase as 1 | 2 | 3 | 4) ?? null,
   } as STSkin;
 
   try {

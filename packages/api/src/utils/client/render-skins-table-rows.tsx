@@ -2,6 +2,7 @@ import { TableCell, TableRow } from "@/components/table";
 import { STSkin } from "@skintracker/types/src";
 import { Bitskins, DMarket, Skinport } from "../market";
 import { skinToString } from "../type-conversion";
+import { renderSkinPhaseTag } from "./render-skin-phase-tag";
 
 export async function renderSkinsTableRows(
   skins: STSkin[],
@@ -45,7 +46,10 @@ export async function renderSkinsTableRows(
       hx-target="body"
       hx-swap="beforeend"
     >
-      <TableCell safe>{skinToString({ skin })}</TableCell>
+      <TableCell>
+        {Html.escapeHtml(skinToString({ skin }))}
+        {renderSkinPhaseTag(skin)}
+      </TableCell>
       <TableCell
         classes="hidden md:table-cell group-odd:bg-red-300 group-even:bg-red-400"
         safe

@@ -53,6 +53,8 @@ export const queries = {
 
     if (skin.phase && skin.phase !== null) args.push(skin.phase);
 
+    logger.info({ sql, args });
+
     const res = await tx?.execute({
       sql,
       args,
