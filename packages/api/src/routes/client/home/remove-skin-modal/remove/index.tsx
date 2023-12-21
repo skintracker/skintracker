@@ -69,8 +69,6 @@ export const removeUserTracking: AponiaRouteHandlerFn<
     category: formData.category as STSkinCategory,
   } as STSkin;
 
-  logger.info({ formData });
-
   if (skin.name.indexOf("Doppler") !== -1) {
     skin.phase = +initialName.substring(initialName.indexOf("Phase") + 6) as
       | 1

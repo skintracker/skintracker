@@ -1,7 +1,6 @@
 import { randomUUID } from "crypto";
 import { createClient } from "@libsql/client";
 import { STSkin } from "@skintracker/types/src";
-import logger from "../logging";
 import { skinCategoryToInt, skinExteriorToInt } from "../type-conversion";
 
 export const db = (() => {
@@ -52,8 +51,6 @@ export const queries = {
     ];
 
     if (skin.phase && skin.phase !== null) args.push(skin.phase);
-
-    logger.info({ sql, args });
 
     const res = await tx?.execute({
       sql,
