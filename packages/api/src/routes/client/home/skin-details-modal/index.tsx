@@ -2,8 +2,7 @@ import Button from "@/components/button";
 import Divider from "@/components/divider";
 import { Modal, ModalClose } from "@/components/modal";
 import { setHTMLAsContentType } from "@/hooks";
-import logger from "@/utils/logging";
-import { skinToString, stringToSkin } from "@/utils/type-conversion";
+import { stringToSkin } from "@/utils/type-conversion";
 import type {
   AponiaCtx,
   AponiaHooks,
@@ -12,7 +11,7 @@ import type {
 } from "aponia";
 
 export const showSkinDetailsModal: AponiaRouteHandlerFn<JSX.Element> = (
-  ctx: AponiaCtx
+  ctx: AponiaCtx,
 ) => {
   const closeModalEventName = "HOME_SHOW_SKIN_DETAILS_MODAL";
   const { headers } = ctx;
@@ -21,7 +20,6 @@ export const showSkinDetailsModal: AponiaRouteHandlerFn<JSX.Element> = (
     throw new Error("Skin not found");
   }
   const skin = stringToSkin(headers.skin);
-  logger.info(skin);
 
   return (
     <Modal id="skin-details-modal" closeEvent={closeModalEventName}>
