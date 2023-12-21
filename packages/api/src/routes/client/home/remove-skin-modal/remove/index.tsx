@@ -4,6 +4,7 @@ import { queries } from "@/utils/db";
 import { STGenericError, STGenericErrorType } from "@/utils/error";
 import logger from "@/utils/logging";
 import { AponiaCtxExtended } from "@/utils/types/context";
+import { getTracking } from "@/utils/user";
 import {
   Gloves,
   GlovesSkins,
@@ -30,9 +31,11 @@ export interface AddUserTrackingFormBody {
   hasSkins: string;
 }
 
-export const addUserTracking: AponiaRouteHandlerFn<
-  Promise<string | STGenericError>
-> = async (ctx: AponiaCtx): Promise<string | STGenericError> => {
+export const removeUserTracking: AponiaRouteHandlerFn<
+  Promise<string | JSX.Element[] | STGenericError>
+> = async (
+  ctx: AponiaCtx,
+): Promise<string | JSX.Element[] | STGenericError> => {
   const { body, jwt, set } = ctx as AponiaCtxExtended;
   const user = await jwt.verify<STUser>(ctx.cookie.auth);
 
@@ -47,17 +50,35 @@ export const addUserTracking: AponiaRouteHandlerFn<
 
   const formData = body as AddUserTrackingFormBody;
   const skinStringParts = formData.skin.split("|");
+  const item =
+    skinStringParts[0].indexOf("★ ") !== -1
+      ? (skinStringParts[0].substring(1).trim() as Gloves | Knife | Weapon)
+      : (skinStringParts[0].trim() as Gloves | Knife | Weapon);
+  const initialName = skinStringParts[1]
+    .trim()
+    .substring(0, skinStringParts[1].indexOf("(") - 2);
+  const name =
+    skinStringParts[1].indexOf("Doppler") !== -1
+      ? initialName.substring(0, skinStringParts[1].indexOf("Phase") - 1).trim()
+      : initialName;
 
   const skin: STSkin = {
-    item: skinStringParts[0].trim() as Gloves | Knife | Weapon,
-    name: skinStringParts[1].trim() as GlovesSkins | KnifeSkins | WeaponSkins,
+    item,
+    name: name as GlovesSkins | KnifeSkins | WeaponSkins,
     exterior: formData.exterior as STSkinExterior,
     category: formData.category as STSkinCategory,
-    phase: (formData.phase as 1 | 2 | 3 | 4) ?? null,
   } as STSkin;
 
+  if (skin.name.indexOf("Doppler") !== -1) {
+    skin.phase = +initialName.substring(initialName.indexOf("Phase") + 6) as
+      | 1
+      | 2
+      | 3
+      | 4;
+  }
+
   try {
-    const res = await queries.addUserTrackedSkin(user.steamId, skin);
+    const res = await queries.removeUserTrackedSkin(user.steamId, skin);
     if (!res) {
       const error = STGenericErrorType.TursoError;
       set.status = error;
@@ -70,22 +91,28 @@ export const addUserTracking: AponiaRouteHandlerFn<
     logger.warn(e);
   }
 
-  const tableRows: JSX.Element | JSX.Element[] = await renderSkinsTableRows([
-    skin,
-  ]);
-  if (typeof tableRows === "string") {
-    return tableRows;
+  let skins: STSkin[] = [];
+  try {
+    const res = await getTracking(user.steamId);
+    skins = res.items;
+  } catch (e) {
+    logger.warn(e);
   }
-  return tableRows.length > 0 ? tableRows.join("") : "";
+
+  const tableRows = await renderSkinsTableRows(skins);
+
+  return Array.isArray(tableRows)
+    ? (tableRows.join("") as string)
+    : (tableRows as string);
 };
 
-export const addUserTrackingHooks: AponiaHooks = {
+export const removeUserTrackingHooks: AponiaHooks = {
   afterHandle: [setHTMLAsContentType],
 };
 
 export const handler: AponiaRouteHandler = {
   POST: {
-    fn: addUserTracking,
-    hooks: addUserTrackingHooks,
+    fn: removeUserTracking,
+    hooks: removeUserTrackingHooks,
   },
 };

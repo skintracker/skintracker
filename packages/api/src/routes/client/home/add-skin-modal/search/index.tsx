@@ -1,10 +1,7 @@
 import Divider from "@/components/divider";
 import { Link } from "@/components/link";
 import { setHTMLAsContentType } from "@/hooks";
-import {
-  ALL_SUPPORTED_WEAPONS,
-  ALL_SUPPORTED_WEAPON_SKIN_STRINGS,
-} from "@/utils/skins";
+import { ALL_SUPPORTED_WEAPON_SKIN_STRINGS } from "@/utils/skins";
 import type {
   AponiaCtx,
   AponiaHooks,
@@ -48,6 +45,7 @@ export const searchSkins: AponiaRouteHandlerFn<JSX.Element> = (
             hx-get={`/client/home/add-skin-modal/details?skin=${urlEncodedResult}`}
             hx-target="#add-skin-modal-content"
             hx-swap="innerHTML"
+            safe
           >
             {result}
           </Link>

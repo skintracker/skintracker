@@ -20,6 +20,23 @@ export const getAddSkinModalDetails: AponiaRouteHandlerFn<JSX.Element> = (
     throw new Error("No skin provided");
   }
   const closeModalEventName = "HOME_SHOW_ADD_SKIN_MODAL";
+  let phaseSelect: string | JSX.Element = "";
+  if (skin.indexOf("Doppler") !== -1) {
+    phaseSelect = (
+      <div class="form-field grid grid-cols-2 items-center px-2 mt-2">
+        <p class="text-stone-400">Phase</p>
+        <select
+          title="Select doppler phase"
+          class="border rounded-md border-slate-300 px-2 py-1"
+          name="phase"
+        >
+          {[1, 2, 3, 4].map((phase) => (
+            <option value={`${phase}`}>Phase {phase}</option>
+          ))}
+        </select>
+      </div>
+    );
+  }
   return (
     <>
       <form
@@ -70,6 +87,7 @@ export const getAddSkinModalDetails: AponiaRouteHandlerFn<JSX.Element> = (
               ))}
             </select>
           </div>
+          {phaseSelect}
         </div>
         <Divider />
         <div class="grid grid-cols-[70px_58px] align-center justify-center gap-2">
