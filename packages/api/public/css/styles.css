@@ -570,9 +570,19 @@ video {
   float: right;
 }
 
+.mx-2 {
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+}
+
 .mx-auto {
   margin-left: auto;
   margin-right: auto;
+}
+
+.my-0 {
+  margin-top: 0px;
+  margin-bottom: 0px;
 }
 
 .my-2 {
@@ -614,6 +624,10 @@ video {
 
 .mt-4 {
   margin-top: 1rem;
+}
+
+.block {
+  display: block;
 }
 
 .flex {
@@ -688,6 +702,10 @@ video {
   grid-template-columns: 70px 70px;
 }
 
+.grid-cols-\[70px_76px\] {
+  grid-template-columns: 70px 76px;
+}
+
 .flex-col {
   flex-direction: column;
 }
@@ -722,6 +740,10 @@ video {
 
 .rounded-md {
   border-radius: 0.375rem;
+}
+
+.rounded-sm {
+  border-radius: 0.125rem;
 }
 
 .border {
@@ -760,6 +782,11 @@ video {
   background-color: rgb(22 163 74 / var(--tw-bg-opacity));
 }
 
+.bg-red-500 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(239 68 68 / var(--tw-bg-opacity));
+}
+
 .bg-red-600 {
   --tw-bg-opacity: 1;
   background-color: rgb(220 38 38 / var(--tw-bg-opacity));
@@ -788,8 +815,28 @@ video {
   background-image: linear-gradient(135deg,#6C66C9 0%,#F97C73 100%);
 }
 
+.bg-\[linear-gradient\(50deg\2c _rgba\(2\2c 0\2c 36\2c 1\)_0\%\2c _rgba\(121\2c 9\2c 61\2c 1\)_30\%\2c _rgba\(199\2c 45\2c 119\2c 1\)_84\%\)\] {
+  background-image: linear-gradient(50deg, rgba(2,0,36,1) 0%, rgba(121,9,61,1) 30%, rgba(199,45,119,1) 84%);
+}
+
+.bg-\[linear-gradient\(70deg\2c _rgba\(2\2c 0\2c 36\2c 1\)_0\%\2c _rgba\(121\2c 9\2c 61\2c 1\)_80\%\2c _rgba\(199\2c 45\2c 119\2c 1\)_96\%\)\] {
+  background-image: linear-gradient(70deg, rgba(2,0,36,1) 0%, rgba(121,9,61,1) 80%, rgba(199,45,119,1) 96%);
+}
+
+.bg-\[linear-gradient\(90deg\2c _rgba\(8\2c 5\2c 55\2c 1\)_0\%\2c _rgba\(34\2c 17\2c 173\2c 1\)_41\%\2c _rgba\(18\2c 61\2c 31\2c 1\)_71\%\)\] {
+  background-image: linear-gradient(90deg, rgba(8,5,55,1) 0%, rgba(34,17,173,1) 41%, rgba(18,61,31,1) 71%);
+}
+
+.bg-\[linear-gradient\(90deg\2c _rgba\(8\2c 5\2c 55\2c 1\)_20\%\2c _rgba\(34\2c 17\2c 173\2c 1\)_94\%\)\] {
+  background-image: linear-gradient(90deg, rgba(8,5,55,1) 20%, rgba(34,17,173,1) 94%);
+}
+
 .bg-\[length\:200\%_200\%\] {
   background-size: 200% 200%;
+}
+
+.p-1 {
+  padding: 0.25rem;
 }
 
 .p-2 {
@@ -843,6 +890,10 @@ video {
 .py-40 {
   padding-top: 10rem;
   padding-bottom: 10rem;
+}
+
+.pr-\[7px\] {
+  padding-right: 7px;
 }
 
 .pt-\[3px\] {
@@ -904,6 +955,10 @@ video {
 
 .uppercase {
   text-transform: uppercase;
+}
+
+.italic {
+  font-style: italic;
 }
 
 .text-black {
