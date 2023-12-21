@@ -26,7 +26,7 @@ export const removeSkinModal: AponiaRouteHandlerFn<JSX.Element> = async (
     const res = await getTracking(user.steamId);
     skins = res.items;
   } catch (e) {
-    logger.debug(e);
+    logger.warn(e);
   }
 
   const dropdownOptions = skins.map((skin) => (
