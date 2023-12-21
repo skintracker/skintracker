@@ -50,9 +50,13 @@ export const removeUserTracking: AponiaRouteHandlerFn<
 
   const formData = body as AddUserTrackingFormBody;
   const skinStringParts = formData.skin.split("|");
+  const item =
+    skinStringParts[0].indexOf("★ ") !== -1
+      ? (skinStringParts[0].substring(1).trim() as Gloves | Knife | Weapon)
+      : (skinStringParts[0].trim() as Gloves | Knife | Weapon);
 
   const skin: STSkin = {
-    item: skinStringParts[0].trim() as Gloves | Knife | Weapon,
+    item,
     name: skinStringParts[1]
       .trim()
       .substring(0, skinStringParts[1].indexOf("(") - 2) as

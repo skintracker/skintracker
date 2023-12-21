@@ -30,8 +30,8 @@ export const removeSkinModal: AponiaRouteHandlerFn<JSX.Element> = async (
   }
 
   const dropdownOptions = skins.map((skin) => (
-    <option value={skinToString({ skin })} safe>
-      {skinToString({ skin })}
+    <option value={skinToString({ skin, includePhase: true })} safe>
+      {skinToString({ skin, includePhase: true })}
     </option>
   ));
 
