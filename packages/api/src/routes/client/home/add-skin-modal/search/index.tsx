@@ -45,6 +45,7 @@ export const searchSkins: AponiaRouteHandlerFn<JSX.Element> = (
             hx-get={`/client/home/add-skin-modal/details?skin=${urlEncodedResult}`}
             hx-target="#add-skin-modal-content"
             hx-swap="innerHTML"
+            safe
           >
             {result}
           </Link>

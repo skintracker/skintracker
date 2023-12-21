@@ -20,7 +20,7 @@ export const commands: Record<string, GoToCommand | ShowModalCommand> = {
     "hx-get": "/client/home/add-skin-modal",
   },
   "Remove Skin": {
-    "hx-get": "/client/home/add-skin-modal",
+    "hx-get": "/client/home/remove-skin-modal",
   },
   "Developer: Show Debug Page": {
     href: "/developer",

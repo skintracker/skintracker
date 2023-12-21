@@ -36,18 +36,28 @@ export const queries = {
       ],
     });
   },
-  removeUserTrackedSkin: (steamid: string, skin: STSkin) => {
-    return db?.execute({
-      sql: "DELETE FROM tracked_skins WHERE steamid = ? AND item = ? AND name = ? AND category = ? AND exterior = ? AND phase = ?",
-      args: [
-        steamid,
-        skin.item,
-        skin.name,
-        skinCategoryToInt(skin.category),
-        skinExteriorToInt(skin.exterior),
-        skin.phase ?? null,
-      ],
+  removeUserTrackedSkin: async (steamid: string, skin: STSkin) => {
+    const tx = await db?.transaction("write");
+
+    const sql = `DELETE FROM tracked_skins WHERE steamid = ? AND item = ? AND name = ? AND category = ? AND exterior = ?${
+      skin.phase && skin.phase !== null ? " AND phase = ?" : ""
+    }`;
+    const args: (string | number)[] = [
+      steamid,
+      skin.item,
+      skin.name,
+      skinCategoryToInt(skin.category),
+      skinExteriorToInt(skin.exterior),
+    ];
+
+    if (skin.phase && skin.phase !== null) args.push(skin.phase);
+
+    const res = await tx?.execute({
+      sql,
+      args,
     });
+    await tx?.commit().then(() => tx?.close());
+    return res;
   },
 };
 
