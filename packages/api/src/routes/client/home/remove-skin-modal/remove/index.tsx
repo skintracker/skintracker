@@ -6,15 +6,12 @@ import logger from "@/utils/logging";
 import { AponiaCtxExtended } from "@/utils/types/context";
 import { getTracking } from "@/utils/user";
 import {
-  Gloves,
   GlovesSkins,
-  Knife,
   KnifeSkins,
   STSkin,
   STSkinCategory,
   STSkinExterior,
   STUser,
-  Weapon,
   WeaponSkins,
 } from "@skintracker/types/src";
 import {
