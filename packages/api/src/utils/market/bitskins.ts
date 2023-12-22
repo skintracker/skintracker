@@ -5,7 +5,7 @@ import { skinToString } from "../type-conversion";
 
 export async function getMinPrice(skin: STSkin): Promise<string> {
   if (!Bun.env.ST_BITSKINS_API_KEY) {
-    logger.debug("Bitskins API key not found");
+    logger.warn("Bitskins API key not found");
     return "N/A";
   }
 

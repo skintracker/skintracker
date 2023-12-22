@@ -34,6 +34,17 @@ export const removeSkinModal: AponiaRouteHandlerFn<JSX.Element> = async (
       {skinToString({ skin, includePhase: true })}
     </option>
   ));
+  const disableRemoveButton = skins.length === 0;
+  const skinSelect = disableRemoveButton ? (
+    <p class="text-center">No skins found.</p>
+  ) : (
+    <select
+      name="skin"
+      class="block mx-auto my-0 text-center border rounded-sm p-2"
+    >
+      {dropdownOptions}
+    </select>
+  );
 
   return (
     <Modal closeEvent={closeModalEventName}>
@@ -46,12 +57,7 @@ export const removeSkinModal: AponiaRouteHandlerFn<JSX.Element> = async (
         hx-swap="innerHTML"
         data-script={`on submit trigger ${closeModalEventName}`}
       >
-        <select
-          name="skin"
-          class="block mx-auto my-0 text-center border rounded-sm p-2"
-        >
-          {dropdownOptions}
-        </select>
+        {skinSelect}
       </form>
       <br />
       <Divider />
@@ -61,9 +67,10 @@ export const removeSkinModal: AponiaRouteHandlerFn<JSX.Element> = async (
         </ModalClose>
         <input
           type="submit"
-          class="border border-solid border-slate-200 rounded p-2 bg-red-500 text-white text-center border-transparent hover:cursor-pointer"
+          class="border border-solid border-slate-200 rounded p-2 enabled:bg-red-500 disabled:bg-gray-500 text-white text-center border-transparent enabled:hover:cursor-pointer disabled:hover:cursor-not-allowed"
           value="Remove"
           form="remove-skin-form"
+          disabled={disableRemoveButton}
         />
       </div>
     </Modal>

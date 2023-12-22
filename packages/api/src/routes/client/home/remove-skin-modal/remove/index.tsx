@@ -6,15 +6,12 @@ import logger from "@/utils/logging";
 import { AponiaCtxExtended } from "@/utils/types/context";
 import { getTracking } from "@/utils/user";
 import {
-  Gloves,
   GlovesSkins,
-  Knife,
   KnifeSkins,
   STSkin,
   STSkinCategory,
   STSkinExterior,
   STUser,
-  Weapon,
   WeaponSkins,
 } from "@skintracker/types/src";
 import {
@@ -50,23 +47,57 @@ export const removeUserTracking: AponiaRouteHandlerFn<
 
   const formData = body as AddUserTrackingFormBody;
   const skinStringParts = formData.skin.split("|");
-  const item =
-    skinStringParts[0].indexOf("★ ") !== -1
-      ? (skinStringParts[0].substring(1).trim() as Gloves | Knife | Weapon)
-      : (skinStringParts[0].trim() as Gloves | Knife | Weapon);
+
+  let item = skinStringParts[0].trim();
+  if (item.indexOf("★ ") !== -1) {
+    item = item.substring(1).trim();
+  }
+  let category: STSkinCategory = STSkinCategory.Normal;
+  if (item.startsWith("Souvenir")) {
+    item = item.substring(8).trim();
+    category = STSkinCategory.Souvenir;
+  }
+  if (item.startsWith("StatTrak™")) {
+    item = item.substring(9).trim();
+    category = STSkinCategory.StatTrak;
+  }
+  const wearString = skinStringParts[1].substring(
+    skinStringParts[1].indexOf("(") + 1,
+    skinStringParts[1].indexOf(")"),
+  );
+  let exterior: STSkinExterior = STSkinExterior.FN;
+  switch (wearString) {
+    case "Factory New":
+      exterior = STSkinExterior.FN;
+      break;
+    case "Minimal Wear":
+      exterior = STSkinExterior.MW;
+      break;
+    case "Field-Tested":
+      exterior = STSkinExterior.FT;
+      break;
+    case "Well-Worn":
+      exterior = STSkinExterior.WW;
+      break;
+    default:
+      exterior = STSkinExterior.BS;
+      break;
+  }
+
+  let name: string | undefined = undefined;
   const initialName = skinStringParts[1]
     .trim()
     .substring(0, skinStringParts[1].indexOf("(") - 2);
-  const name =
-    skinStringParts[1].indexOf("Doppler") !== -1
-      ? initialName.substring(0, skinStringParts[1].indexOf("Phase") - 1).trim()
-      : initialName;
+  name = initialName;
+  if (name.indexOf("Doppler") !== -1) {
+    name = name.substring(0, skinStringParts[1].indexOf("Phase") - 1).trim();
+  }
 
   const skin: STSkin = {
     item,
     name: name as GlovesSkins | KnifeSkins | WeaponSkins,
-    exterior: formData.exterior as STSkinExterior,
-    category: formData.category as STSkinCategory,
+    exterior,
+    category,
   } as STSkin;
 
   if (skin.name.indexOf("Doppler") !== -1) {
