@@ -45,10 +45,11 @@ export function SplashLayout({ children, title, user }: SplashLayoutProps) {
         <meta charset="UTF-8" />
         <script src="/public/js/htmx.js" />
         <script src="/public/js/hyperscript.js" />
+        <script src="/public/js/loading-states.js" />
         <link rel="stylesheet" href="/public/font/font.css" />
         {styles()}
       </head>
-      <body class="font-sans font-normal">
+      <body class="font-sans font-normal" hx-ext="loading-states">
         <Navigation items={navItems} user={user} />
         <main>{children}</main>
       </body>
