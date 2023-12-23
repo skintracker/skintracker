@@ -17,23 +17,16 @@ export function BaseLayout({ children, title, user }: BaseLayoutProps) {
   }
   const styles = () => {
     if (Bun.env.NODE_ENV === "production")
-      return <link rel="stylesheet" href="/public/css/styles.css" />;
+      return (
+        <>
+          <link rel="stylesheet" href="/public/css/styles.css" />
+          <link rel="stylesheet" href="/public/css/global.css" />
+        </>
+      );
     return (
       <>
         <script src="/public/js/tailwind.js" />
-        <style>
-          {`
-					.font-sans {
-						font-family: "Basier Square", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !important;
-					}
-					.font-mono {
-						font-family: "Basier Square Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !important;
-					}
-          *::-webkit-scrollbar {
-            display: none;
-          }
-				`}
-        </style>
+        <link rel="stylesheet" href="/public/css/global.dev.css" />
       </>
     );
   };
