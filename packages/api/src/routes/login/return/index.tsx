@@ -80,23 +80,6 @@ export const getLogin: AponiaRouteHandlerFn<Promise<string>> = async (
           </a>
         </p>
       </div>
-      <style>
-        {`@keyframes gradient {
-            0% {
-              background-position: 0% 50%;
-            }
-            50% {
-              background-position: 100% 50%;
-            }
-            100% {
-              background-position: 0% 50%;
-            }
-          }
-          .full-height {
-            height: calc(100vh - 74px);
-          }
-        `}
-      </style>
     </SplashLayout>
   );
 };
