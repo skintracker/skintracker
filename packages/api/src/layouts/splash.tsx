@@ -38,8 +38,8 @@ export function SplashLayout({ children, title, user }: SplashLayoutProps) {
         <title safe>Skintracker | {title}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta charset="UTF-8" />
-        <script src="/public/js/htmx.js" />
-        <script src="/public/js/hyperscript.js" />
+        <script src="/public/js/htmx.js" defer />
+        <script src="/public/js/hyperscript.js" defer />
         <script src="/public/js/loading-states.js" />
         <link rel="stylesheet" href="/public/font/font.css" />
         {styles()}

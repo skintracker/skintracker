@@ -22,7 +22,6 @@ async function getPrices(
   const headers = buildStandardHeaders(id, secret);
   const params = {
     currency: "USD",
-    // market_hash_name: skinToString(skin),
   };
   const requestOptions: RequestInit = {
     method: "GET",
