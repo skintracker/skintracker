@@ -27,6 +27,7 @@ export interface AddUserTrackingFormBody {
   skin: string;
   exterior: string;
   category: string;
+  phase?: 1 | 2 | 3 | 4;
   hasSkins: string;
 }
 
@@ -53,7 +54,7 @@ export const addUserTracking: AponiaRouteHandlerFn<
     name: skinStringParts[1].trim() as GlovesSkins | KnifeSkins | WeaponSkins,
     exterior: formData.exterior as STSkinExterior,
     category: formData.category as STSkinCategory,
-    phase: (formData.phase as 1 | 2 | 3 | 4) ?? null,
+    phase: formData.phase ? (+formData.phase as 1 | 2 | 3 | 4) : null,
   } as STSkin;
 
   try {

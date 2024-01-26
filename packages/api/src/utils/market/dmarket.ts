@@ -70,7 +70,15 @@ export async function getMinPrice(skin: STSkin): Promise<string> {
 
   const timestamp = Math.floor(Date.now() / 1000);
   const path = "/exchange/v1/market/items";
-  const params = {
+  const params: {
+    gameId: string;
+    currency: string;
+    limit: number;
+    title: string;
+    orderBy: string;
+    orderDir: string;
+    treeFilters?: string;
+  } = {
     gameId: "a8db",
     currency: "USD",
     limit: 10,
@@ -78,6 +86,10 @@ export async function getMinPrice(skin: STSkin): Promise<string> {
     orderBy: "price",
     orderDir: "asc",
   };
+
+  if (skin.phase) {
+    params.treeFilters = `phase[]=phase-${skin.phase}`;
+  }
 
   //* Not sure if this is correct URL yet
   const builtPath = `${path}?${queryParamsToString(params)}`;

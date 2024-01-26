@@ -3,7 +3,11 @@
   "module": "index.ts",
   "version": "2023.4.1",
   "devDependencies": {
-    "bun-types": "latest"
+    "bun-types": "latest",
+    "lightningcss": "^1.22.1",
+    "lightningcss-cli": "^1.22.1",
+    "stylelint": "^16.0.2",
+    "stylelint-config-standard": "^35.0.0"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
