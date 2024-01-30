@@ -17,7 +17,7 @@ export function SplashLayout({ children, title, user }: SplashLayoutProps) {
   }
   const styles = () => {
     if (Bun.env.NODE_ENV === "production")
-      return <link rel="stylesheet" href="/public/css/styles.css" />;
+      return <link rel="stylesheet" href="/public/css/styles.096ac234.css" />;
     return (
       <>
         <script src="/public/js/tailwind.js" />
