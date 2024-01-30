@@ -11,14 +11,17 @@
   "private": true,
   "scripts": {
     "build": "bun run --cwd packages/api build",
-    "build:docker": "docker build -t skintracker .",
+    "build:docker": "docker build -t skintracker -f Dockerfile .",
+    "build:docker-dev": "docker build -t skintracker-dev -f Dockerfile.dev .",
     "dev": "bun run --cwd packages/api dev",
+    "dev:docker": "docker run -d -v \"$(pwd)\":/usr/src/app -p 3001:3001 skintracker-dev",
     "lint": "bun run --cwd packages/api lint && bun run --cwd packages/types lint",
     "lint:fix": "bun run --cwd packages/api lint:fix && bun run --cwd packages/types lint:fix",
     "fmt": "bun run --cwd packages/api fmt && bun run --cwd packages/types fmt",
     "fmt:fix": "bun run --cwd packages/api fmt:fix && bun run --cwd packages/types fmt:fix",
     "prestart": "bun run --cwd packages/api build",
-    "start": "bun run packages/api/dist/index.js"
+    "start": "bun run packages/api/dist/index.js",
+    "start:docker": "docker run -d -p 3001:3001 skintracker"
   },
   "type": "module",
   "workspaces": ["packages/*"],
