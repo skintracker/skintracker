@@ -52,7 +52,7 @@ ln -s ./packages/api/public ./public
 
 Docker is an alternative way of running the application, which is necessary on Linux distributions. To run the application in dev mode using Docker:
 ```bash
-bun build:dev-docker
+bun build:docker-dev
 bun dev:docker
 ```
 
