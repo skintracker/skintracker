@@ -18,7 +18,7 @@
     "build:docker": "docker build -t skintracker -f Dockerfile .",
     "build:docker-dev": "docker build -t skintracker-dev -f Dockerfile.dev .",
     "dev": "bun run --cwd packages/api dev",
-    "dev:docker": "docker run -d -v \"$(pwd)\":/usr/src/app -p 3001:3001 skintracker-dev",
+    "dev:docker": "docker run -d --net=host -v \"$(pwd)\":/usr/src/app -p 3001:3001 skintracker-dev",
     "lint": "bun run --cwd packages/api lint && bun run --cwd packages/types lint",
     "lint:fix": "bun run --cwd packages/api lint:fix && bun run --cwd packages/types lint:fix",
     "fmt": "bun run --cwd packages/api fmt && bun run --cwd packages/types fmt",
