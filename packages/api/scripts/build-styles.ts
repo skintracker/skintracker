@@ -16,8 +16,14 @@ const logger = pino({
 
 logger.info("Beginning CSS build...");
 logger.info("Removing previous build artifacts...");
-const prevCSSFileName = readdirSync("./public/css/")[0];
-logger.info(`Found artifact: ${prevCSSFileName}`);
+const cssDir = readdirSync("./public/css/");
+
+let prevStylesFileName: string | undefined = undefined;
+for (const file of cssDir) {
+  if (file.startsWith("styles")) prevStylesFileName = file;
+}
+if (!prevStylesFileName) throw new Error("Previous file not found!");
+logger.info(`Found artifact: ${prevStylesFileName}`);
 
 const cssFileName = "./public/css/styles.css";
 await $`bunx tailwindcss -o ${cssFileName} --minify`;
@@ -36,7 +42,7 @@ logger.info(
 );
 async function updateCSSRef(filePath: string): Promise<void> {
   const content = await Bun.file(filePath).text();
-  const updatedContent = content.replace(prevCSSFileName, newCSSFileName);
+  const updatedContent = content.replace(prevStylesFileName!, newCSSFileName);
   if (content !== updatedContent) {
     writeFileSync(filePath, updatedContent, "utf8");
     logger.info(`Updated reference in ${filePath}`);

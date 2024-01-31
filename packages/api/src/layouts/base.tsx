@@ -17,23 +17,16 @@ export function BaseLayout({ children, title, user }: BaseLayoutProps) {
   }
   const styles = () => {
     if (Bun.env.NODE_ENV === "production")
-      return <link rel="stylesheet" href="/public/css/styles.096ac234.css" />;
+      return (
+        <>
+          <link rel="stylesheet" href="/public/css/styles.e2ceca52.css" />
+          <link rel="stylesheet" href="/public/css/global.css" />
+        </>
+      );
     return (
       <>
         <script src="/public/js/tailwind.js" />
-        <style>
-          {`
-					.font-sans {
-						font-family: "Basier Square", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !important;
-					}
-					.font-mono {
-						font-family: "Basier Square Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !important;
-					}
-          *::-webkit-scrollbar {
-            display: none;
-          }
-				`}
-        </style>
+        <link rel="stylesheet" href="/public/css/global.dev.css" />
       </>
     );
   };
@@ -45,10 +38,11 @@ export function BaseLayout({ children, title, user }: BaseLayoutProps) {
         <meta charset="UTF-8" />
         <script src="/public/js/htmx.js" />
         <script src="/public/js/hyperscript.js" />
+        <script src="/public/js/loading-states.js" />
         <link rel="stylesheet" href="/public/font/font.css" />
         {styles()}
       </head>
-      <body class="font-sans font-normal">
+      <body class="font-sans font-normal" hx-ext="loading-states">
         <Navigation items={navItems} user={user} />
         <main class="py-2 px-8">{children}</main>
       </body>

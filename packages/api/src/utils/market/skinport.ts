@@ -22,7 +22,6 @@ async function getPrices(
   const headers = buildStandardHeaders(id, secret);
   const params = {
     currency: "USD",
-    // market_hash_name: skinToString(skin),
   };
   const requestOptions: RequestInit = {
     method: "GET",
@@ -36,6 +35,7 @@ async function getPrices(
   }
   const response = await fetch(requestUrl, requestOptions);
   const json = await response.json<SkinportSearchResponse>();
+
   logger.debug(`[${response.status}]: ${JSON.stringify(json)}`);
   if (response.status === 200) {
     httpRequestCache.add(requestUrl, requestOptions, JSON.stringify(json));

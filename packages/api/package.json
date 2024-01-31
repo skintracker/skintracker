@@ -8,6 +8,7 @@
     "dev": "bun run --watch src/index.ts",
     "lint": "bunx biome check ./src",
     "lint:fix": "bunx biome check ./src --apply",
+    "lint:styles": "bunx stylelint \"public/css/**/*.css\"",
     "fmt": "bunx biome format ./src",
     "fmt:fix": "bunx biome format ./src --write",
     "seed:db": "bun run scripts/seed-db.ts",
