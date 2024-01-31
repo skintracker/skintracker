@@ -19,7 +19,7 @@ export function BaseLayout({ children, title, user }: BaseLayoutProps) {
     if (Bun.env.NODE_ENV === "production")
       return (
         <>
-          <link rel="stylesheet" href="/public/css/styles.css" />
+          <link rel="stylesheet" href="/public/css/styles.e2ceca52.css" />
           <link rel="stylesheet" href="/public/css/global.css" />
         </>
       );
