@@ -2,25 +2,20 @@
 
 ## Prerequisites
 
-1. [Bun v1.0.11+](https://bun.sh/)
+1. [Bun v1.0.25+](https://bun.sh/)
+
+If Bun is already installed, you can run `bun upgrade` to update to the latest version of Bun.
 
 ## Getting Started
 
-1. Link the `@skintracker/types` package:
-
-```bash
-cd ./packages/types
-bun link
-```
-
-2. Install deps:
+1. Install deps:
 
 ```bash
 cd ../..
 bun i
 ```
 
-3. Configure .env files in both root of the project and in the root of the API package:
+2. Configure .env files in both root of the project and in the root of the API package:
 
 ```
 touch .env
@@ -30,7 +25,7 @@ cp ./.env ./packages/api/.env
 
 Values can be obtained from Google Cloud Secret Manager.
 
-4. ... and that should be it!
+3. ... and that should be it!
 
 ## Running Locally
 
@@ -52,3 +47,19 @@ This will transpile TS to JS and start the transpiled application. However, you 
 # IN ROOT DIRECTORY!
 ln -s ./packages/api/public ./public
 ```
+
+## Running via Docker
+
+Docker is an alternative way of running the application, which is necessary on Linux distributions. To run the application in dev mode using Docker:
+```bash
+bun build:docker-dev
+bun dev:docker
+```
+
+Similarly, the production build can be run using the following:
+
+```bash
+bun build:docker
+bun start:docker
+```
+
