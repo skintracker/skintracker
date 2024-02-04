@@ -52,31 +52,56 @@ export const showSkinDetailsModal: AponiaRouteHandlerFn<JSX.Element> = (
             </TableRow>
           </TableHead>
           <TableBody>
-            <TableRow class="bg-red-400 py-2">
-              <TableCell <img alt="Bitskins Logo" src="/public/svg/bitskins.svg" class="h-[17px] pt-[3px]">>BitSkins</TableCell>
+            <TableRow class="bg-red-200 py-2">
+              <TableCell>
+                <img
+                  alt="Bitskins Logo"
+                  src="/public/svg/bitskins.svg"
+                  class="inline h-[17px] mr-2"
+                />
+                BitSkins
+              </TableCell>
               <TableCell>{prices.bitskins}</TableCell>
             </TableRow>
-            <TableRow class="bg-green-400 py-2">
-              <TableCell>DMarket</TableCell>
+            <TableRow class="bg-green-200 py-2">
+              <TableCell>
+                <img
+                  alt="DMarket Logo"
+                  src="/public/svg/dmarket.svg"
+                  class="inline h-[17px] mr-2"
+                />
+                DMarket
+              </TableCell>
               <TableCell>{prices.dmarket}</TableCell>
             </TableRow>
-            <TableRow class="bg-blue-400 py-2">
-              <TableCell>Skinport</TableCell>
+            <TableRow class="bg-blue-200 py-2">
+              <TableCell>
+                <img
+                  alt="Skinport Logo"
+                  src="/public/svg/skinport.svg"
+                  class="inline h-[17px] mr-2"
+                />
+                Skinport
+              </TableCell>
               <TableCell>{prices.skinport}</TableCell>
             </TableRow>
           </TableBody>
         </Table>
       </div>
       <Divider />
-      <div class="grid grid-cols-[70px] align-center justify-center">
-        <ModalClose closeEvent={closeModalEventName}>
-          <Button text="Close" />
-        </ModalClose>
-        <input
-          type="submit"
-          class="flex border border-solid border-slate-200 rounded p-2 bg-red-600 text-white text-center border-transparent hover:cursor-pointer"
-          value="Delete"
-        />
+      <div class="flex justify-center items-center space-x-4 py-4">
+        <div class="w-1/2">
+          <ModalClose closeEvent={closeModalEventName}>
+            <Button text="Close" />
+          </ModalClose>
+        </div>
+        <div class="w-1/6">
+          <input
+            type="submit"
+            class="w-full flex justify-center items-center border border-solid border-slate-200 rounded px-4 py-2 bg-red-600 text-white text-center hover:cursor-pointer"
+            value="Delete"
+          />
+        </div>
       </div>
     </Modal>
   );
