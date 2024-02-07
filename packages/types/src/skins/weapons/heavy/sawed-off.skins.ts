@@ -1,4 +1,5 @@
 export enum SawedOffSkins {
+  AnalogInput = "Analog Input",
   AmberFade = "Amber Fade",
   Apocalypto = "Apocalypto",
   BambooShadow = "Bamboo Shadow",

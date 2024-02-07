@@ -1,7 +1,6 @@
 export enum MP7Skins {
   AbyssalApparition = "Abyssal Apparition",
   Akoben = "Akoben",
-  AnalogInput = "Analog Input",
   AnodizedNavy = "Anodized Navy",
   ArmorCore = "Armor Core",
   ArmyRecon = "Army Recon",
