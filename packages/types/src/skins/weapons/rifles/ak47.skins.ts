@@ -18,6 +18,7 @@ export enum AK47Skins {
   HeadShot = "Head Shot",
   Hydroponic = "Hydroponic",
   IceCoaled = "Ice Coaled",
+  Inheritance = "Inheritance",
   Jaguar = "Jaguar",
   JetSet = "Jet Set",
   JungleSpray = "Jungle Spray",

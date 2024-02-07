@@ -18,6 +18,7 @@ export enum DualBerettasSkins {
   FloraCarnivora = "Flora Carnivora",
   Heist = "Heist",
   Hemoglobin = "Hemoglobin",
+  Hideout = "Hideout",
   Marina = "Marina",
   Melondrama = "Melondrama",
   MoonInLibra = "Moon in Libra",

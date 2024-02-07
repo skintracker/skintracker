@@ -6,6 +6,7 @@ export enum AWPSkins {
   BOOM = "BOOM",
   Capillary = "Capillary",
   ChromaticAberration = "Chromatic Aberration",
+  ChromeCannon = "Chrome Cannon",
   ContainmentBreach = "Containment Breach",
   Corticera = "Corticera",
   DesertHydra = "Desert Hydra",

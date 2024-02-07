@@ -13,6 +13,7 @@ export enum USPSSkins {
   Flashback = "Flashback",
   ForestLeaves = "Forest Leaves",
   Guardian = "Guardian",
+  Jawbreaker = "Jawbreaker",
   KillConfirmed = "Kill Confirmed",
   LeadConduit = "Lead Conduit",
   MonsterMashup = "Monster Mashup",

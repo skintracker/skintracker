@@ -1,6 +1,7 @@
 export enum M4A1SSkins {
   AtomicAlloy = "Atomic Alloy",
   Basilisk = "Basilisk",
+  BlackLotus = "Black Lotus",
   BloodTiger = "Blood Tiger",
   BluePhosphor = "Blue Phosphor",
   BorealForest = "Boreal Forest",

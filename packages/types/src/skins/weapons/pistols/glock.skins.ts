@@ -1,4 +1,5 @@
 export enum Glock18Skins {
+  Block18 = "Block18",
   BlueFissure = "Blue Fissure",
   Brass = "Brass",
   BulletQueen = "Bullet Queen",

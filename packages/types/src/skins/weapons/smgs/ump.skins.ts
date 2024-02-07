@@ -25,6 +25,7 @@ export enum UMP45Skins {
   MinotaursLabyrinth = "Minotaur's Labyrinth",
   Momentum = "Momentum",
   Moonrise = "Moonrise",
+  Motorized = "Motorized",
   Mudder = "Mudder",
   Oscillator = "Oscillator",
   Plastique = "Plastique",

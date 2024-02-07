@@ -1,6 +1,7 @@
 export enum MP7Skins {
   AbyssalApparition = "Abyssal Apparition",
   Akoben = "Akoben",
+  AnalogInput = "Analog Input",
   AnodizedNavy = "Anodized Navy",
   ArmorCore = "Armor Core",
   ArmyRecon = "Army Recon",
@@ -14,6 +15,7 @@ export enum MP7Skins {
   Guerilla = "Guerilla",
   Gunsmoke = "Gunsmoke",
   Impire = "Impire",
+  JustSmile = "Just Smile",
   Mischief = "Mischief",
   Motherboard = "Motherboard",
   Nemesis = "Nemesis",
