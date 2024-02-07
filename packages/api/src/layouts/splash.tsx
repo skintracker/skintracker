@@ -26,7 +26,7 @@ export function SplashLayout({ children, title, user }: SplashLayoutProps) {
       );
     return (
       <>
-        <script src="/public/js/tailwind.js" />
+        <script src="/public/js/tailwind-3.4.1.js" />
         <link rel="stylesheet" href="/public/css/global.dev.css" />
         <link rel="stylesheet" href="/public/css/splash.css" />
       </>
@@ -38,8 +38,8 @@ export function SplashLayout({ children, title, user }: SplashLayoutProps) {
         <title safe>Skintracker | {title}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta charset="UTF-8" />
-        <script src="/public/js/htmx.js" defer />
-        <script src="/public/js/hyperscript.js" defer />
+        <script src="/public/js/htmx-1.9.10.js" defer />
+        <script src="/public/js/hyperscript-0.9.12.js" defer />
         <script src="/public/js/loading-states.js" />
         <link rel="stylesheet" href="/public/font/font.css" />
         {styles()}
