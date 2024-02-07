@@ -17,6 +17,7 @@ export enum FiveSevenSkins {
   ForestNight = "Forest Night",
   FowlPlay = "Fowl Play",
   HotShot = "Hot Shot",
+  Hybrid = "Hybrid",
   HyperBeast = "Hyper Beast",
   Jungle = "Jungle",
   Kami = "Kami",

@@ -22,6 +22,7 @@ export enum MAC10Skins {
   Indigo = "Indigo",
   LapisGator = "Lapis Gator",
   LastDive = "Last Dive",
+  LightBox = "Light Box",
   Malachite = "Malachite",
   Monkeyflage = "Monkeyflage",
   NeonRider = "Neon Rider",

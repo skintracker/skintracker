@@ -10,6 +10,7 @@ export enum M4A4Skins {
   DesertStrike = "Desert-Strike",
   DesolateSpace = "Desolate Space",
   DragonKing = "Dragon King",
+  EtchLord = "Etch Lord",
   EvilDaimyo = "Evil Daimyo",
   EyeOfHorus = "Eye of Horus",
   FadedZebra = "Faded Zebra",

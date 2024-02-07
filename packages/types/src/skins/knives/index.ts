@@ -8,6 +8,7 @@ export * from "./gut.skins";
 export * from "./huntsman.skins";
 export * from "./karambit.skins";
 export * from "./knives";
+export * from "./kukri.skins";
 export * from "./m9-bayonet.skins";
 export * from "./navaja.skins";
 export * from "./nomad.skins";

@@ -17,6 +17,7 @@ export enum XM1014Skins {
   HeavenGuard = "Heaven Guard",
   Hieroglyph = "Hieroglyph",
   Incinegator = "Incinegator",
+  Irezumi = "Irezumi",
   Jungle = "Jungle",
   OxideBlaze = "Oxide Blaze",
   Quicksilver = "Quicksilver",

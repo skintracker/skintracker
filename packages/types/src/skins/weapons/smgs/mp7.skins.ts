@@ -14,6 +14,7 @@ export enum MP7Skins {
   Guerilla = "Guerilla",
   Gunsmoke = "Gunsmoke",
   Impire = "Impire",
+  JustSmile = "Just Smile",
   Mischief = "Mischief",
   Motherboard = "Motherboard",
   Nemesis = "Nemesis",

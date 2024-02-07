@@ -29,6 +29,7 @@ export enum Tec9Skins {
   RemoteControl = "Remote Control",
   RustLeaf = "Rust Leaf",
   SafetyNet = "Safety Net",
+  Slag = "Slag",
   Sandstorm = "Sandstorm",
   Snek9 = "Snek-9",
   Terrace = "Terrace",

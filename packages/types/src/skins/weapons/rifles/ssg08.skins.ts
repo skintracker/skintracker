@@ -11,6 +11,7 @@ export enum SSG08Skins {
   DeathsHead = "Death's Head",
   DeathStrike = "Death Strike",
   Detour = "Detour",
+  Dezastre = "Dezastre",
   Dragonfire = "Dragonfire",
   FeverDream = "Fever Dream",
   GhostCrusader = "Ghost Crusader",

@@ -7,6 +7,7 @@ export enum NovaSkins {
   CagedSteel = "Caged Steel",
   CandyApple = "Candy Apple",
   ClearPolymer = "Clear Polymer",
+  DarkSigil = "Dark Sigil",
   Exo = "Exo",
   ForestLeaves = "Forest Leaves",
   GhostCamo = "Ghost Camo",
