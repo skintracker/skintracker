@@ -20,17 +20,18 @@ export const showLogoutModal: AponiaRouteHandlerFn<JSX.Element> = (
       <p class="text-center">Are you sure you want to log out?</p>
       <br />
       <Divider />
-      <div class="grid grid-cols-[70px_70px] align-center justify-center gap-2">
+      <div class="grid grid-cols-[70px_75px] align-center justify-center gap-2">
         <ModalClose closeEvent={closeModalEventName}>
           <Button text="Cancel" />
         </ModalClose>
         <ModalClose closeEvent={closeModalEventName}>
-          <Button
-            text="Logout"
-            classes="bg-red-600 text-white border-transparent"
-            hx-get="/logout"
-            hx-push-url="/"
-          />
+          <button
+            class="flex border border-solid border-slate-200 rounded p-2 bg-red-600 text-white border-transparent"
+            type="submit"
+            onclick="window.location.href = '/logout'"
+          >
+            Log out
+          </button>
         </ModalClose>
       </div>
     </Modal>

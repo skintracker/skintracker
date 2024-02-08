@@ -33,7 +33,7 @@ export async function getPlayerSummaries(steamId64: string) {
   const cachedRes = httpRequestCache.get(url.toString(), {});
   if (cachedRes) return cachedRes as SteamGetPlayerSummariesResponse;
   const res = await fetch(url);
-  const data = await res.json<SteamGetPlayerSummariesResponse>();
+  const data = await (res.json() as Promise<SteamGetPlayerSummariesResponse>);
 
   if (data.response.players.length !== 0)
     httpRequestCache.add(url.toString(), {}, data);
