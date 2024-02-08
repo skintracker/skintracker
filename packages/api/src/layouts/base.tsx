@@ -25,7 +25,7 @@ export function BaseLayout({ children, title, user }: BaseLayoutProps) {
       );
     return (
       <>
-        <script src="/public/js/tailwind.js" />
+        <script src="/public/js/tailwind-3.4.1.js" />
         <link rel="stylesheet" href="/public/css/global.dev.css" />
       </>
     );
@@ -36,9 +36,9 @@ export function BaseLayout({ children, title, user }: BaseLayoutProps) {
         <title safe>Skintracker | {title}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta charset="UTF-8" />
-        <script src="/public/js/htmx.js" />
-        <script src="/public/js/hyperscript.js" />
-        <script src="/public/js/loading-states.js" />
+        <script src="/public/js/htmx-1.9.10.js" defer />
+        <script src="/public/js/hyperscript-0.9.12.js" defer />
+        <script src="/public/js/loading-states.js" defer />
         <link rel="stylesheet" href="/public/font/font.css" />
         {styles()}
       </head>

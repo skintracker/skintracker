@@ -1,13 +1,13 @@
 import { networkInterfaces } from "os";
 import { dirname } from "path";
+import logger from "@/utils/logging";
 import { cookie } from "@elysiajs/cookie";
 // DO NOT REMOVE ME!! I PROVIDE INTELLISENSE FOR THE WHOLE PROJECT
 import { html } from "@elysiajs/html";
 import { jwt } from "@elysiajs/jwt";
 // END DO NOT REMOVE ME!!
-import { staticPlugin } from "@elysiajs/static";
+import { staticPlugin } from "@skintracker/elysia-static";
 import { Aponia, AponiaPlugin } from "aponia";
-import logger from "./utils/logging";
 
 if (!Bun.env.JWT_SECRET) {
   throw new Error("JWT_SECRET is not defined!");

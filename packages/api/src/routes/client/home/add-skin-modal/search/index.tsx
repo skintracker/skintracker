@@ -1,6 +1,6 @@
 import Divider from "@/components/divider";
 import { Link } from "@/components/link";
-import { setHTMLAsContentType } from "@/hooks";
+import { gzipEncode, setHTMLAsContentType } from "@/hooks";
 import { ALL_SUPPORTED_WEAPON_SKIN_STRINGS } from "@/utils/skins";
 import type {
   AponiaCtx,
@@ -59,7 +59,7 @@ export const searchSkins: AponiaRouteHandlerFn<JSX.Element> = (
 };
 
 export const searchSkinsHooks: AponiaHooks = {
-  afterHandle: [setHTMLAsContentType],
+  afterHandle: [setHTMLAsContentType, gzipEncode],
   type: "urlencoded",
 };
 
