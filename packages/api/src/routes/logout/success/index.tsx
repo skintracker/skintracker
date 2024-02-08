@@ -22,7 +22,7 @@ export const getLogoutSuccess: AponiaRouteHandlerFn<Promise<string>> = async (
         <h1 class="text-5xl font-bold text-center text-white">
           See you later!
         </h1>
-        <h2 class="text-3xl font-bold text-center text-white mt-4" safe>
+        <h2 class="text-3xl font-bold text-center text-white mt-4">
           You have been successfully logged out.
         </h2>
         <p class="text-center mt-16">
