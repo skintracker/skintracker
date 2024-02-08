@@ -27,7 +27,7 @@ export const getLogoutSuccess: AponiaRouteHandlerFn<Promise<string>> = async (
         </h2>
         <p class="text-center mt-16">
           <a href="/" class="text-white underline underline-offset-8">
-            close 󰅖
+            close x
           </a>
         </p>
       </div>
