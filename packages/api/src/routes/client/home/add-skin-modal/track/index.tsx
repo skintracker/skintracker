@@ -1,4 +1,4 @@
-import { setHTMLAsContentType } from "@/hooks";
+import { gzipEncode, setHTMLAsContentType } from "@/hooks";
 import { renderSkinsTableRows } from "@/utils/client/render-skins-table-rows";
 import { queries } from "@/utils/db";
 import { STGenericError, STGenericErrorType } from "@/utils/error";
@@ -81,7 +81,7 @@ export const addUserTracking: AponiaRouteHandlerFn<
 };
 
 export const addUserTrackingHooks: AponiaHooks = {
-  afterHandle: [setHTMLAsContentType],
+  afterHandle: [setHTMLAsContentType, gzipEncode],
 };
 
 export const handler: AponiaRouteHandler = {
