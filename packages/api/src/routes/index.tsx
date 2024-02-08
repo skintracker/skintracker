@@ -6,7 +6,7 @@ import {
   TableHeaderCell,
   TableHeaderRow,
 } from "@/components/table";
-import { setHTMLAsContentType } from "@/hooks";
+import { gzipEncode, setHTMLAsContentType } from "@/hooks";
 import { BaseLayout } from "@/layouts/base";
 import { SplashLayout } from "@/layouts/splash";
 import { renderSkinsTableRows } from "@/utils/client/render-skins-table-rows";
@@ -109,6 +109,7 @@ export const getIndex = async (ctx: AponiaCtx) => {
 
 export const getIndexHooks: AponiaHooks = {
   beforeHandle: [setHTMLAsContentType],
+  afterHandle: [gzipEncode],
 };
 
 export const handler: AponiaRouteHandler = {

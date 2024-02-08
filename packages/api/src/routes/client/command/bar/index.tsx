@@ -1,5 +1,5 @@
 import { CommandBar } from "@/components/command-bar";
-import { setHTMLAsContentType } from "@/hooks";
+import { gzipEncode, setHTMLAsContentType } from "@/hooks";
 import type {
   AponiaCtx,
   AponiaHooks,
@@ -14,7 +14,7 @@ export const showCommandBar: AponiaRouteHandlerFn<JSX.Element> = (
 };
 
 export const showCommandBarHooks: AponiaHooks = {
-  afterHandle: [setHTMLAsContentType],
+  afterHandle: [setHTMLAsContentType, gzipEncode],
 };
 
 export const handler: AponiaRouteHandler = {

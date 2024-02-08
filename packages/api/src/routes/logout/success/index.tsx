@@ -1,4 +1,4 @@
-import { setHTMLAsContentType } from "@/hooks";
+import { gzipEncode, setHTMLAsContentType } from "@/hooks";
 import SplashLayout from "@/layouts/splash";
 import { AponiaCtxExtended } from "@/utils/types/context";
 import {
@@ -22,7 +22,7 @@ export const getLogoutSuccess: AponiaRouteHandlerFn<Promise<string>> = async (
         <h1 class="text-5xl font-bold text-center text-white">
           See you later!
         </h1>
-        <h2 class="text-3xl font-bold text-center text-white mt-4" safe>
+        <h2 class="text-3xl font-bold text-center text-white mt-4">
           You have been successfully logged out.
         </h2>
         <p class="text-center mt-16">
@@ -36,7 +36,7 @@ export const getLogoutSuccess: AponiaRouteHandlerFn<Promise<string>> = async (
 };
 
 export const getLogoutSuccessHooks: AponiaHooks = {
-  afterHandle: [setHTMLAsContentType],
+  afterHandle: [setHTMLAsContentType, gzipEncode],
 };
 
 export const handler: AponiaRouteHandler = {
