@@ -1,4 +1,4 @@
-import { setHTMLAsContentType } from "@/hooks";
+import { gzipEncode, setHTMLAsContentType } from "@/hooks";
 import BaseLayout from "@/layouts/base";
 import SplashLayout from "@/layouts/splash";
 import { JsonHighlighter } from "@/utils/client";
@@ -85,7 +85,7 @@ export const getLogin: AponiaRouteHandlerFn<Promise<string>> = async (
 };
 
 export const getLoginHooks: AponiaHooks = {
-  afterHandle: [setHTMLAsContentType],
+  afterHandle: [setHTMLAsContentType, gzipEncode],
 };
 
 export const handler: AponiaRouteHandler = {

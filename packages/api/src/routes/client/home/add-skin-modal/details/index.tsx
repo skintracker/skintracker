@@ -1,7 +1,7 @@
 import Button from "@/components/button";
 import Divider from "@/components/divider";
 import { ModalClose } from "@/components/modal";
-import { setHTMLAsContentType } from "@/hooks";
+import { gzipEncode, setHTMLAsContentType } from "@/hooks";
 import { STSkinCategory, STSkinExterior } from "@skintracker/types/src";
 import type {
   AponiaCtx,
@@ -121,7 +121,7 @@ export const getAddSkinModalDetails: AponiaRouteHandlerFn<JSX.Element> = (
 };
 
 export const getAddSkinModalDetailsHooks: AponiaHooks = {
-  afterHandle: [setHTMLAsContentType],
+  afterHandle: [setHTMLAsContentType, gzipEncode],
 };
 
 export const handler: AponiaRouteHandler = {

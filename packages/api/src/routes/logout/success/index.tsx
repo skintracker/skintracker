@@ -1,4 +1,4 @@
-import { setHTMLAsContentType } from "@/hooks";
+import { gzipEncode, setHTMLAsContentType } from "@/hooks";
 import SplashLayout from "@/layouts/splash";
 import { AponiaCtxExtended } from "@/utils/types/context";
 import {
@@ -36,7 +36,7 @@ export const getLogoutSuccess: AponiaRouteHandlerFn<Promise<string>> = async (
 };
 
 export const getLogoutSuccessHooks: AponiaHooks = {
-  afterHandle: [setHTMLAsContentType],
+  afterHandle: [setHTMLAsContentType, gzipEncode],
 };
 
 export const handler: AponiaRouteHandler = {

@@ -10,3 +10,8 @@ export type AponiaCtxExtended = AponiaCtx & {
     ) => Promise<ReturnType>;
   };
 };
+
+export type AponiaAfterRequestCtx = {
+  response?: unknown;
+  set: AponiaCtx["set"];
+};

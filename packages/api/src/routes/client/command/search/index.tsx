@@ -1,6 +1,6 @@
 import Divider from "@/components/divider";
 import { Link } from "@/components/link";
-import { setHTMLAsContentType } from "@/hooks";
+import { gzipEncode, setHTMLAsContentType } from "@/hooks";
 import { commands } from "@/utils/commands";
 import { isGoToCommand } from "@/utils/type-guards/is-go-to-command";
 import { AponiaCtxExtended } from "@/utils/types/context";
@@ -73,32 +73,31 @@ export const searchCommands: AponiaRouteHandlerFn<Promise<JSX.Element>> =
             {i < results.length - 1 ? <Divider class="my-2" /> : null}
           </>
         );
-      } else {
-        return (
-          <>
-            <li class="px-4">
-              <Link
-                href="#"
-                hx-get={command["hx-get"]}
-                hx-target="body"
-                hx-swap="beforeend"
-                class="text-blue-600 hover:cursor-pointer hover:underline"
-                data-script="on click trigger closeCommandBar"
-              >
-                {result}
-              </Link>
-            </li>
-            {i < results.length - 1 ? <Divider class="my-2" /> : null}
-          </>
-        );
       }
+      return (
+        <>
+          <li class="px-4">
+            <Link
+              href="#"
+              hx-get={command["hx-get"]}
+              hx-target="body"
+              hx-swap="beforeend"
+              class="text-blue-600 hover:cursor-pointer hover:underline"
+              data-script="on click trigger closeCommandBar"
+            >
+              {result}
+            </Link>
+          </li>
+          {i < results.length - 1 ? <Divider class="my-2" /> : null}
+        </>
+      );
     });
 
     return <ul>{resultElements}</ul>;
   };
 
 export const searchCommandsHooks: AponiaHooks = {
-  afterHandle: [setHTMLAsContentType],
+  afterHandle: [setHTMLAsContentType, gzipEncode],
   type: "urlencoded",
 };
 
