@@ -18,7 +18,7 @@ const app = new Aponia({
   routesDir: `${moduleDir}/routes`,
   plugins: [
     html({ autoDetect: false }) as unknown as AponiaPlugin,
-    staticPlugin() as unknown as AponiaPlugin,
+    staticPlugin({ alwaysStatic: true }) as unknown as AponiaPlugin,
     cookie() as unknown as AponiaPlugin,
     jwt({
       name: "jwt",
@@ -26,17 +26,6 @@ const app = new Aponia({
     }) as unknown as AponiaPlugin,
   ],
 });
-
-if (Bun.env.NODE_ENV === "production") {
-  logger.debug("Initializing Sentry...");
-  // init({
-  //   // Performance Monitoring
-  //   tracesSampleRate: 1.0, // Capture 100% of the transactions
-  //   integrations: [new Integrations.Http({ tracing: true })],
-  //   dsn: Bun.env.SENTRY_DSN,
-  // });
-  logger.debug("🔥 Sentry is enabled!");
-}
 
 function getCurrentLocalIP() {
   const interfaces = networkInterfaces();
