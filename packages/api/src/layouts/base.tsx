@@ -38,7 +38,7 @@ export function BaseLayout({ children, title, user }: BaseLayoutProps) {
         <meta charset="UTF-8" />
         <script src="/public/js/htmx-1.9.10.js" defer />
         <script src="/public/js/hyperscript-0.9.12.js" defer />
-        <script src="/public/js/loading-states.js" />
+        <script src="/public/js/loading-states.js" defer />
         <link rel="stylesheet" href="/public/font/font.css" />
         {styles()}
       </head>
