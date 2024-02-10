@@ -85,7 +85,7 @@ export const getLogin: AponiaRouteHandlerFn<Promise<string>> = async (
 };
 
 export const getLoginHooks: AponiaHooks = {
-  afterHandle: [setHTMLAsContentType, gzipEncode],
+  afterHandle: [setHTMLAsContentType],
 };
 
 export const handler: AponiaRouteHandler = {
