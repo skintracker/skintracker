@@ -9,10 +9,9 @@
     "fmt:fix": "bunx biome format ./src --write"
   },
   "devDependencies": {
-    "@biomejs/biome": "latest",
     "bun-types": "latest"
   },
   "peerDependencies": {
-    "typescript": "^5.0.0"
+    "typescript": "^5.3.3"
   }
 }

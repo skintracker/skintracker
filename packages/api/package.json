@@ -22,7 +22,6 @@
     "test:db-access": "bun run scripts/test-db-access.ts"
   },
   "devDependencies": {
-    "@biomejs/biome": "latest",
     "@skintracker/types": "workspace:*",
     "bun-types": "latest",
     "tailwindcss": "^3.4.1"
