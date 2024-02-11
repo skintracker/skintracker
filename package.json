@@ -25,7 +25,9 @@
     "fmt:fix": "bun run --cwd packages/api fmt:fix && bun run --cwd packages/types fmt:fix",
     "prestart": "bun run --cwd packages/api build",
     "start": "bun run packages/api/dist/index.js",
-    "start:docker": "docker run -d -p 3001:3001 skintracker"
+    "start:docker": "docker run -d -p 3001:3001 skintracker",
+    "test:integration": "bun run --cwd packages/api test:integration",
+    "test:unit": "bun run --cwd packages/api test:unit"
   },
   "type": "module",
   "workspaces": ["packages/*"],
