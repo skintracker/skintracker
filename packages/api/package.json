@@ -17,8 +17,8 @@
     "start:db": "sh ./scripts/start-db.sh",
     "test:all": "bun test",
     "test:e2e": "bun test ./test/e2e/**/*.test.ts",
-    "test:integration": "bun test ./test/integration/**/*.test.ts",
-    "test:unit": "bun test ./test/unit/**/*.test.ts",
+    "test:integration": "bun test integration/",
+    "test:unit": "bun test unit/",
     "test:db-access": "bun run scripts/test-db-access.ts"
   },
   "devDependencies": {
