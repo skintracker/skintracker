@@ -15,7 +15,10 @@
     "prestart": "bun run build:styles && bun run build",
     "start": "NODE_ENV=production bun run ./dist/index.js",
     "start:db": "sh ./scripts/start-db.sh",
-    "test": "bun test ./src/**/*.test.ts",
+    "test:all": "bun test",
+    "test:e2e": "bun test ./test/e2e/**/*.test.ts",
+    "test:integration": "bun test ./test/integration/**/*.test.ts",
+    "test:unit": "bun test ./test/unit/**/*.test.ts",
     "test:db-access": "bun run scripts/test-db-access.ts"
   },
   "devDependencies": {
