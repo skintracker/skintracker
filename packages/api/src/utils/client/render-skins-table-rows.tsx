@@ -3,6 +3,7 @@ import { STSkin } from "@skintracker/types/src";
 import { Bitskins, DMarket, Skinport } from "../market";
 import { skinToString } from "../type-conversion";
 import { renderSkinPhaseTag } from "./render-skin-phase-tag";
+import logger from "../logging";
 
 export async function renderSkinsTableRows(
   skins: STSkin[],
@@ -28,13 +29,13 @@ export async function renderSkinsTableRows(
   const minPrices = minPricesResult.map((result) => {
     if (result.status === "fulfilled") {
       return result.value;
-    } else {
-      return {
-        bitskins: "N/A",
-        dmarket: "N/A",
-        skinport: "N/A",
-      };
     }
+    logger.error(result);
+    return {
+      bitskins: "N/A",
+      dmarket: "N/A",
+      skinport: "N/A",
+    };
   });
 
   return skins.map((skin, i) => (
