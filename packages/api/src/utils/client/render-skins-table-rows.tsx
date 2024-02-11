@@ -1,9 +1,9 @@
 import { TableCell, TableRow } from "@/components/table";
 import { STSkin } from "@skintracker/types/src";
+import logger from "../logging";
 import { Bitskins, DMarket, Skinport } from "../market";
 import { skinToString } from "../type-conversion";
 import { renderSkinPhaseTag } from "./render-skin-phase-tag";
-import logger from "../logging";
 
 export async function renderSkinsTableRows(
   skins: STSkin[],
