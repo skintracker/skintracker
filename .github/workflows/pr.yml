@@ -19,12 +19,14 @@ jobs:
         run: bun run build
   unit-test:
     name: unit-test-app
+    needs: build
     runs-on: ubuntu-latest
     steps:
       - name: Unit Test app
         run: bun run test:unit
   integration-test:
     name: integration-test-app
+    needs: build
     runs-on: ubuntu-latest
     steps:
       - name: Integration Test app
