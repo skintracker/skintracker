@@ -54,6 +54,7 @@ export default function Navigation({ items, user }: NavigationProps) {
             alt="Skintracker logo"
             aria-label="Skintracker logo"
           >
+            <title>Skintracker logo</title>
             <path
               fill-rule="evenodd"
               clip-rule="evenodd"
