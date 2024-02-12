@@ -31,10 +31,9 @@ export class HTTPRequestCache {
   get(url: string, request: RequestInit) {
     const hash = HTTPRequestCache.createHash({ url, request });
     const cached = HTTPRequestCache.data.get(hash);
-    if (cached && cached.expiry > Date.now()) {
-      return JSON.parse(cached.data);
-    } else if (cached) {
-      // remove expired cache
+    if (cached) {
+      if (cached.expiry > Date.now()) return JSON.parse(cached.data);
+      // remove expired data
       HTTPRequestCache.data.delete(hash);
     }
     return undefined;

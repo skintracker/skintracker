@@ -18,7 +18,10 @@ const app = new Aponia({
   routesDir: `${moduleDir}/routes`,
   plugins: [
     html({ autoDetect: false }) as unknown as AponiaPlugin,
-    staticPlugin({ alwaysStatic: true }) as unknown as AponiaPlugin,
+    staticPlugin({
+      alwaysStatic: true,
+      maxAge: 259200 /* 3 days */,
+    }) as unknown as AponiaPlugin,
     cookie() as unknown as AponiaPlugin,
     jwt({
       name: "jwt",

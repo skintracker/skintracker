@@ -41,14 +41,8 @@ export function stringToSkin(s: string): STSkin {
       exterior: skin.exterior,
       category: skin.category || STSkinCategory.Normal,
     } as STSkin;
-  } else if (isKnife(skin.item)) {
-    return {
-      item: skin.item,
-      name: skin.name,
-      exterior: skin.exterior,
-      category: skin.category || STSkinCategory.Normal,
-    } as STSkin;
-  } else {
+  }
+  if (isKnife(skin.item)) {
     return {
       item: skin.item,
       name: skin.name,
@@ -56,4 +50,10 @@ export function stringToSkin(s: string): STSkin {
       category: skin.category || STSkinCategory.Normal,
     } as STSkin;
   }
+  return {
+    item: skin.item,
+    name: skin.name,
+    exterior: skin.exterior,
+    category: skin.category || STSkinCategory.Normal,
+  } as STSkin;
 }

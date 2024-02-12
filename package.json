@@ -3,6 +3,7 @@
   "module": "index.ts",
   "version": "2023.4.1",
   "devDependencies": {
+    "@biomejs/biome": "1.5.2",
     "bun-types": "latest",
     "lightningcss": "^1.22.1",
     "lightningcss-cli": "^1.22.1",
@@ -19,13 +20,15 @@
     "build:docker-dev": "docker build -t skintracker-dev -f Dockerfile.dev .",
     "dev": "bun run --cwd packages/api dev",
     "dev:docker": "docker run -d --net=host -v \"$(pwd)\":/usr/src/app -p 3001:3001 skintracker-dev",
-    "lint": "bun run --cwd packages/api lint && bun run --cwd packages/types lint",
-    "lint:fix": "bun run --cwd packages/api lint:fix && bun run --cwd packages/types lint:fix",
-    "fmt": "bun run --cwd packages/api fmt && bun run --cwd packages/types fmt",
-    "fmt:fix": "bun run --cwd packages/api fmt:fix && bun run --cwd packages/types fmt:fix",
+    "lint": "bun run --cwd packages/api lint",
+    "lint:fix": "bun run --cwd packages/api lint:fix",
+    "fmt": "bun run --cwd packages/api fmt",
+    "fmt:fix": "bun run --cwd packages/api fmt:fix",
     "prestart": "bun run --cwd packages/api build",
     "start": "bun run packages/api/dist/index.js",
-    "start:docker": "docker run -d -p 3001:3001 skintracker"
+    "start:docker": "docker run -d -p 3001:3001 skintracker",
+    "test:integration": "bun run --cwd packages/api test:integration",
+    "test:unit": "bun run --cwd packages/api test:unit"
   },
   "type": "module",
   "workspaces": ["packages/*"],

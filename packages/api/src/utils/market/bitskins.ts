@@ -47,7 +47,7 @@ export async function getMinPrice(skin: STSkin): Promise<string> {
     "https://api.bitskins.com/market/search/730",
     requestOptions,
   );
-  const json = await response.json<BitskinsSearchResponse>();
+  const json = (await response.json()) as BitskinsSearchResponse;
   logger.debug(`[${response.status}]: ${JSON.stringify(json)}`);
 
   if (!json.list) {
