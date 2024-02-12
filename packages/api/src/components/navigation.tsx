@@ -51,6 +51,8 @@ export default function Navigation({ items, user }: NavigationProps) {
             class="inline-block w-[32px] h-[32px]"
             fill="#fff"
             xmlns="http://www.w3.org/2000/svg"
+            alt="Skintracker logo"
+            aria-label="Skintracker logo"
           >
             <path
               fill-rule="evenodd"
