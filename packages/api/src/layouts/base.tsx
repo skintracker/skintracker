@@ -39,6 +39,7 @@ export function BaseLayout({ children, title, user }: BaseLayoutProps) {
         <script src="/public/js/htmx-1.9.10.js" defer />
         <script src="/public/js/hyperscript-0.9.12.js" defer />
         <script src="/public/js/loading-states.js" defer />
+        <link rel="icon" href="/public/svg/icon.svg" type="image/svg+xml" />
         <link rel="stylesheet" href="/public/font/font.css" />
         {styles()}
       </head>
