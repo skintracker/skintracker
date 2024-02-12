@@ -33,7 +33,7 @@
   "type": "module",
   "workspaces": ["packages/*"],
   "dependencies": {
-    "@skintracker/elysia-static": "github:skintracker/elysia-static#main",
+    "@skintracker/elysia-static": "github:skintracker/elysia-static",
     "aponia": "github:jacksonsalopek/aponia",
     "openid-client": "^5.6.1",
     "tweetnacl": "^1.0.3"
