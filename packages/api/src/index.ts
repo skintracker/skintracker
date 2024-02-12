@@ -7,7 +7,7 @@ import { cookie } from "@elysiajs/cookie";
 import { html } from "@elysiajs/html";
 import { jwt } from "@elysiajs/jwt";
 // END DO NOT REMOVE ME!!
-// import { staticPlugin } from "@skintracker/elysia-static";
+import { staticPlugin } from "@skintracker/elysia-static";
 import { Aponia, AponiaPlugin } from "aponia";
 
 if (!Bun.env.JWT_SECRET) {
@@ -17,10 +17,10 @@ const start = performance.now();
 const app = new Aponia({
   plugins: [
     html({ autoDetect: false }) as unknown as AponiaPlugin,
-    // staticPlugin({
-    //  alwaysStatic: true,
-    //  maxAge: 259200 /* 3 days */,
-    //}) as unknown as AponiaPlugin,
+    staticPlugin({
+      alwaysStatic: true,
+      maxAge: 259200 /* 3 days */,
+    }) as unknown as AponiaPlugin,
     cookie() as unknown as AponiaPlugin,
     jwt({
       name: "jwt",
