@@ -1,5 +1,5 @@
 import { createHash } from "crypto";
-import { readdirSync, renameSync, writeFileSync } from "fs";
+import { readdirSync, renameSync, rmSync, writeFileSync } from "fs";
 import { join } from "path";
 import { $ } from "bun";
 import pino from "pino";
@@ -15,7 +15,6 @@ const logger = pino({
 });
 
 logger.info("Beginning CSS build...");
-logger.info("Removing previous build artifacts...");
 const cssDir = readdirSync("./public/css/");
 
 let prevStylesFileName: string | undefined = undefined;
@@ -54,4 +53,10 @@ for (const file of layoutFiles) {
   const layoutFilePath = join(layoutDir, file);
   await updateCSSRef(layoutFilePath);
 }
-logger.info("Updated all references. CSS build complete!");
+
+if (prevStylesFileName !== newCSSFileName) {
+  logger.info("Updated all references. Removing previous build artifacts...");
+  rmSync(join("./public/css", prevStylesFileName));
+  logger.info("Removed.");
+}
+logger.info("Build complete!");
