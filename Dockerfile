@@ -1,10 +1,8 @@
-FROM oven/bun:latest
+FROM oven/bun:1.0.25-slim
 WORKDIR /usr/src/app
 
 COPY . .
-RUN bun install
-
-RUN ln -s ./packages/api/public ./public
+RUN bun install && ln -s ./packages/api/public ./public
 
 EXPOSE 3001/tcp
-ENTRYPOINT ["bun", "start"]
+ENTRYPOINT ["bun", "dev"]
