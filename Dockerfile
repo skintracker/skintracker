@@ -5,4 +5,4 @@ COPY . .
 RUN bun install && ln -s ./packages/api/public ./public
 
 EXPOSE 3001/tcp
-ENTRYPOINT ["bun", "dev"]
+ENTRYPOINT ["bun", "start"]
