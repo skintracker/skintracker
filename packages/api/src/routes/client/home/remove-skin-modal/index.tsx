@@ -41,6 +41,7 @@ export const removeSkinModal: AponiaRouteHandlerFn<JSX.Element> = async (
     <select
       name="skin"
       class="block mx-auto my-0 text-center border rounded-sm p-2"
+      title="Remove skin dropdown"
     >
       {dropdownOptions}
     </select>

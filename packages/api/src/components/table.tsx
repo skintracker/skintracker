@@ -1,5 +1,5 @@
 export interface TableHeadProps {
-  children: JSX.Element | JSX.Element[];
+  children?: JSX.Element | JSX.Element[];
 }
 
 export function TableHead({
@@ -10,7 +10,7 @@ export function TableHead({
 }
 
 export interface TableBodyProps {
-  children: JSX.Element | JSX.Element[];
+  children?: JSX.Element | JSX.Element[];
 }
 
 export function TableBody({
@@ -21,7 +21,7 @@ export function TableBody({
 }
 
 export interface TableRowProps {
-  children: JSX.Element | JSX.Element[];
+  children?: JSX.Element | JSX.Element[];
 }
 
 export function TableRow({
@@ -40,7 +40,7 @@ export function TableRow({
 
 export interface TableHeaderRowProps {
   dark?: boolean;
-  children: JSX.Element | JSX.Element[];
+  children?: JSX.Element | JSX.Element[];
 }
 
 export function TableHeaderRow({
@@ -65,7 +65,7 @@ export function TableHeaderRow({
 }
 
 export interface TableCellProps {
-  children: JSX.Element | JSX.Element[];
+  children?: JSX.Element | JSX.Element[];
   classes?: string;
 }
 
@@ -82,7 +82,7 @@ export function TableCell({
 }
 
 export interface TableHeaderCellProps {
-  children: JSX.Element | JSX.Element[];
+  children?: JSX.Element | JSX.Element[];
   classes?: string;
 }
 
@@ -99,7 +99,7 @@ export function TableHeaderCell({
 }
 
 export interface TableProps {
-  children: JSX.Element | JSX.Element[];
+  children?: JSX.Element | JSX.Element[];
 }
 
 export function Table({
