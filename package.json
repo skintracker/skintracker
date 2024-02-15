@@ -3,15 +3,15 @@
   "module": "index.ts",
   "version": "2023.4.1",
   "devDependencies": {
-    "@biomejs/biome": "1.5.2",
+    "@biomejs/biome": "1.5.3",
     "bun-types": "latest",
-    "lightningcss": "^1.22.1",
-    "lightningcss-cli": "^1.22.1",
-    "stylelint": "^16.0.2",
-    "stylelint-config-standard": "^35.0.0"
+    "lightningcss": "^1.23.0",
+    "lightningcss-cli": "^1.23.0",
+    "stylelint": "^16.2.1",
+    "stylelint-config-standard": "^36.0.0"
   },
   "peerDependencies": {
-    "typescript": "^5.0.0"
+    "typescript": "^5.3.3"
   },
   "private": true,
   "scripts": {
@@ -34,6 +34,7 @@
   "workspaces": ["packages/*"],
   "dependencies": {
     "@elysiajs/cookie": "^0.8.0",
+    "@elysiajs/server-timing": "^0.8.0",
     "aponia": "github:jacksonsalopek/aponia",
     "openid-client": "^5.6.1",
     "tweetnacl": "^1.0.3"

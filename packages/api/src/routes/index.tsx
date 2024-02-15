@@ -9,16 +9,13 @@ import {
 import { gzipEncode, setHTMLAsContentType } from "@/hooks";
 import { BaseLayout } from "@/layouts/base";
 import { SplashLayout } from "@/layouts/splash";
-import { renderSkinsTableRows } from "@/utils/client/render-skins-table-rows";
-import logger from "@/utils/logging";
 import type { AponiaCtxExtended } from "@/utils/types/context";
-import { getTracking } from "@/utils/user";
-import type { STSkin, STUser } from "@skintracker/types/src";
+import type { STUser } from "@skintracker/types/src";
 import type { AponiaCtx, AponiaHooks, AponiaRouteHandler } from "aponia";
 
 export const getIndex = async (ctx: AponiaCtx) => {
-  const { jwt } = ctx as AponiaCtxExtended;
-  const user = await jwt.verify<STUser>(ctx.cookie.auth);
+  const { cookie, jwt } = ctx as AponiaCtxExtended;
+  const user = await jwt.verify<STUser>(cookie.auth);
 
   if (!user) {
     return (
@@ -47,16 +44,6 @@ export const getIndex = async (ctx: AponiaCtx) => {
       </SplashLayout>
     );
   }
-
-  let skins: STSkin[] = [];
-  try {
-    const res = await getTracking(user.steamId);
-    skins = res.items;
-  } catch (e) {
-    logger.debug(e);
-  }
-
-  const tableRows = await renderSkinsTableRows(skins);
 
   return (
     <BaseLayout title="Home" user={user}>
@@ -98,7 +85,12 @@ export const getIndex = async (ctx: AponiaCtx) => {
               </TableHeaderCell>
             </TableHeaderRow>
           </TableHead>
-          <TableBody id="tracked-skins-table-body">{tableRows}</TableBody>
+          <TableBody
+            id="tracked-skins-table-body"
+            hx-get="/client/home/table-rows"
+            hx-trigger="load"
+            hx-swap="innerHTML"
+          />
         </Table>
         <br />
         <Divider />

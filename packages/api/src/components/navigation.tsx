@@ -75,17 +75,19 @@ export default function Navigation({ items, user }: NavigationProps) {
               </li>
             );
           })}
-          <li class="mr-4">
-            <Link
-              hx-trigger="click, keydown[metaKey && key=='k'] from:html"
-              hx-get="/client/command/bar"
-              hx-target="body"
-              hx-swap="beforeend"
-            >
-              <span class="mr-2">Actions</span>
-              <span class="text-white/70">⌘K</span>
-            </Link>
-          </li>
+          {user && (
+            <li class="mr-4">
+              <Link
+                hx-trigger="click, keydown[metaKey && key=='k'] from:html"
+                hx-get="/client/command/bar"
+                hx-target="body"
+                hx-swap="beforeend"
+              >
+                <span class="mr-2">Actions</span>
+                <span class="text-white/70">⌘K</span>
+              </Link>
+            </li>
+          )}
           <li>{loginOrUserButton}</li>
         </ul>
       </div>
