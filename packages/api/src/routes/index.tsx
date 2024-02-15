@@ -56,7 +56,7 @@ export const getIndex = async (ctx: AponiaCtx) => {
     logger.debug(e);
   }
 
-  const tableRows = await renderSkinsTableRows(skins);
+  const safeTableRows = await renderSkinsTableRows(skins);
 
   return (
     <BaseLayout title="Home" user={user}>
@@ -98,7 +98,7 @@ export const getIndex = async (ctx: AponiaCtx) => {
               </TableHeaderCell>
             </TableHeaderRow>
           </TableHead>
-          <TableBody id="tracked-skins-table-body">{tableRows}</TableBody>
+          <TableBody id="tracked-skins-table-body">{safeTableRows}</TableBody>
         </Table>
         <br />
         <Divider />

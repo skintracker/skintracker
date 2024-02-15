@@ -5,8 +5,9 @@ import logger from "@/utils/logging";
 import { cookie } from "@elysiajs/cookie";
 // DO NOT REMOVE ME!! I PROVIDE INTELLISENSE FOR THE WHOLE PROJECT
 import { html } from "@elysiajs/html";
+// END DO NOT REMOVE
 import { jwt } from "@elysiajs/jwt";
-// END DO NOT REMOVE ME!!
+import { serverTiming } from "@elysiajs/server-timing";
 import { staticPlugin } from "@skintracker/elysia-static";
 import { Aponia, AponiaPlugin } from "aponia";
 
@@ -26,6 +27,7 @@ const app = new Aponia({
       name: "jwt",
       secret: Bun.env.JWT_SECRET,
     }) as unknown as AponiaPlugin,
+    serverTiming(),
   ],
 });
 

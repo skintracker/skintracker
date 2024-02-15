@@ -33,6 +33,7 @@
   "type": "module",
   "workspaces": ["packages/*"],
   "dependencies": {
+    "@elysiajs/server-timing": "^0.8.0",
     "@skintracker/elysia-static": "github:skintracker/elysia-static",
     "aponia": "github:jacksonsalopek/aponia",
     "openid-client": "^5.6.1",
