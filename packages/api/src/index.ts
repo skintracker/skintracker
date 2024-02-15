@@ -8,7 +8,6 @@ import { html } from "@elysiajs/html";
 // END DO NOT REMOVE
 import { jwt } from "@elysiajs/jwt";
 import { serverTiming } from "@elysiajs/server-timing";
-import { staticPlugin } from "@skintracker/elysia-static";
 import { Aponia, AponiaPlugin } from "aponia";
 
 if (!Bun.env.JWT_SECRET) {
@@ -18,10 +17,6 @@ const start = performance.now();
 const app = new Aponia({
   plugins: [
     html({ autoDetect: false }) as unknown as AponiaPlugin,
-    staticPlugin({
-      alwaysStatic: true,
-      maxAge: 259200 /* 3 days */,
-    }) as unknown as AponiaPlugin,
     cookie() as unknown as AponiaPlugin,
     jwt({
       name: "jwt",
