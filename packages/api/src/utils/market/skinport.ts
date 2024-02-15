@@ -34,7 +34,7 @@ async function getPrices(
     return JSON.parse(cachedPrices);
   }
   const response = await fetch(requestUrl, requestOptions);
-  const json = await response.json<SkinportSearchResponse>();
+  const json = (await response.json()) as SkinportSearchResponse;
 
   logger.debug(`[${response.status}]: ${JSON.stringify(json)}`);
   if (response.status === 200) {

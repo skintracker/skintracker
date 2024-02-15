@@ -1,44 +1,6 @@
-import logger from "../logging";
+import { httpRequestCache } from "./http-request-cache";
 
-export class HTTPRequestCache {
-  static data: Map<
-    number,
-    {
-      data: string;
-      expiry: number;
-    }
-  >;
-
-  constructor() {
-    if (!HTTPRequestCache.data) {
-      HTTPRequestCache.data = new Map();
-    }
-  }
-
-  static createHash(data: unknown) {
-    logger.debug(`Creating hash for ${JSON.stringify(data)}`);
-    const hash = Bun.hash.crc32(JSON.stringify(data));
-    logger.debug(`Hash: ${hash}`);
-    return hash;
-  }
-
-  add(url: string, request: RequestInit, response: unknown, ttl = 300000) {
-    const hash = HTTPRequestCache.createHash({ url, request });
-    const data = JSON.stringify(response);
-    HTTPRequestCache.data.set(hash, { data, expiry: Date.now() + ttl });
-  }
-
-  get(url: string, request: RequestInit) {
-    const hash = HTTPRequestCache.createHash({ url, request });
-    const cached = HTTPRequestCache.data.get(hash);
-    if (cached) {
-      if (cached.expiry > Date.now()) return JSON.parse(cached.data);
-      // remove expired data
-      HTTPRequestCache.data.delete(hash);
-    }
-    return undefined;
-  }
-}
-
-export const httpRequestCache = new HTTPRequestCache();
 export default httpRequestCache;
+
+export * from "./file-cache";
+export * from "./http-request-cache";

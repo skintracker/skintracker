@@ -110,7 +110,7 @@ export async function getMinPrice(skin: STSkin): Promise<string> {
   logger.debug(`Request options: ${JSON.stringify(requestOptions)}`);
 
   const response = await fetch(requestUrl, requestOptions);
-  const json = await response.json<DMarketItemsSearchResponse>();
+  const json = (await response.json()) as DMarketItemsSearchResponse;
   logger.debug({ status: response.status, json });
 
   // No results
