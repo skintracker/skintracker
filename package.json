@@ -26,7 +26,6 @@
     "fmt": "bun run --cwd packages/api fmt",
     "fmt:fix": "bun run --cwd packages/api fmt:fix",
     "fmt:styles": "bun run --cwd packages/api fmt:styles",
-    "prestart": "bun run --cwd packages/api build",
     "start": "bun run --cwd packages/api start",
     "start:docker": "docker run -d -p 3001:3001 skintracker",
     "test:integration": "bun run --cwd packages/api test:integration",

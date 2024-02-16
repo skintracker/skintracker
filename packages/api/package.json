@@ -13,7 +13,7 @@
     "fmt:fix": "bunx biome format ./src --write",
     "fmt:styles": "bunx lightningcss --minify public/css/**/*.css --output-dir public/css",
     "seed:db": "bun run scripts/seed-db.ts",
-    "prestart": "bun run build:styles && bun run build",
+    "prestart": "bun run build:styles && NODE_ENV=production bun run build",
     "start": "NODE_ENV=production bun run ./dist/index.js",
     "start:db": "sh ./scripts/start-db.sh",
     "test:all": "bun test",
