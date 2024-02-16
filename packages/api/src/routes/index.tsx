@@ -101,13 +101,13 @@ export const getIndex = async (ctx: AponiaCtx) => {
               <TableCell>
                 <Skeleton />
               </TableCell>
-              <TableCell>
+              <TableCell classes="hidden md:table-cell">
                 <Skeleton />
               </TableCell>
-              <TableCell>
+              <TableCell classes="hidden md:table-cell">
                 <Skeleton />
               </TableCell>
-              <TableCell>
+              <TableCell classes="hidden md:table-cell">
                 <Skeleton />
               </TableCell>
             </TableRow>
