@@ -26,7 +26,6 @@
     "fmt": "bun run --cwd packages/api fmt",
     "fmt:fix": "bun run --cwd packages/api fmt:fix",
     "fmt:styles": "bun run --cwd packages/api fmt:styles",
-    "prestart": "bun run --cwd packages/api build",
     "start": "bun run --cwd packages/api start",
     "start:docker": "docker run -d -p 3001:3001 skintracker",
     "test:integration": "bun run --cwd packages/api test:integration",
@@ -37,7 +36,7 @@
   "dependencies": {
     "@elysiajs/cookie": "^0.8.0",
     "@elysiajs/server-timing": "^0.8.0",
-    "aponia": "github:jacksonsalopek/aponia",
+    "aponia": "github:jacksonsalopek/aponia#2024.1.1",
     "openid-client": "^5.6.1",
     "tweetnacl": "^1.0.3"
   }
