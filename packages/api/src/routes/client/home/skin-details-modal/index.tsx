@@ -19,7 +19,8 @@ import type {
 } from "aponia";
 
 export const showSkinDetailsModal: AponiaRouteHandlerFn<JSX.Element> = (
-  ctx: AponiaCtx
+  ctx: AponiaCtx,
+  
 ) => {
   const closeModalEventName = "HOME_SHOW_SKIN_DETAILS_MODAL";
   const { headers } = ctx;
@@ -30,9 +31,9 @@ export const showSkinDetailsModal: AponiaRouteHandlerFn<JSX.Element> = (
   const skin = stringToSkin(headers.skin);
   // Placeholder prices
   const prices = {
-    bitskins: "100.00$",
-    skinport: "95.00$",
-    dmarket: "98.00$",
+    bitskins: "100.00",
+    skinport: "95.00",
+    dmarket: "98.00",
   };
 
   return (
