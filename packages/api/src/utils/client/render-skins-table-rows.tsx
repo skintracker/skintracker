@@ -81,7 +81,7 @@ export async function renderSkinsTableRows(
           {renderSkinPhaseTag(skin)}
         </TableCell>
         <TableCell>
-          <span class="inline-grid grid-cols-[39px_1fr_1fr] gap-x-1">
+          <span class="inline-grid grid-cols-[21px_1fr_1fr] gap-x-1">
             <img
               alt={
                 minPrices[i].market !== "N/A"

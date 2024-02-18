@@ -29,7 +29,7 @@ const SPLASH = (
       </h1>
     </div>
     <br />
-    <div class="py-2 px-8">
+    <div class="py-2 px-4 md:px-8">
       <h1 class="text-2xl font-bold">What is this?</h1>
       <p>
         We're actively working on this project and are excited to provide
