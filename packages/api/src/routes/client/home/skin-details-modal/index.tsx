@@ -1,8 +1,10 @@
 import Button from "@/components/button";
 import Divider from "@/components/divider";
 import { Modal, ModalClose } from "@/components/modal";
+import { Table, TableBody, TableCell, TableRow } from "@/components/table";
 import { setHTMLAsContentType } from "@/hooks";
-import { skinToString, stringToSkin } from "@/utils/type-conversion";
+import { Bitskins, DMarket, Skinport } from "@/utils/market";
+import { stringToSkin } from "@/utils/type-conversion";
 import type {
   AponiaCtx,
   AponiaHooks,
@@ -10,7 +12,7 @@ import type {
   AponiaRouteHandlerFn,
 } from "aponia";
 
-export const showSkinDetailsModal: AponiaRouteHandlerFn<JSX.Element> = (
+export const showSkinDetailsModal: AponiaRouteHandlerFn<JSX.Element> = async (
   ctx: AponiaCtx,
 ) => {
   const closeModalEventName = "HOME_SHOW_SKIN_DETAILS_MODAL";
@@ -20,6 +22,12 @@ export const showSkinDetailsModal: AponiaRouteHandlerFn<JSX.Element> = (
     throw new Error("Skin not found");
   }
   const skinString = decodeURIComponent(headers.skin);
+  const skin = stringToSkin(skinString);
+  const prices = {
+    bitskins: await Bitskins.getMinPrice(skin),
+    dmarket: await DMarket.getMinPrice(skin),
+    skinport: await Skinport.getMinPrice(skin),
+  };
 
   return (
     <Modal id="skin-details-modal" closeEvent={closeModalEventName}>
@@ -27,8 +35,45 @@ export const showSkinDetailsModal: AponiaRouteHandlerFn<JSX.Element> = (
         <p class="px-4" safe>
           {skinString}
         </p>
+        <br />
+        <Table>
+          <TableBody>
+            <TableRow class="bg-red-200 py-2">
+              <TableCell>
+                <img
+                  alt="Bitskins Logo"
+                  src="/public/svg/bitskins.svg"
+                  class="inline h-[17px] mr-2"
+                />
+                BitSkins
+              </TableCell>
+              <TableCell safe>{prices.bitskins}</TableCell>
+            </TableRow>
+            <TableRow class="bg-green-200 py-2">
+              <TableCell>
+                <img
+                  alt="DMarket Logo"
+                  src="/public/svg/dmarket.svg"
+                  class="inline h-[17px] mr-2"
+                />
+                DMarket
+              </TableCell>
+              <TableCell safe>{prices.dmarket}</TableCell>
+            </TableRow>
+            <TableRow class="bg-blue-200 py-2">
+              <TableCell>
+                <img
+                  alt="Skinport Logo"
+                  src="/public/svg/skinport.svg"
+                  class="inline h-[17px] mr-2"
+                />
+                Skinport
+              </TableCell>
+              <TableCell safe>{prices.skinport}</TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
       </div>
-      <p class="px-4 text-stone-400">Skin details coming soon!</p>
       <br />
       <Divider />
       <div class="grid grid-cols-[60px_70px] gap-x-2 align-center justify-center">
