@@ -2,7 +2,7 @@ import Button from "@/components/button";
 import Divider from "@/components/divider";
 import { Modal, ModalClose } from "@/components/modal";
 import { setHTMLAsContentType } from "@/hooks";
-import { stringToSkin } from "@/utils/type-conversion";
+import { skinToString, stringToSkin } from "@/utils/type-conversion";
 import type {
   AponiaCtx,
   AponiaHooks,
@@ -19,21 +19,25 @@ export const showSkinDetailsModal: AponiaRouteHandlerFn<JSX.Element> = (
   if (!headers.skin) {
     throw new Error("Skin not found");
   }
-  const skin = stringToSkin(headers.skin);
+  const skinString = decodeURIComponent(headers.skin);
 
   return (
     <Modal id="skin-details-modal" closeEvent={closeModalEventName}>
       <div id="skin-details" class="py-4">
-        <p class="text-stone-400 px-4">{skin}</p>
+        <p class="px-4" safe>
+          {skinString}
+        </p>
       </div>
+      <p class="px-4 text-stone-400">Skin details coming soon!</p>
+      <br />
       <Divider />
-      <div class="grid grid-cols-[70px] align-center justify-center">
+      <div class="grid grid-cols-[60px_70px] gap-x-2 align-center justify-center">
         <ModalClose closeEvent={closeModalEventName}>
           <Button text="Close" />
         </ModalClose>
         <input
           type="submit"
-          class="flex border border-solid border-slate-200 rounded p-2 bg-red-600 text-white text-center border-transparent hover:cursor-pointer"
+          class="flex border border-solid border-slate-200 rounded p-2 bg-red-600 text-white justify-center border-transparent hover:cursor-pointer"
           value="Delete"
         />
       </div>

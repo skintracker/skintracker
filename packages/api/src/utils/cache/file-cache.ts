@@ -20,7 +20,7 @@ export class FileCache {
   }
 
   get(fileName: string): FileCacheEntry | undefined {
-    if (process.env.NODE_ENV !== "production") return undefined;
+    // if (process.env.NODE_ENV !== "production") return undefined;
 
     const retrieved = this.data.get(fileName);
     if (retrieved && retrieved.ttl > Date.now()) return retrieved;
