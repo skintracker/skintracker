@@ -175,10 +175,12 @@ dist
 # Finder (MacOS) folder config
 .DS_Store
 
-# Symlink to /packages/api/public
-
 # just relaxed bro !
 .go-tetris.log
 
+# Nix direnv
+.direnv/
+
 # VSCode settings
-.vscode/settings.json
+.vscode
+
