@@ -1,4 +1,4 @@
-import Divider from "@/components/divider";
+import { DividerSpaced } from "@/components/divider";
 import { Link } from "@/components/link";
 import { gzipEncode, setHTMLAsContentType } from "@/hooks";
 import { ALL_SUPPORTED_WEAPON_SKIN_STRINGS } from "@/utils/skins";
@@ -41,7 +41,6 @@ export const searchSkins: AponiaRouteHandlerFn<JSX.Element> = (
         <li class="px-4">
           <Link
             href="#"
-            class="text-blue-600 hover:underline"
             hx-get={`/client/home/add-skin-modal/details?skin=${urlEncodedResult}`}
             hx-target="#add-skin-modal-content"
             hx-swap="innerHTML"
@@ -50,7 +49,7 @@ export const searchSkins: AponiaRouteHandlerFn<JSX.Element> = (
             {result}
           </Link>
         </li>
-        {i < constrainedResults.length - 1 ? <Divider class="my-2" /> : null}
+        {i < constrainedResults.length - 1 ? <DividerSpaced /> : null}
       </>
     );
   });

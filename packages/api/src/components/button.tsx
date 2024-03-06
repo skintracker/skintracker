@@ -1,44 +1,38 @@
-export enum ButtonType {
-  Default = 0,
-  Ghost = 1,
-}
-
 export interface ButtonProps {
-  text?: string;
   children?: JSX.Element | JSX.Element[];
-  classes?: string;
-  type?: ButtonType;
-  href?: string;
 }
 
-export function Button({
-  children,
-  classes,
-  type,
-  text,
-  href,
-  ...props
-}: ButtonProps) {
-  const classStr = (() => {
-    switch (type) {
-      case ButtonType.Ghost:
-        return `flex p-2${classes ? ` ${classes}` : ""}`;
-      default:
-        return `flex border border-solid border-slate-200 rounded p-2${
-          classes ? ` ${classes}` : ""
-        }`;
-    }
-  })();
+export interface LinkButtonProps extends ButtonProps {
+  href: string;
+}
+
+export function ButtonGhost({ children, ...props }: ButtonProps) {
   return (
-    <button
-      type="button"
-      class={classStr}
-      {...(href ? { onclick: `location.href='${href}'` } : {})}
-      {...props}
-    >
-      {children ?? text ?? ""}
+    <button type="button" class="button" {...props}>
+      {children}
     </button>
   );
 }
 
-export default Button;
+export function ButtonPrimary({ children, ...props }: ButtonProps) {
+  return (
+    <button type="button" class="button button-primary" {...props}>
+      {children}
+    </button>
+  );
+}
+
+export function ButtonLink({ children, href, ...props }: LinkButtonProps) {
+  return (
+    <button
+      type="button"
+      class="button button-primary"
+      onclick={`location.href=${href}`}
+      {...props}
+    >
+      {children}
+    </button>
+  );
+}
+
+export default ButtonPrimary;

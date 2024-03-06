@@ -17,18 +17,11 @@ export function SplashLayout({ children, title, user }: SplashLayoutProps) {
   }
   const styles = () => {
     if (Bun.env.NODE_ENV === "production")
-      return (
-        <>
-          <link rel="stylesheet" href="/public/css/styles.969e42a1.css" />
-          <link rel="stylesheet" href="/public/css/global.css" />
-          <link rel="stylesheet" href="/public/css/splash.css" />
-        </>
-      );
+      return <link rel="stylesheet" href="/public/css/styles.2d8f65a3.css" />;
     return (
       <>
         <script src="/public/js/tailwind-3.4.1.js" />
         <link rel="stylesheet" href="/public/css/global.dev.css" />
-        <link rel="stylesheet" href="/public/css/splash.css" />
       </>
     );
   };
@@ -43,6 +36,8 @@ export function SplashLayout({ children, title, user }: SplashLayoutProps) {
         <script src="/public/js/loading-states.js" defer />
         <link rel="icon" href="/public/svg/icon.svg" type="image/svg+xml" />
         <link rel="stylesheet" href="/public/font/font.css" />
+        <link rel="stylesheet" href="/public/css/global.css" />
+        <link rel="stylesheet" href="/public/css/splash.css" />
         {styles()}
       </head>
       <body

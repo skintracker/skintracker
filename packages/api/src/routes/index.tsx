@@ -18,19 +18,19 @@ import type { AponiaCtx, AponiaHooks, AponiaRouteHandler } from "aponia";
 
 const SPLASH = (
   <SplashLayout title="Home">
-    <div class="py-40 bg-[linear-gradient(135deg,#6C66C9_0%,#F97C73_100%)]">
-      <h1 class="text-5xl font-bold text-center text-white">
+    <div class="jumbotron">
+      <h1 class="jumbotron-title">
         <img
           alt="Counter-Strike 2 Logo"
           src="/public/svg/cs2.svg"
-          class="w-32 mx-auto mb-4"
+          class="jumbotron-img"
         />
         Skintracker is in development.
       </h1>
     </div>
     <br />
-    <div class="py-2 px-4 md:px-8">
-      <h1 class="text-2xl font-bold">What is this?</h1>
+    <div class="splash-container">
+      <h1 class="splash-header">What is this?</h1>
       <p>
         We're actively working on this project and are excited to provide
         details soon!
