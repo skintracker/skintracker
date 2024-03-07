@@ -1,0 +1,16 @@
+@use "sass:map";
+@import '../shared/variables';
+
+.command-bar {
+  &-input {
+    width: 100%;
+    background: rgb(226 232 240);
+    border-radius: map.get($rounded, "sm");
+    color: #000;
+  }
+
+  &-placeholder {
+    padding: 0 1rem;
+    color: rgb(168 162 158);
+  }
+}

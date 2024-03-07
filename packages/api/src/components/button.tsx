@@ -1,6 +1,4 @@
-export interface ButtonProps {
-  children?: JSX.Element | JSX.Element[];
-}
+export type ButtonProps = JSX.IntrinsicElements["button"];
 
 export interface LinkButtonProps extends ButtonProps {
   href: string;
@@ -24,14 +22,9 @@ export function ButtonPrimary({ children, ...props }: ButtonProps) {
 
 export function ButtonLink({ children, href, ...props }: LinkButtonProps) {
   return (
-    <button
-      type="button"
-      class="button button-primary"
-      onclick={`location.href=${href}`}
-      {...props}
-    >
+    <ButtonPrimary onclick={`location.href="${href}"`} {...props}>
       {children}
-    </button>
+    </ButtonPrimary>
   );
 }
 

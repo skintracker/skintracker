@@ -17,7 +17,7 @@ export function SplashLayout({ children, title, user }: SplashLayoutProps) {
   }
   const styles = () => {
     if (Bun.env.NODE_ENV === "production")
-      return <link rel="stylesheet" href="/public/css/styles.2d8f65a3.css" />;
+      return <link rel="stylesheet" href="/public/css/styles.b2746599.css" />;
     return (
       <>
         <script src="/public/js/tailwind-3.4.1.js" />
@@ -35,16 +35,12 @@ export function SplashLayout({ children, title, user }: SplashLayoutProps) {
         <script src="/public/js/hyperscript-0.9.12.js" defer />
         <script src="/public/js/loading-states.js" defer />
         <link rel="icon" href="/public/svg/icon.svg" type="image/svg+xml" />
-        <link rel="stylesheet" href="/public/font/font.css" />
+        <link rel="stylesheet" href="/public/css/font.css" />
         <link rel="stylesheet" href="/public/css/global.css" />
         <link rel="stylesheet" href="/public/css/splash.css" />
         {styles()}
       </head>
-      <body
-        class="font-sans font-normal"
-        hx-ext="loading-states"
-        hx-boost="true"
-      >
+      <body hx-ext="loading-states" hx-boost="true">
         <Navigation items={navItems} user={user} />
         <main>{children}</main>
       </body>
