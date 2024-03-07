@@ -1,6 +1,6 @@
-import {
-  type DMarketItemsSearchResponse,
-  type STSkin,
+import type {
+  DMarketItemsSearchResponse,
+  STSkin,
 } from "@skintracker/types/src";
 import { sign } from "tweetnacl";
 import httpRequestCache from "../cache";
