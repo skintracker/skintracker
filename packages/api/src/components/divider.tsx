@@ -5,7 +5,7 @@ export function Divider({ ...props }: DividerProps) {
 }
 
 export function DividerSpaced({ ...props }: DividerProps) {
-  return <hr class="divider-spaced" {...props} />;
+  return <hr class="divider divider-spaced" {...props} />;
 }
 
 export default Divider;

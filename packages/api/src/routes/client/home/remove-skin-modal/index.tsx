@@ -64,7 +64,7 @@ export const removeSkinModal: AponiaRouteHandlerFn<JSX.Element> = async (
       <Divider />
       <div class="grid grid-cols-[70px_76px] align-center justify-center gap-2">
         <ModalClose closeEvent={closeModalEventName}>
-          <Button text="Cancel" />
+          <Button>Cancel</Button>
         </ModalClose>
         <input
           type="submit"

@@ -22,7 +22,7 @@ export const showModal: AponiaRouteHandlerFn<JSX.Element> = (
       <br />
       <Divider />
       <ModalClose closeEvent={closeModalEventName}>
-        <Button text="Close" classes="float-right" />
+        <Button>Close</Button>
       </ModalClose>
     </Modal>
   );

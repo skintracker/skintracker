@@ -1,0 +1,80 @@
+@use "sass:map";
+@import '../shared/variables';
+
+.phase-tag {
+  border-radius: map.get($rounded, "xs");
+  margin: 0 0.5rem;
+  font-style: italic;
+  padding: 0.25rem 7px 0.25rem 0.25rem;
+  color: #fff;
+}
+
+.phase {
+  $darkRed: rgb(2 0 36);
+  $red: rgb(121 9 61);
+  $pink: rgb(199 45 119);
+
+  $darkBlue: rgb(8 5 55);
+  $blue: rgb(34 17 173);
+  $darkGreen: rgb(18 61 31);
+
+  // Standard Doppler gradients
+  &-1 {
+    background: linear-gradient(70deg,
+        $darkRed 0%,
+        $red 80%,
+        $pink 96%);
+  }
+
+  &-2 {
+    background: linear-gradient(50deg,
+        $darkRed 0%,
+        $red 30%,
+        $pink 84%)
+  }
+
+  &-3 {
+    background: linear-gradient(90deg,
+        $darkBlue 0%,
+        $blue 41%,
+        $darkGreen 71%)
+  }
+
+  &-4 {
+    background: linear-gradient(90deg,
+        $darkBlue 20%,
+        $blue 94%)
+  }
+
+  // Gamma Doppler gradients
+  &-g {
+    $dark: rgb(17 36 19);
+    $green: rgb(38 145 82);
+
+    &-1 {
+      background: linear-gradient(138deg,
+          rgb(24 36 17) 63%,
+          rgb(102 209 45) 100%);
+    }
+
+    &-2 {
+      background: linear-gradient(63deg,
+          $dark 16%,
+          rgb(38 170 92) 100%)
+    }
+
+    &-3 {
+      background: linear-gradient(230deg,
+          $dark 25%,
+          rgb(52 209 198) 51%,
+          $green 77%)
+    }
+
+    &-4 {
+      background: linear-gradient(302deg,
+          rgb(68 218 49) 0%,
+          $dark 42%,
+          $green 87%)
+    }
+  }
+}

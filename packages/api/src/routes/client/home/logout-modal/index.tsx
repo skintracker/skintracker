@@ -22,7 +22,7 @@ export const showLogoutModal: AponiaRouteHandlerFn<JSX.Element> = (
       <Divider />
       <div class="grid grid-cols-[70px_75px] align-center justify-center gap-2">
         <ModalClose closeEvent={closeModalEventName}>
-          <Button text="Cancel" />
+          <Button>Cancel</Button>
         </ModalClose>
         <ModalClose closeEvent={closeModalEventName}>
           <button

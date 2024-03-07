@@ -3,6 +3,7 @@
 
 .command-bar {
   &-input {
+    padding: 1rem;
     width: 100%;
     background: rgb(226 232 240);
     border-radius: map.get($rounded, "sm");
