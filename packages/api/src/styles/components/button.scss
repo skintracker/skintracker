@@ -1,0 +1,9 @@
+.button {
+  display: flex;
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+
+  &-primary {
+    border: 1px solid #E2E8F0;
+  }
+}

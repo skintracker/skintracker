@@ -1,0 +1,42 @@
+@use "sass:map";
+@use "sass:string";
+@import 'shared/variables';
+
+// Define font family names as variables for easy reference
+$sans: map.get($font, "sans");
+$mono: map.get($font, "mono");
+
+// Mixin to include font-face
+@mixin font-face($family, $path, $weight: 400, $style: normal) {
+  @font-face {
+    font-family: $family;
+    font-weight: $weight;
+    font-style: $style;
+    src: url('/public/font/#{$path}/#{string.to-lower-case($family)}#{if($style == normal, '', '-italic')}#{if($weight == 400, '-regular', if($weight == 500, '-medium', if($weight == 600, '-semibold', '-bold')))}-webfont.woff2') format('woff2'),
+    url('/public/font/#{$path}/#{string.to-lower-case($family)}#{if($style == normal, '', '-italic')}#{if($weight == 400, '-regular', if($weight == 500, '-medium', if($weight == 600, '-semibold', '-bold')))}-webfont.woff') format('woff');
+  }
+}
+
+// Regular Fonts
+@include font-face($sans, 'regular');
+@include font-face($sans, 'regular', 500);
+@include font-face($sans, 'regular', 600);
+@include font-face($sans, 'regular', 700);
+
+// Regular Italic Fonts
+@include font-face($sans, 'regular', 400, italic);
+@include font-face($sans, 'regular', 500, italic);
+@include font-face($sans, 'regular', 600, italic);
+@include font-face($sans, 'regular', 700, italic);
+
+// Mono Fonts
+@include font-face($mono, 'mono');
+@include font-face($mono, 'mono', 500);
+@include font-face($mono, 'mono', 600);
+@include font-face($mono, 'mono', 700);
+
+// Mono Italic Fonts
+@include font-face($mono, 'mono', 400, italic);
+@include font-face($mono, 'mono', 500, italic);
+@include font-face($mono, 'mono', 600, italic);
+@include font-face($mono, 'mono', 700, italic);

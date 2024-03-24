@@ -1,4 +1,4 @@
-import Divider from "@/components/divider";
+import { DividerSpaced } from "@/components/divider";
 import { Link } from "@/components/link";
 import { gzipEncode, setHTMLAsContentType } from "@/hooks";
 import { commands } from "@/utils/commands";
@@ -66,11 +66,9 @@ export const searchCommands: AponiaRouteHandlerFn<Promise<JSX.Element>> =
         return (
           <>
             <li class="px-4">
-              <Link href={command.href} class="text-blue-600 hover:underline">
-                {result}
-              </Link>
+              <Link href={command.href}>{result}</Link>
             </li>
-            {i < results.length - 1 ? <Divider class="my-2" /> : null}
+            {i < results.length - 1 ? <DividerSpaced /> : null}
           </>
         );
       }
@@ -82,13 +80,12 @@ export const searchCommands: AponiaRouteHandlerFn<Promise<JSX.Element>> =
               hx-get={command["hx-get"]}
               hx-target="body"
               hx-swap="beforeend"
-              class="text-blue-600 hover:cursor-pointer hover:underline"
               data-script="on click trigger closeCommandBar"
             >
               {result}
             </Link>
           </li>
-          {i < results.length - 1 ? <Divider class="my-2" /> : null}
+          {i < results.length - 1 ? <DividerSpaced /> : null}
         </>
       );
     });

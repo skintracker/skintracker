@@ -1,0 +1,21 @@
+@use "sass:map";
+/** Components which are available globally */
+@use "components/button";
+@use "components/command-bar";
+@use "components/divider";
+@use "components/link";
+@use "components/modal";
+@use "components/navigation";
+@use "components/phase-tag";
+@use "components/skeleton";
+
+@import 'shared/variables';
+
+::-webkit-scrollbar {
+  display: none
+}
+
+body {
+  font-family: map.get($font, "sans-with-fallback");
+  font-weight: 400;
+}
