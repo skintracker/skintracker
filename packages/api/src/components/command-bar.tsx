@@ -7,7 +7,7 @@ export function CommandBar() {
         id="command-bar-input"
         type="search"
         name="query"
-        class="w-full p-4 bg-slate-200 text-black rounded"
+        class="command-bar-input"
         placeholder="Search for a command..."
         data-script="on keydown[key is 'Escape'] trigger closeCommandBar"
         autofocus="true"
@@ -16,7 +16,7 @@ export function CommandBar() {
         hx-target="#command-bar-results"
       />
       <div id="command-bar-results" class="py-4">
-        <p class="text-stone-400 px-4">Results will appear here</p>
+        <p class="command-bar-placeholder">Results will appear here</p>
       </div>
     </Modal>
   );

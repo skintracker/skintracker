@@ -18,19 +18,19 @@ import type { AponiaCtx, AponiaHooks, AponiaRouteHandler } from "aponia";
 
 const SPLASH = (
   <SplashLayout title="Home">
-    <div class="py-40 bg-[linear-gradient(135deg,#6C66C9_0%,#F97C73_100%)]">
-      <h1 class="text-5xl font-bold text-center text-white">
+    <div class="jumbotron">
+      <h1 class="jumbotron-title">
         <img
           alt="Counter-Strike 2 Logo"
           src="/public/svg/cs2.svg"
-          class="w-32 mx-auto mb-4"
+          class="jumbotron-img"
         />
         Skintracker is in development.
       </h1>
     </div>
     <br />
-    <div class="py-2 px-8">
-      <h1 class="text-2xl font-bold">What is this?</h1>
+    <div class="splash-container">
+      <h1 class="splash-header">What is this?</h1>
       <p>
         We're actively working on this project and are excited to provide
         details soon!
@@ -59,36 +59,7 @@ export const getIndex = async (ctx: AponiaCtx) => {
           <TableHead class="uppercase text-sm">
             <TableHeaderRow dark>
               <TableHeaderCell>Skin</TableHeaderCell>
-              <TableHeaderCell classes="hidden md:table-cell">
-                <span class="inline-grid grid-cols-[39px_1fr]">
-                  <img
-                    alt="Bitskins Logo"
-                    src="/public/svg/bitskins.svg"
-                    class="h-[17px] pt-[3px]"
-                  />
-                  <span class="text-red-400">Bitskins</span>
-                </span>
-              </TableHeaderCell>
-              <TableHeaderCell classes="hidden md:table-cell">
-                <span class="inline-grid grid-cols-[39px_1fr]">
-                  <img
-                    alt="DMarket Logo"
-                    src="/public/svg/dmarket.svg"
-                    class="h-[17px] pt-[3px]"
-                  />
-                  <span class="text-green-400">DMarket</span>
-                </span>
-              </TableHeaderCell>
-              <TableHeaderCell classes="hidden md:table-cell">
-                <span class="inline-grid grid-cols-[39px_1fr]">
-                  <img
-                    alt="Skinport Logo"
-                    src="/public/svg/skinport.svg"
-                    class="h-[17px] pt-[3px]"
-                  />
-                  <span class="text-blue-400">Skinport</span>
-                </span>
-              </TableHeaderCell>
+              <TableHeaderCell>Lowest Price</TableHeaderCell>
             </TableHeaderRow>
           </TableHead>
           <TableBody
@@ -101,13 +72,7 @@ export const getIndex = async (ctx: AponiaCtx) => {
               <TableCell>
                 <Skeleton />
               </TableCell>
-              <TableCell classes="hidden md:table-cell">
-                <Skeleton />
-              </TableCell>
-              <TableCell classes="hidden md:table-cell">
-                <Skeleton />
-              </TableCell>
-              <TableCell classes="hidden md:table-cell">
+              <TableCell>
                 <Skeleton />
               </TableCell>
             </TableRow>

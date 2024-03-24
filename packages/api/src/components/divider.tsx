@@ -1,8 +1,11 @@
-// biome-ignore lint/suspicious/noEmptyInterface: <explanation>
-export interface DividerProps {}
+export type DividerProps = JSX.IntrinsicElements["hr"];
 
-export default function Divider({
-  ...props
-}: DividerProps & JSX.IntrinsicElements["hr"]) {
-  return <hr class="border-gray-200 border-1 mb-2" {...props} />;
+export function Divider({ ...props }: DividerProps) {
+  return <hr class="divider" {...props} />;
 }
+
+export function DividerSpaced({ ...props }: DividerProps) {
+  return <hr class="divider divider-spaced" {...props} />;
+}
+
+export default Divider;

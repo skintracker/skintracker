@@ -1,0 +1,21 @@
+.link {
+  display: flex;
+  align-self: center;
+  align-items: center;
+  color: rgb(37 99 235);
+
+  &:hover {
+    cursor: pointer;
+    text-decoration: underline;
+  }
+
+  &-nav {
+    color: #fff;
+    width: fit-content;
+    padding: 0.5rem;
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+}

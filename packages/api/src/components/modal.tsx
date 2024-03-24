@@ -5,9 +5,8 @@ export interface ModalCloseProps {
 
 export function ModalClose({ children, closeEvent }: ModalCloseProps) {
   const closeEventName = closeEvent ?? "closeModal";
-  return (
-    <span data-script={`on click trigger ${closeEventName}`}>{children}</span>
-  );
+  const hyperscript = `on click trigger ${closeEventName}`;
+  return <span data-script={hyperscript}>{children}</span>;
 }
 
 export interface ModalTitleProps {
@@ -16,7 +15,10 @@ export interface ModalTitleProps {
 }
 
 export function ModalTitle({ children, center }: ModalTitleProps) {
-  return <h1 class={`text-xl${center ? " text-center" : ""}`}>{children}</h1>;
+  const classes = ["text-xl"];
+  if (center) classes.push("text-center");
+
+  return <h1 class={classes.join(" ")}>{children}</h1>;
 }
 
 export interface ModalProps {
@@ -28,20 +30,16 @@ export interface ModalProps {
 export function Modal({ children, closeEvent, id }: ModalProps) {
   const closeEventName = closeEvent ?? "closeModal";
   const mainDivId = id ?? "modal";
+  const contentId = `${mainDivId}-content`;
+  const hyperscript = {
+    close: `on ${closeEventName} remove me`,
+    closeTrigger: `on click trigger ${closeEventName}`,
+  };
+
   return (
-    <div
-      id={mainDivId}
-      class="flex flex-col items-center fixed top-0 bottom-0 left-0 right-0 z-50"
-      data-script={`on ${closeEventName} remove me`}
-    >
-      <div
-        class="modal-underlay absolute -z-10 top-0 bottom-0 left-0 right-0 bg-slate-950/30"
-        data-script={`on click trigger ${closeEventName}`}
-      />
-      <div
-        id={`${mainDivId}-content`}
-        class="modal-content mt-24 w-4/5 max-w-xl border border-solid rounded bg-white p-2"
-      >
+    <div id={mainDivId} class="modal" data-script={hyperscript.close}>
+      <div class="modal-underlay" data-script={hyperscript.closeTrigger} />
+      <div id={contentId} class="modal-content">
         {children}
       </div>
     </div>
