@@ -15,10 +15,11 @@ const logger = pino({
 });
 
 logger.info("Beginning CSS build...");
-const cssDir = readdirSync("./public/css/");
+const cssDir = "./public/css";
+const cssFiles = readdirSync("./public/css/");
 
 let prevStylesFileName: string | undefined = undefined;
-for (const file of cssDir) {
+for (const file of cssFiles) {
   if (file.startsWith("styles")) prevStylesFileName = file;
 }
 if (!prevStylesFileName) throw new Error("Previous file not found!");
@@ -59,4 +60,19 @@ if (prevStylesFileName !== newCSSFileName) {
   rmSync(join("./public/css", prevStylesFileName));
   logger.info("Removed.");
 }
+
+logger.info("Transpiling SCSS...");
+const stylesDir = "./src/styles";
+const stylesFiles = readdirSync(stylesDir);
+for (const file of stylesFiles) {
+  const filePath = join(stylesDir, file);
+  if (filePath.endsWith(".scss")) {
+    await $`grass -s compressed ${filePath} ${cssDir}/${file.replace(
+      ".scss",
+      ".css",
+    )}`;
+  }
+}
+logger.info("Transpiled SCSS.");
+
 logger.info("Build complete!");

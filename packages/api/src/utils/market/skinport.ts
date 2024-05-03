@@ -1,4 +1,4 @@
-import { STSkin, SkinportSearchResponse } from "@skintracker/types/src";
+import type { STSkin, SkinportSearchResponse } from "@skintracker/types/src";
 import httpRequestCache from "../cache";
 import logger from "../logging";
 import { queryParamsToString, skinToString } from "../type-conversion";
