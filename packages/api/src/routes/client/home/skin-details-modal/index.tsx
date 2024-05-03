@@ -3,8 +3,9 @@ import Divider from "@/components/divider";
 import { Modal, ModalClose } from "@/components/modal";
 import { Table, TableBody, TableCell, TableRow } from "@/components/table";
 import { setHTMLAsContentType } from "@/hooks";
+import { renderSkinPhaseTag } from "@/utils/client/render-skin-phase-tag";
 import { Bitskins, DMarket, Skinport } from "@/utils/market";
-import { stringToSkin } from "@/utils/type-conversion";
+import { skinToString, stringToSkin } from "@/utils/type-conversion";
 import type {
   AponiaCtx,
   AponiaHooks,
@@ -15,7 +16,7 @@ import type {
 export const showSkinDetailsModal: AponiaRouteHandlerFn<JSX.Element> = async (
   ctx: AponiaCtx,
 ) => {
-  const closeModalEventName = "HOME_SHOW_SKIN_DETAILS_MODAL";
+  const closeModalEventName = "HOME_HIDE_SKIN_DETAILS_MODAL";
   const { headers } = ctx;
 
   if (!headers.skin) {
@@ -23,17 +24,31 @@ export const showSkinDetailsModal: AponiaRouteHandlerFn<JSX.Element> = async (
   }
   const skinString = decodeURIComponent(headers.skin);
   const skin = stringToSkin(skinString);
+  const phase = headers.phase ? parseInt(headers.phase) as 1 | 2 | 3 | 4 : undefined;
+  skin.phase = phase;
+
   const prices = {
-    bitskins: await Bitskins.getMinPrice(skin),
-    dmarket: await DMarket.getMinPrice(skin),
-    skinport: await Skinport.getMinPrice(skin),
+    bitskins:await Bitskins.getMinPrice(skin).catch(e => "N/A"),
+    dmarket: await DMarket.getMinPrice(skin).catch(e => "N/A"),
+    skinport: await Skinport.getMinPrice(skin).catch(e => "N/A"),
   };
 
   return (
     <Modal id="skin-details-modal" closeEvent={closeModalEventName}>
       <div id="skin-details" class="py-4">
-        <p class="px-4" safe>
+        <form
+          id="remove-skin-form"
+          hx-post="/client/home/remove-skin-modal/remove"
+          hx-target="#tracked-skins-table-body"
+          hx-swap="innerHTML"
+          data-script={`on submit trigger ${closeModalEventName}`}
+          class="hidden"
+        >
+          <input type="hidden" name="skin" value={skinToString({ skin, includePhase: true })} />
+        </form>
+        <p class="mt-[-24px] mb-0 mx-[-8px] py-4 bg-slate-800 hover:bg-slate-700 text-white text-center">
           {skinString}
+          {phase && renderSkinPhaseTag(skin)}
         </p>
         <br />
         <Table>
@@ -84,6 +99,7 @@ export const showSkinDetailsModal: AponiaRouteHandlerFn<JSX.Element> = async (
           type="submit"
           class="flex border border-solid border-slate-200 rounded p-2 bg-red-600 text-white justify-center border-transparent hover:cursor-pointer"
           value="Delete"
+          form="remove-skin-form"
         />
       </div>
     </Modal>

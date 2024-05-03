@@ -25,7 +25,7 @@ export function getMinPrice(prices: {
     }
   }
   return {
-    price: lowestPrice.price === -1 ? "N/A" : lowestPrice.price.toFixed(2),
+    price: lowestPrice.price === Number.MAX_SAFE_INTEGER ? "N/A" : lowestPrice.price.toFixed(2),
     market: lowestPrice.market,
   };
 }
@@ -72,7 +72,7 @@ export async function renderSkinsTableRows(
         class="group odd:bg-slate-200 even:bg-slate-300 hover:bg-slate-400 hover:cursor-pointer"
         hx-trigger="click"
         hx-get="/client/home/skin-details-modal"
-        hx-headers={`js:{'skin': '${skinString}'}`}
+        hx-headers={`js:{'skin': '${skinString}','phase': '${skin.phase}'}`}
         hx-target="body"
         hx-swap="beforeend"
       >
