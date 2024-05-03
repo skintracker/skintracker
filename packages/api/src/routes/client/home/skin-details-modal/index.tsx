@@ -24,13 +24,15 @@ export const showSkinDetailsModal: AponiaRouteHandlerFn<JSX.Element> = async (
   }
   const skinString = decodeURIComponent(headers.skin);
   const skin = stringToSkin(skinString);
-  const phase = headers.phase ? parseInt(headers.phase) as 1 | 2 | 3 | 4 : undefined;
+  const phase = headers.phase
+    ? (parseInt(headers.phase) as 1 | 2 | 3 | 4)
+    : undefined;
   skin.phase = phase;
 
   const prices = {
-    bitskins:await Bitskins.getMinPrice(skin).catch(e => "N/A"),
-    dmarket: await DMarket.getMinPrice(skin).catch(e => "N/A"),
-    skinport: await Skinport.getMinPrice(skin).catch(e => "N/A"),
+    bitskins: await Bitskins.getMinPrice(skin).catch((e) => "N/A"),
+    dmarket: await DMarket.getMinPrice(skin).catch((e) => "N/A"),
+    skinport: await Skinport.getMinPrice(skin).catch((e) => "N/A"),
   };
 
   return (
@@ -44,7 +46,11 @@ export const showSkinDetailsModal: AponiaRouteHandlerFn<JSX.Element> = async (
           data-script={`on submit trigger ${closeModalEventName}`}
           class="hidden"
         >
-          <input type="hidden" name="skin" value={skinToString({ skin, includePhase: true })} />
+          <input
+            type="hidden"
+            name="skin"
+            value={skinToString({ skin, includePhase: true })}
+          />
         </form>
         <p class="mt-[-24px] mb-0 mx-[-8px] py-4 bg-slate-800 hover:bg-slate-700 text-white text-center">
           {skinString}

@@ -25,7 +25,10 @@ export function getMinPrice(prices: {
     }
   }
   return {
-    price: lowestPrice.price === Number.MAX_SAFE_INTEGER ? "N/A" : lowestPrice.price.toFixed(2),
+    price:
+      lowestPrice.price === Number.MAX_SAFE_INTEGER
+        ? "N/A"
+        : lowestPrice.price.toFixed(2),
     market: lowestPrice.market,
   };
 }
