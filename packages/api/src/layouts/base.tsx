@@ -1,3 +1,4 @@
+import { Loading } from "@/components/loading";
 import Navigation, { NavigationItem } from "@/components/navigation";
 import { STUser } from "@skintracker/types/src";
 
@@ -40,6 +41,7 @@ export function BaseLayout({ children, title, user }: BaseLayoutProps) {
         {styles()}
       </head>
       <body hx-ext="loading-states">
+        <Loading />
         <Navigation items={navItems} user={user} />
         <main class="py-2 px-8">{children}</main>
       </body>

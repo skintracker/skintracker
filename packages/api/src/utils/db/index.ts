@@ -59,6 +59,14 @@ export const queries = {
     await tx?.commit().then(() => tx?.close());
     return res;
   },
+  addPriceHistoryDataPoint: (skin: STSkin, price: number | null, market: string | null) => {
+    const skinHash = Bun.hash.crc32(skin.item + skin.name + skinCategoryToInt(skin.category) + skinExteriorToInt(skin.exterior) + (skin.phase ?? 0));
+    // trim hash to 32 bits
+    return db?.execute({
+      sql: "INSERT INTO price_history (id, skin_hash, price, market, time) VALUES (?, ?, ?, ?, ?)",
+      args: [randomUUID(), skinHash, price, market, Date.now()],
+    });
+  }
 };
 
 export default db;

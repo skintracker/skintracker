@@ -63,6 +63,7 @@ import {
   UrsusKnifeSkins,
   Weapon,
   XM1014Skins,
+  STSkin,
 } from "@skintracker/types/src";
 
 export const ALL_SUPPORTED_WEAPONS: string[] = [
@@ -142,3 +143,4 @@ export const ALL_SUPPORTED_WEAPON_SKIN_STRINGS: string[] =
     }
     return [];
   });
+  
